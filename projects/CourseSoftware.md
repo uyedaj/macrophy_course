@@ -15,7 +15,14 @@ Download and install [RevBayes](https://revbayes.github.io/software.html)
 
 ### _Optional software (subject to promotion to required, good to have regardless!)_
 [MrBayes](http://mrbayes.sourceforge.net/download.php) (Bayesian inference of phylogenies)
+
 [PAUP*](http://phylosolutions.com/paup-test/) Time-tested software for running parsimony and Maximum Likelihood phylogenetic analyses
+
+[FigTree](http://tree.bio.ed.ac.uk/software/figtree/) Software for visualizing phylogenetic trees
+
+[Tracer](http://tree.bio.ed.ac.uk/software/tracer/) Software for visualizing output of Bayesian MCMC software
+
+[Mesquite](https://www.mesquiteproject.org/) User-friendly software suite for phylogenetic tree/data manipulation and analysis with an intuitive GUI. 
 
 ### _Other software_
 [git](https://gist.github.com/derhuerst/1b15ff4652a867391f03) Version control software that will allow you to connect to interact with my course [github page](https://github.com/uyedaj/macrophy_course)
