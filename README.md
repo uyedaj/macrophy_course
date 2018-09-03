@@ -113,8 +113,8 @@ results of these independent research projects.
 |W 9/26 |    11\. Biogeography |||                                                        
 |M 10/1 |   12\. Lab: RevBayes ||Assignment II:Project proposal|
 |W 10/3 |   13\. Dating phylogenetic trees |||                                            
-|M 10/8 |   14\. Gene trees vs. Species trees |||                                         
-|W 10/10 |  15\. The multispecies coalescent |||                                          
+|M 10/8 |   14\. The multispecies coalescent |||                                         
+|W 10/10 |  15\. Guest speaker (T. Pelletier, Radford U.) | Pelletier et al. 2014 ||                                          
 |M 10/15 | 16\. Brownian Motion & continuous trait evolution |||                          
 |W 10/17 |  17\. The comparative method & PICs |Felsenstein 1985||                        
 |M 10/22 |  18\. Modeling adaptation |Hansen 1997 ||                                      
