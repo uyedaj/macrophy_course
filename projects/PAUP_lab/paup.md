@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # Computational Exercise in PAUP*
 
 We will be using the software program called PAUP\* (Phylogenetic Analysis Under Parsimony \*and other methods) written by David Swofford. PAUP\* is an old program that has been around for decades now (v3 in 1989). As its name suggests the original version only performed parsimony. For many years, PAUP* v4.0b10 was commercial software distributed by Sinauer Associates. However, recently the license has expired and PAUP* will now be released as an open-source software as v.5.0, with “test” versions available now. While a variety of alternative likelihood and parsimony software programs exist, few have as reliable a likelihood estimation as PAUP*. There are GUIs available for some versions, but we will be using 
@@ -92,6 +97,12 @@ paup>
 Type "?" to get a list of possible commands. Type a command followed by a question mark (e.g. "lset ?") to get 
 help about a specific function. 
 
+Let's begin by creating a log file of our session. 
+```
+log file=./username/paup_lab.log
+```
+
+
 Next we execute our data block and do an exhaustive parsimony analysis.
 ```
 execute bears_JC69.nex
@@ -136,6 +147,12 @@ Now let's consider another dataset. Let's first load the modified "true tree" th
 execute bears_LBAtree.nex
 describetrees /plot=phylogram
 ```
+
+We are going to now load data simulated on this phylogeny, again under a JC69 model. 
+```
+execute bears_LBA500.nex
+```
+
 Now perform a parsimony anaylsis. How has the resulting tree changed? How does it compare to the true tree? 
 
 Let's now determine how confident we are in the tree. We're going to use a method called the boostrap, which will be explained in class. 
@@ -159,6 +176,7 @@ What is the consequence of adding more data in the likelihood example?
 We are now going to actually analyze a real dataset. We have a real sequence dataset from these species. But first, we need to establish what the correct model of sequence evolution is. We could do this all within PAUP\*. In fact, if you run the following command: 
 
 ```
+execute bears_irbp.nex
 execute modelblockPAUPb10.nex
 ```
 It will fit a large set of models which can then be ranked. However, the output is a bit dense to parse, and the software used to summarize them is a bit hard to get these days. Folks usually select models using stand alone software like *jModeltest2*. We're going to use *modeltest-ng*, which can be run from command line. Open up another browser tab and navigate again to the portal for accessing the server. Navigate to the PAUP_lab director again, and run the following command:
@@ -171,17 +189,4 @@ What is the best model? Does the answer differ depending on the criterion you pi
 
 Challenge: Implement the model in PAUP\* and analyze using a heuristic search. Perform a bootstrap analysis with 100 replicates that takes a reasonable amount of time. Save the tree in your output folder. 
 
-## Submit your final analysis to github
-
-Get a github account if you don't already have one. Now you're going to take your results and submit them to the github repository so I can take a look and give you credit. 
-
-Navigate to the macrophy-course directory: 
-```
-cd ~/repos/macrophy-course
-git status
-git add ./projects/PAUP_lab/username/
-git commit -m "Adding <username>'s lab exercise results"
-```
-
-
-
+When you are finished, email me your log file. In the future we will use Github, so please get Github account. 
