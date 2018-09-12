@@ -106,7 +106,7 @@ results of these independent research projects.
 |M 9/3  |    No Class, Labor Day     |||
 |W 9/5  |   5\. Felsenstein & the birth of statistical phylogenetics | Felsenstein 1981 ||
 |M 9/10 |   6\. Discrete character evolution I |O’Meara 2012||
-|W 9/12 |   7\. Discrete character evolution II|Inferring phylogenies||      
+|W 9/12 |   7\. Discrete character evolution II|No Reading||      
 |M 9/17 |   8\. Inferring phylogenies from molecular data|Inferring phylogenies||      
 |W 9/19 |   9\. Practical considerations: alignments, partitioning and mixture models||   
 |M 9/24 |   10\. **EXAM I**   |||                                                         
