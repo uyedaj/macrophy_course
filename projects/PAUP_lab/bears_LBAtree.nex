@@ -1,0 +1,33 @@
+#NEXUS
+[R-package APE, Wed Sep 12 08:07:18 2018]
+
+BEGIN TAXA;
+	DIMENSIONS NTAX = 10;
+	TAXLABELS
+		Canis_lupus
+		Phoca_largha
+		Ailuropoda_melanoleuca
+		Tremarctos_ornatus
+		Helarctos_malayanus
+		Ursus_americanus
+		Ursus_thibetanus
+		Ursus_arctos
+		Ursus_maritimus
+		Melursus_ursinus
+	;
+END;
+BEGIN TREES;
+	TRANSLATE
+		1	Canis_lupus,
+		2	Phoca_largha,
+		3	Ailuropoda_melanoleuca,
+		4	Tremarctos_ornatus,
+		5	Helarctos_malayanus,
+		6	Ursus_americanus,
+		7	Ursus_thibetanus,
+		8	Ursus_arctos,
+		9	Ursus_maritimus,
+		10	Melursus_ursinus
+	;
+	TREE * UNTITLED = [&R] (1:0.5607849681,(2:0.4066251388,(3:1.202129436,(4:0.1469273297,(((5:1.056729294,(6:0.05175703732,7:0.05175703732):0.01497225637):0.01635461456,(8:0.0193699494,9:0.0193699494):0.05371395891):0.01245295142,10:0.06553685976):0.09139047089):0.06520210454):0.2144957032):0.1641598279);
+END;
