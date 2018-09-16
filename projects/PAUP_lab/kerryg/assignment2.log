@@ -1,0 +1,273 @@
+
+P A U P *
+Version 4.0a (build 163) for Unix/Linux (built on Jul 23 2018 at 19:49:27)
+Sun Sep 16 16:24:54 2018
+
+
+paup> execute bears_irbp.nex 
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/bears_irbp.nex" begins...
+
+Data read in DNA format
+
+Data matrix has 10 taxa, 1281 characters
+Valid character-state symbols: ACGT
+Missing data identified by '?'
+Gaps identified by '-'
+"Equate" macros in effect:
+   R,r ==> {AG}
+   Y,y ==> {CT}
+   M,m ==> {AC}
+   K,k ==> {GT}
+   S,s ==> {CG}
+   W,w ==> {AT}
+   H,h ==> {ACT}
+   B,b ==> {CGT}
+   V,v ==> {ACG}
+   D,d ==> {AGT}
+   N,n ==> {ACGT}
+
+Processing of input file "bears_irbp.nex" completed.
+
+paup> set criterion=likelihood
+
+Optimality criterion set to likelihood.
+
+paup> lset nst=2 basefreq=estimat rratio=estimate pinvar=estimate rates=equal
+
+Error(#143): Keyword "rratio" is not recognized.
+                 If the keyword is valid for the current command and it is spelled correctly, look for problems in a previous command,
+                 such as a missing semicolon.
+
+paup> lset nst=2 basefreq=estimate tratio=estimate pinvar=estimate rates=equal
+
+paup> hsearch
+
+Heuristic search settings:
+  Optimality criterion = likelihood
+    1281 characters are included
+    All characters have equal weight
+    Likelihood settings:
+      Current model:
+                               Data type = nucleotide
+                      Substitution types = 2 (HKY85 variant)
+                             Ti/tv ratio = estimated
+                       State frequencies = estimated
+          Proportion of invariable sites = estimated
+                 Rates at variable sites = equal
+                    Model correspondence = HKY85+I
+
+      Number of distinct data patterns under this model = 77
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Trees with approximate log likelihoods 5% or further from the target score are rejected without additional iteration
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+      Multidimensional optimizer = Praxis (tol=0.0001)
+      Likelihood calculations performed in single precision
+      Vector processing enabled
+      Conditional-likelihood rescaling threshold = 1e-20
+      Using 1 thread on 22 physical (88 logical) processors
+
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: as-is
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: tree-bisection-reconnection (TBR) with reconnection limit = 8
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+Heuristic search completed
+  Total number of rearrangements tried = 290
+  Score of best tree(s) found = 2707.478
+  Number of trees retained = 1
+  Time used = 4.19 sec (CPU time = 4.19 sec)
+
+paup> lscores
+
+Likelihood scores of tree(s) in memory:
+---------------------------------------
+  1281 characters are included
+  All characters have equal weight
+  Likelihood settings:
+    Current model:
+                             Data type = nucleotide
+                    Substitution types = 2 (HKY85 variant)
+                           Ti/tv ratio = estimated
+                     State frequencies = estimated
+        Proportion of invariable sites = estimated
+               Rates at variable sites = equal
+                  Model correspondence = HKY85+I
+
+    Number of distinct data patterns under this model = 77
+    Molecular clock not enforced
+    Starting branch lengths obtained using Rogers-Swofford approximation method
+    Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+    Multidimensional optimizer = Praxis (tol=0.0001)
+    Likelihood calculations performed in single precision
+    Vector processing enabled
+    Conditional-likelihood rescaling threshold = 1e-20
+    Using 1 thread on 22 physical (88 logical) processors
+
+Tree                   1
+------------------------
+-ln L           2707.478
+Base frequencies:
+  A             0.178920
+  C             0.327870
+  G             0.325112
+  T             0.168098
+Ti/tv:
+  exp. ratio    3.331741
+  kappa         7.352195
+P_inv           0.702703
+
+Time used to compute likelihoods = 0.03 sec (CPU time = 0.03 sec)
+
+paup> describetrees /plot=phylogram
+
+Tree description:
+
+  Unrooted tree(s) rooted using outgroup method
+
+  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
+  Optimality criterion = likelihood
+    1281 characters are included
+    All characters have equal weight
+    Likelihood settings:
+      Current model:
+                               Data type = nucleotide
+                      Substitution types = 2 (HKY85 variant)
+                             Ti/tv ratio = estimated
+                       State frequencies = estimated
+          Proportion of invariable sites = estimated
+                 Rates at variable sites = equal
+                    Model correspondence = HKY85+I
+
+      Number of distinct data patterns under this model = 77
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+      Multidimensional optimizer = Praxis (tol=0.0001)
+      Likelihood calculations performed in single precision
+      Vector processing enabled
+      Conditional-likelihood rescaling threshold = 1e-20
+      Using 1 thread on 22 physical (88 logical) processors
+
+Tree 1 (rooted using default outgroup)
+
+-Ln likelihood = 2707.478
+(use the LScores command (or Tree Scores->Likelihood menu command) to see model parameter estimates)
+
+/---------------------------------------------------------------------------------------------------------------- Canis lupus
+|
+|                                                                        /--------------------------------------- Phoca largha
+|                                                                        |
+\-----------------------------------------------------------------------16                       /------------ Ailuropoda melanoleuca
+                                                                         |                       |
+                                                                         \----------------------15    /---------- Tremarctos ornatus
+                                                                                                 |    |
+                                                                                                 |    | /- Helarctos malayanus
+                                                                                                 \---14 |
+                                                                                                      | |/-- Melursus ursinus
+                                                                                                      \13|
+                                                                                                        |+-- Ursus americanus
+                                                                                                        ||
+                                                                                                        12/-- Ursus arctos
+                                                                                                         11
+                                                                                                         |\ Ursus maritimus
+                                                                                                         |
+                                                                                                         \- Ursus thibetanus
+
+paup> bootstrap nreps=100 search=heuristic/swap=NNI nreps=1
+
+Bootstrap method with heuristic search:
+  Number of bootstrap replicates = 100
+  Starting seed = generated automatically
+  Number of characters resampled in each replicate = 1281
+  Optimality criterion = likelihood
+    1281 characters are included
+    All characters have equal weight
+    Likelihood settings:
+      Current model:
+                               Data type = nucleotide
+                      Substitution types = 2 (HKY85 variant)
+                             Ti/tv ratio = estimated
+                       State frequencies = estimated
+          Proportion of invariable sites = estimated
+                 Rates at variable sites = equal
+                    Model correspondence = HKY85+I
+
+      Number of distinct data patterns under this model = 77
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Trees with approximate log likelihoods 5% or further from the target score are rejected without additional iteration
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+      Multidimensional optimizer = Praxis (tol=0.0001)
+      Likelihood calculations performed in single precision
+      Vector processing enabled
+      Conditional-likelihood rescaling threshold = 1e-20
+      Using 1 thread on 22 physical (88 logical) processors
+
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: as-is
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: nearest-neighbor interchange (NNI)
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+  100 bootstrap replicates completed
+  Time used = 26.55 sec (CPU time = 26.56 sec)
+
+Bootstrap 50% majority-rule consensus tree
+
+/------------------------------------------------------------------------------------------------------------ Canis lupus(1)
+|
+|              /--------------------------------------------------------------------------------------------- Phoca largha(2)
+|              |
+\--------------+               /----------------------------------------------------------------------------- Ailuropoda melanoleuca(3)
+               |               |
+               \------88-------+              /-------------------------------------------------------------- Tremarctos ornatus(4)
+                               |              |
+                               |              |               /---------------------------------------------- Helarctos malayanus(5)
+                               \------79------+               |
+                                              |               |              /------------------------------- Melursus ursinus(6)
+                                              \------84-------+              |
+                                                              |              +------------------------------- Ursus americanus(7)
+                                                              |              |
+                                                              \------69------+               /--------------- Ursus arctos(8)
+                                                                             +------58-------+
+                                                                             |               \--------------- Ursus maritimus(10)
+                                                                             |
+                                                                             \------------------------------- Ursus thibetanus(9)
+
+Bipartitions found in one or more trees and frequency of occurrence (bootstrap support values):
+
+         1
+1234567890          Freq
+------------------------
+..********         88.00
+....******         84.00
+...*******         79.33
+.....*****         69.00
+.......*.*         58.00
+.**.......         12.00
+..*.******          9.00
+.**.******          8.83
+
+3 groups at (relative) frequency less than 5% not shown
+
+paup> savetrees file = ./kerryg/bears_likelihood_hyk+i.tre format=neqick supportvalues=nodelabels
+
+Error(#141): Invalid value specified for 'format': "neqick".
+                 Use "format=?" to see a list of valid values for each option.
+
+paup> savetrees file = ./kerryg/bears_likelihood_hyk+i.tre format=newick supportvalues=nodelabels
+
+1 tree saved to file "~/repos/macrophy_course/projects/PAUP_lab/kerryg/bears_likelihood_hyk+i.tre" in raw Newick format
