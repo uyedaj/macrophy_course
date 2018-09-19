@@ -1,456 +1,8 @@
 
 P A U P *
 Version 4.0a (build 163) for Unix/Linux (built on Jul 23 2018 at 19:49:27)
-Tue Sep 18 09:22:54 2018
+Wed Sep 19 13:52:36 2018
 
-
-paup> execute bears_irbp.nex
-
-Processing of file "~/repos/macrophy_course/projects/PAUP_lab/bears_irbp.nex" begins...
-
-Data read in DNA format
-
-Data matrix has 10 taxa, 1281 characters
-Valid character-state symbols: ACGT
-Missing data identified by '?'
-Gaps identified by '-'
-"Equate" macros in effect:
-   R,r ==> {AG}
-   Y,y ==> {CT}
-   M,m ==> {AC}
-   K,k ==> {GT}
-   S,s ==> {CG}
-   W,w ==> {AT}
-   H,h ==> {ACT}
-   B,b ==> {CGT}
-   V,v ==> {ACG}
-   D,d ==> {AGT}
-   N,n ==> {ACGT}
-
-Processing of input file "bears_irbp.nex" completed.
-
-paup> set criterion=parsimony
-
-paup> alltrees
-
-Exhaustive search settings:
-  Optimality criterion = parsimony
-    Character-status summary:
-      Of 1281 total characters:
-        All characters are of type 'unord'
-        All characters have equal weight
-        1104 characters are constant (proportion = 0.861827)
-        145 variable characters are parsimony-uninformative
-        Number of parsimony-informative characters = 32
-    Gaps are treated as "missing"
-    Multistate taxa interpreted as uncertainty
-  Initial 'Maxtrees' setting = 100
-  Branches collapsed (creating polytomies) if maximum branch length is zero
-  'MulTrees' option in effect
-  No topological constraints in effect
-  Trees are unrooted
-
-Exhaustive search completed:
-  Number of trees evaluated = 2027025
-  Score of best tree found = 199
-  Score of worst tree found = 231
-  Number of trees retained = 1
-  Time used = 0.45 sec (CPU time = 0.45 sec)
-
-Frequency distribution of tree scores:
-
-         mean=226.648485 sd=5.765320 g1=-2.411547 g2=5.579105
-199.000 /----------------------------------------------------------------------------------
-200.600 | (195)
-202.200 | (2535)
-203.800 |# (7965)
-205.400 |# (5550)
-207.000 |## (16710)
-208.600 |### (32910)
-210.200 |####### (69270)
-211.800 | (0)
-213.400 | (0)
-215.000 | (0)
-216.600 | (1155)
-218.200 |# (5880)
-219.800 |## (19626)
-221.400 |## (20022)
-223.000 |## (21060)
-224.600 |################# (164628)
-226.200 |################################# (313629)
-227.800 |############# (123312)
-229.400 |################################################ (449586)
-231.000 |################################################################################## (772992)
-        \----------------------------------------------------------------------------------
-
-paup> describetrees 1
-
-Tree description:
-
-  Unrooted tree(s) rooted using outgroup method
-
-  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
-  Optimality criterion = parsimony
-    Character-status summary:
-      Of 1281 total characters:
-        All characters are of type 'unord'
-        All characters have equal weight
-        1104 characters are constant (proportion = 0.861827)
-        145 variable characters are parsimony-uninformative
-        Number of parsimony-informative characters = 32
-    Gaps are treated as "missing"
-    Multistate taxa interpreted as uncertainty
-    Character-state optimization: Accelerated transformation (ACCTRAN)
-
-Tree 1 (rooted using default outgroup)
-
-Tree length = 199
-Consistency index (CI) = 0.9497
-Homoplasy index (HI) = 0.0503
-CI excluding uninformative characters = 0.7727
-HI excluding uninformative characters = 0.2273
-Retention index (RI) = 0.7619
-Rescaled consistency index (RC) = 0.7236
-
-/---------------------------------------------------------------------------- Canis lupus
-|
-|          /----------------------------------------------------------------- Phoca largha
-|          |
-\---------16          /------------------------------------------------------ Ailuropoda melanoleuca
-           |          |
-           \---------15          /------------------------------------------- Tremarctos ornatus
-                      |          |
-                      |          |         /--------------------------------- Helarctos malayanus
-                      \---------14         |
-                                 |         |          /---------------------- Melursus ursinus
-                                 \--------13          |
-                                           |          +---------------------- Ursus americanus
-                                           |          |
-                                           \---------12          /----------- Ursus arctos
-                                                      +---------11
-                                                      |          \----------- Ursus maritimus
-                                                      |
-                                                      \---------------------- Ursus thibetanus
-
-paup> pscores
-
-Lengths of trees in memory:
-  Character-status summary:
-    Of 1281 total characters:
-      All characters are of type 'unord'
-      All characters have equal weight
-      1104 characters are constant (proportion = 0.861827)
-      145 variable characters are parsimony-uninformative
-      Number of parsimony-informative characters = 32
-  Gaps are treated as "missing"
-  Multistate taxa interpreted as uncertainty
-
-Tree #     1
-Length   199
-
-paup> describetrees /plot=phylogram
-
-Tree description:
-
-  Unrooted tree(s) rooted using outgroup method
-
-  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
-  Optimality criterion = parsimony
-    Character-status summary:
-      Of 1281 total characters:
-        All characters are of type 'unord'
-        All characters have equal weight
-        1104 characters are constant (proportion = 0.861827)
-        145 variable characters are parsimony-uninformative
-        Number of parsimony-informative characters = 32
-    Gaps are treated as "missing"
-    Multistate taxa interpreted as uncertainty
-    Character-state optimization: Accelerated transformation (ACCTRAN)
-
-Tree 1 (rooted using default outgroup)
-
-Tree length = 199
-Consistency index (CI) = 0.9497
-Homoplasy index (HI) = 0.0503
-CI excluding uninformative characters = 0.7727
-HI excluding uninformative characters = 0.2273
-Retention index (RI) = 0.7619
-Rescaled consistency index (RC) = 0.7236
-
-/---------------------------------------------------------------------------- Canis lupus
-|
-|                                       /------------------------------- Phoca largha
-|                                       |
-\--------------------------------------16                   /----------- Ailuropoda melanoleuca
-                                        |                   |
-                                        \------------------15     /---------- Tremarctos ornatus
-                                                            |     |
-                                                            |     | /- Helarctos malayanus
-                                                            \----14 |
-                                                                  | |/-- Melursus ursinus
-                                                                  \13|
-                                                                    |+-- Ursus americanus
-                                                                    ||
-                                                                    12/-- Ursus arctos
-                                                                     11
-                                                                     |\ Ursus maritimus
-                                                                     |
-                                                                     \- Ursus thibetanus
-
-paup> bandb
-
-Branch-and-bound search settings:
-  Optimality criterion = parsimony
-    Character-status summary:
-      Of 1281 total characters:
-        All characters are of type 'unord'
-        All characters have equal weight
-        1104 characters are constant (proportion = 0.861827)
-        145 variable characters are parsimony-uninformative
-        Number of parsimony-informative characters = 32
-    Gaps are treated as "missing"
-    Multistate taxa interpreted as uncertainty
-  Initial upper bound: unknown (compute heuristically)
-  Addition sequence: furthest
-  Initial 'Maxtrees' setting = 100
-  Branches collapsed (creating polytomies) if maximum branch length is zero
-  'MulTrees' option in effect
-  No topological constraints in effect
-  Trees are unrooted
-
-Branch-and-bound search completed:
-  Score of best tree found = 199
-  Number of trees retained = 1
-  Time used = 0.00 sec (CPU time = 0.00 sec)
-
-paup> set ?
-
-Usage: Set [options...];
-
-Optimality criterion, general search settings, etc.:
-
-Keyword ------- Option type -------------------------------------- Current setting -----------------
-criterion       parsimony|likelihood|distance                      parsimony
-maxtrees        <integer-value>                                    100
-increase        no|prompt|auto                                     prompt
-autoInc         <integer-value>                                    100
-constraints     <constraint-name>                                  (none)
-statusWin       no|yes                                             yes
-dStatus         <integer-value>|none                               60
-autoClose       no|yes                                             yes
-notifyBeep      no|yes                                             no
-
-Options for Nexus file input/output:
-
-Keyword ------- Option type -------------------------------------- Current setting -----------------
-allDigLab       prohibit|warn|noWarn                               warn
-allowPunct      no|yes                                             no
-nexusBlocks     data|taxaChar                                      data
-taxlabMatch     relaxed|strict                                     strict
-underscores     convert|keep                                       convert
-hashComments    no|yes                                             no
-
-Options for tree rooting and input/output:
-
-Keyword ------- Option type -------------------------------------- Current setting -----------------
-rootMethod      outgroup|lundberg|midpoint                         outgroup
-outRoot         polytomy|paraphyletic|monophyletic                 polytomy
-forcePolytomy   no|yes                                             no
-storeBrLens     no|yes                                             yes
-storeTreeWts    no|yes                                             yes
-
-Warning/error settings:
-
-Keyword ------- Option type -------------------------------------- Current setting -----------------
-warnReset       no|yes                                             yes
-warnTree        no|yes                                             yes
-warnTSave       no|yes                                             yes
-warnBlkName     no|yes                                             yes
-warnRoot        no|yes                                             yes
-warnRedef       no|yes                                             yes
-warnTFileNoData no|yes                                             no
-errorStop       no|yes                                             yes
-errorBeep       no|yes                                             yes
-queryBeep       no|yes                                             yes
-
-Options for matrix output:
-
-Keyword ------- Option type -------------------------------------- Current setting -----------------
-showExcluded    no|yes                                             no
-cmLabels        no|yes                                             no
-cmShowEq        no|yes                                             yes
-cmColWidth      <integer-value>                                    1
-cmCstatus       no|yes                                             no
-
-Options for tree drawing:
-
-Keyword ------- Option type -------------------------------------- Current setting -----------------
-semiGraph       no|yes                                             no
-tOrder          standard|right|left|alphabet                       standard
-tCompress       no|yes                                             no
-showTaxNum      no|yes                                             no
-taxLabels       truncate|full                                      truncate
-
-Miscellaneous settings:
-
-Keyword ------- Option type -------------------------------------- Current setting -----------------
-monitor         no|yes                                             yes
-flushLog        no|yes                                             no
-dataStorage     full|compact                                       compact
-defaultMode     no|yes                                             no
-showAbbrev      no|yes                                             no
-outwidth        <integer-value>|auto                              *auto
-pause           no|silent|beep|msg                                 no
-fLock           no|yes                                             yes
-                                                                  *Option is nonpersistent
-
-paup> criterion = likelihood
-
-Error(#152): Command "criterion" is unrecognized.
-                 If it is spelled correctly, look for problems in a previous command, such as an
-                 unintentional semicolon.
-
-paup> set criterion = likelihood
-
-Optimality criterion set to likelihood.
-
-paup> alltrees
-
-Exhaustive search settings:
-  Optimality criterion = likelihood
-    1281 characters are included
-    All characters have equal weight
-    Likelihood settings:
-      Current model:
-                               Data type = nucleotide
-                      Substitution types = 2 (HKY85 variant)
-                             Ti/tv ratio = 2
-                       State frequencies = empirical: A=0.181833 C=0.328567 G=0.319747 T=0.169853
-          Proportion of invariable sites = none
-                 Rates at variable sites = equal
-                    Model correspondence = HKY85
-
-      Number of distinct data patterns under this model = 77
-      Molecular clock not enforced
-      Starting branch lengths obtained using Rogers-Swofford approximation method
-      Trees with approximate log likelihoods 5% or further from the target score are rejected
-        without additional iteration
-      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20,
-                                   tolerance=1e-07
-      Likelihood calculations performed in single precision
-      Vector processing enabled
-      Conditional-likelihood rescaling threshold = 1e-20
-      Using 1 thread on 22 physical (88 logical) processors
-
-  Initial 'Maxtrees' setting = 100
-  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
-  'MulTrees' option in effect
-  No topological constraints in effect
-  Trees are unrooted
-
-    Elapsed  % Search-    # Trees    # Trees      Score of
-       time  tree done  evaluated      saved    best trees
-  --------------------------------------------------------
-    0:01:00      6.878     140664          1      2753.316
-    0:02:00     15.450     314677          1      2748.290
-    0:03:00     23.492     476228          1      2748.290
-    0:04:00     31.534     640743          1      2748.290
-    0:05:00     38.624     784438          1      2748.290
-    0:06:00     47.090     956241          1      2748.290
-    0:07:00     53.968    1094256          1      2748.290
-    0:08:00     61.481    1246907          1      2748.290
-    0:09:00     69.206    1403227          1      2748.290
-    0:10:00     77.037    1563411          1      2748.290
-    0:11:00     85.714    1739591          1      2731.712
-    0:12:00     94.074    1907122          1      2723.805
-    0:12:42    100.000    2027025          1      2723.805
-
-Exhaustive search completed:
-  Number of trees evaluated = 2027025
-  Score of best tree found = 2723.805
-  Score of worst tree found = 2796.133
-  Number of trees retained = 1
-  Time used = 00:12:42 (CPU time = 00:12:42.7)
-
-Frequency distribution of tree scores:
-
-          mean=2786.575644 sd=10.457307 g1=-1.975668 g2=3.841967
-2723.805 /---------------------------------------------------------------------------------
-2727.421 | (15)
-2731.038 | (105)
-2734.654 | (225)
-2738.270 | (1833)
-2741.887 | (1197)
-2745.503 |# (11382)
-2749.120 | (2925)
-2752.736 |## (23256)
-2756.352 |# (11676)
-2759.969 |#### (36179)
-2763.585 |###### (53269)
-2767.202 |# (5838)
-2770.818 |### (28296)
-2774.434 |#### (33918)
-2778.051 |###### (55098)
-2781.667 |################# (156723)
-2785.284 |################ (146964)
-2788.900 |############################### (286352)
-2792.516 |############################################ (411366)
-2796.133 |################################################################################# (760408)
-         \---------------------------------------------------------------------------------
-
-paup> describetrees 1
-
-Tree description:
-
-  Unrooted tree(s) rooted using outgroup method
-
-  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
-  Optimality criterion = likelihood
-    1281 characters are included
-    All characters have equal weight
-    Likelihood settings:
-      Current model:
-                               Data type = nucleotide
-                      Substitution types = 2 (HKY85 variant)
-                             Ti/tv ratio = 2
-                       State frequencies = empirical: A=0.181833 C=0.328567 G=0.319747 T=0.169853
-          Proportion of invariable sites = none
-                 Rates at variable sites = equal
-                    Model correspondence = HKY85
-
-      Number of distinct data patterns under this model = 77
-      Molecular clock not enforced
-      Starting branch lengths obtained using Rogers-Swofford approximation method
-      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20,
-                                   tolerance=1e-07
-      Likelihood calculations performed in single precision
-      Vector processing enabled
-      Conditional-likelihood rescaling threshold = 1e-20
-      Using 1 thread on 22 physical (88 logical) processors
-
-Tree 1 (rooted using default outgroup)
-
--Ln likelihood = 2723.805
-
-/---------------------------------------------------------------------------- Canis lupus
-|
-|                                         /--------------------------------- Phoca largha
-|                                         |
-\----------------------------------------16                   /---------- Ailuropoda melanoleuca
-                                          |                   |
-                                          \------------------15   /---------- Tremarctos ornatus
-                                                              |   |
-                                                              |   |  / Helarctos malayanus
-                                                              \--14  |
-                                                                  |  +-- Melursus ursinus
-                                                                  \-13
-                                                                     +-- Ursus americanus
-                                                                     |
-                                                                    12/-- Ursus arctos
-                                                                     11
-                                                                     |\ Ursus maritimus
-                                                                     |
-                                                                     \- Ursus thibetanus
 
 paup> lset ?
 
@@ -525,6 +77,8 @@ Keyword ------- Option type -------------------------------------- Current setti
 useBeagle       no|GPU|CPU|<resource-number>                       no
 invarSiteMem    compact|fullStore                                  compact
 
+paup> lset nst=1 basefreq=estimate rates=gamma tratio=estimate
+
 paup> hsearch ?
 
 Usage: HSearch [options...];
@@ -564,8 +118,184 @@ rearrLimit      <integer-value>|none                               none
 limitPerRep     no|yes                                             no
                                                                   *Option is nonpersistent
 
-paup> lset basefreq=empirical rates=equal nst=1 rmatrix=estimate
+paup> hsearch swap=NNI nreps=100
 
-paup> quit
+Heuristic search settings:
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 1281 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        1104 characters are constant (proportion = 0.861827)
+        145 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 32
+    Gaps are treated as "missing"
+    Multistate taxa interpreted as uncertainty
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: simple (reference taxon = Canis lupus)
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: nearest-neighbor interchange (NNI)
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
 
-Warning: there are unsaved trees.  Do you want to quit anyway? (Y/n)y
+Heuristic search completed
+  Total number of rearrangements tried = 20
+  Score of best tree(s) found = 199
+  Number of trees retained = 1
+  Time used = 0.00 sec (CPU time = 0.00 sec)
+
+paup> describetrees 1
+
+Tree description:
+
+  Unrooted tree(s) rooted using outgroup method
+
+  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 1281 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        1104 characters are constant (proportion = 0.861827)
+        145 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 32
+    Gaps are treated as "missing"
+    Multistate taxa interpreted as uncertainty
+    Character-state optimization: Accelerated transformation (ACCTRAN)
+
+Tree 1 (rooted using default outgroup)
+
+Tree length = 199
+Consistency index (CI) = 0.9497
+Homoplasy index (HI) = 0.0503
+CI excluding uninformative characters = 0.7727
+HI excluding uninformative characters = 0.2273
+Retention index (RI) = 0.7619
+Rescaled consistency index (RC) = 0.7236
+
+/------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Canis lupus
+|
+|                            /-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Phoca largha
+|                            |
+\---------------------------16                             /-------------------------------------------------------------------------------------------------------------------------------------------------- Ailuropoda melanoleuca
+                             |                             |
+                             \----------------------------15                            /--------------------------------------------------------------------------------------------------------------------- Tremarctos ornatus
+                                                           |                            |
+                                                           |                            |                            /---------------------------------------------------------------------------------------- Helarctos malayanus
+                                                           \---------------------------14                            |
+                                                                                        |                            |                            /----------------------------------------------------------- Melursus ursinus
+                                                                                        \---------------------------13                            |
+                                                                                                                     |                            +----------------------------------------------------------- Ursus americanus
+                                                                                                                     |                            |
+                                                                                                                     \---------------------------12                             /----------------------------- Ursus arctos
+                                                                                                                                                  +----------------------------11
+                                                                                                                                                  |                             \----------------------------- Ursus maritimus
+                                                                                                                                                  |
+                                                                                                                                                  \----------------------------------------------------------- Ursus thibetanus
+
+paup> savetrees 1
+
+Error(#143): Keyword "1" is not recognized.
+                 If the keyword is valid for the current command and it is spelled correctly, look for problems in a previous command, such as a missing semicolon.
+
+paup> savetrees
+
+1 tree saved to file "~/repos/macrophy_course/projects/PAUP_lab/bears_irbp.tre"
+
+paup> savetrees paup_bear2.tre
+
+Error(#143): Keyword "paup bear2.tre" is not recognized.
+                 If the keyword is valid for the current command and it is spelled correctly, look for problems in a previous command, such as a missing semicolon.
+
+paup> lset variant=HKY
+
+paup> hsearch swap=NNI nreps=100
+
+Heuristic search settings:
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 1281 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        1104 characters are constant (proportion = 0.861827)
+        145 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 32
+    Gaps are treated as "missing"
+    Multistate taxa interpreted as uncertainty
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: simple (reference taxon = Canis lupus)
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: nearest-neighbor interchange (NNI)
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+Heuristic search completed
+  Total number of rearrangements tried = 20
+  Score of best tree(s) found = 199
+  Number of trees retained = 1
+  Time used = 0.00 sec (CPU time = 0.00 sec)
+
+paup> describetrees 1
+
+Tree description:
+
+  Unrooted tree(s) rooted using outgroup method
+
+  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 1281 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        1104 characters are constant (proportion = 0.861827)
+        145 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 32
+    Gaps are treated as "missing"
+    Multistate taxa interpreted as uncertainty
+    Character-state optimization: Accelerated transformation (ACCTRAN)
+
+Tree 1 (rooted using default outgroup)
+
+Tree length = 199
+Consistency index (CI) = 0.9497
+Homoplasy index (HI) = 0.0503
+CI excluding uninformative characters = 0.7727
+HI excluding uninformative characters = 0.2273
+Retention index (RI) = 0.7619
+Rescaled consistency index (RC) = 0.7236
+
+/------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Canis lupus
+|
+|                            /-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- Phoca largha
+|                            |
+\---------------------------16                             /-------------------------------------------------------------------------------------------------------------------------------------------------- Ailuropoda melanoleuca
+                             |                             |
+                             \----------------------------15                            /--------------------------------------------------------------------------------------------------------------------- Tremarctos ornatus
+                                                           |                            |
+                                                           |                            |                            /---------------------------------------------------------------------------------------- Helarctos malayanus
+                                                           \---------------------------14                            |
+                                                                                        |                            |                            /----------------------------------------------------------- Melursus ursinus
+                                                                                        \---------------------------13                            |
+                                                                                                                     |                            +----------------------------------------------------------- Ursus americanus
+                                                                                                                     |                            |
+                                                                                                                     \---------------------------12                             /----------------------------- Ursus arctos
+                                                                                                                                                  +----------------------------11
+                                                                                                                                                  |                             \----------------------------- Ursus maritimus
+                                                                                                                                                  |
+                                                                                                                                                  \----------------------------------------------------------- Ursus thibetanus
+
+paup> savetrees
+
+OK to replace file "bears_irbp.tre"? (Y/n)n
+
+paup> savetrees file=./khanhto/paul_bear2.tre format=newick root=yes brlens=yes supportvalues=nodelabels trees=all
+
+1 tree saved to file "~/repos/macrophy_course/projects/PAUP_lab/khanhto/paul_bear2.tre" in raw Newick format
