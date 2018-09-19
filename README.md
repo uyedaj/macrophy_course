@@ -107,13 +107,13 @@ results of these independent research projects.
 |W 9/5  |   5\. Felsenstein & the birth of statistical phylogenetics | Felsenstein 1981 ||
 |M 9/10 |   6\. Discrete character evolution I |O’Meara 2012||
 |W 9/12 |   7\. Discrete character evolution II|No Reading||      
-|M 9/17 |   8\. Inferring phylogenies from molecular data|Inferring phylogenies||      
-|W 9/19 |   9\. Practical considerations: alignments, partitioning and mixture models||   
+|M 9/17 |   8\. Model selection, model adequacy & Hypothesis testing||Assignment II: Paup Lab|      
+|W 9/19 |   9\. Practical considerations: alignments, concatenation, partitioning etc.|||   
 |M 9/24 |   10\. **EXAM I**   |||                                                         
-|W 9/26 |    11\. Biogeography |||                                                        
-|M 10/1 |   12\. Lab: RevBayes ||Assignment II:Project proposal|
+|W 9/26 |    11\. Biogeography |Ree and Smith 2008, Landis et al. 2013||                                                        
+|M 10/1 |   12\. Lab: RevBayes ||Turn in lab at end of period|
 |W 10/3 |   13\. Dating phylogenetic trees |||                                            
-|M 10/8 |   14\. The multispecies coalescent |||                                         
+|M 10/8 |   14\. The multispecies coalescent ||Assignment III:Project proposal|                                         
 |W 10/10 |  15\. Guest speaker (T. Pelletier, Radford U.) | Pelletier et al. 2014 ||                                          
 |M 10/15 | 16\. Brownian Motion & continuous trait evolution |||                          
 |W 10/17 |  17\. The comparative method & PICs |Felsenstein 1985||                        
