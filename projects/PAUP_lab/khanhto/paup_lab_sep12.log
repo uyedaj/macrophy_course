@@ -1,0 +1,1292 @@
+
+P A U P *
+Version 4.0a (build 163) for Unix/Linux (built on Jul 23 2018 at 19:49:27)
+Wed Sep 12 16:24:05 2018
+
+
+paup> execute bears_JC69.nex
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/bears_JC69.nex" begins...
+
+Data read in DNA format
+
+Data matrix has 10 taxa, 300 characters
+Valid character-state symbols: ACGT
+Missing data identified by '?'
+Gaps identified by '-'
+"Equate" macros in effect:
+   R,r ==> {AG}
+   Y,y ==> {CT}
+   M,m ==> {AC}
+   K,k ==> {GT}
+   S,s ==> {CG}
+   W,w ==> {AT}
+   H,h ==> {ACT}
+   B,b ==> {CGT}
+   V,v ==> {ACG}
+   D,d ==> {AGT}
+   N,n ==> {ACGT}
+
+Processing of input file "bears_JC69.nex" completed.
+
+paup> set criterion=parsimony
+
+paup> alltrees
+
+Exhaustive search settings:
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 300 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        31 characters are constant (proportion = 0.103333)
+        138 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 131
+    Gaps are treated as "missing"
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+Exhaustive search completed:
+  Number of trees evaluated = 2027025
+  Score of best tree found = 491
+  Score of worst tree found = 617
+  Number of trees retained = 2
+  Time used = 0.70 sec (CPU time = 0.71 sec)
+
+Frequency distribution of tree scores:
+
+         mean=592.389100 sd=17.091058 g1=-1.167594 g2=1.048914
+491.000 /---------------------------------------------------------------------------------------------------------------------------------------
+497.300 | (19)
+503.600 | (58)
+509.900 | (128)
+516.200 | (511)
+522.500 | (1725)
+528.800 |# (2391)
+535.100 |## (6537)
+541.400 |#### (12973)
+547.700 |##### (18293)
+554.000 |###### (20187)
+560.300 |############# (46559)
+566.600 |############################ (103700)
+572.900 |#################### (72302)
+579.200 |##################################### (136526)
+585.500 |############################################ (161859)
+591.800 |################################################### (187145)
+598.100 |############################################################################# (281232)
+604.400 |################################################################################################### (363228)
+610.700 |####################################################################################################################################### (494835)
+617.000 |################################ (116817)
+        \---------------------------------------------------------------------------------------------------------------------------------------
+
+paup> describetrees 1
+
+Tree description:
+
+  Unrooted tree(s) rooted using outgroup method
+
+  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 300 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        31 characters are constant (proportion = 0.103333)
+        138 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 131
+    Gaps are treated as "missing"
+    Character-state optimization: Accelerated transformation (ACCTRAN)
+
+Tree 1 (rooted using default outgroup)
+
+Tree length = 491
+Consistency index (CI) = 0.8493
+Homoplasy index (HI) = 0.1507
+CI excluding uninformative characters = 0.7439
+HI excluding uninformative characters = 0.2561
+Retention index (RI) = 0.6318
+Rescaled consistency index (RC) = 0.5366
+
+/--------------------------------------------------------------------------------------------------------------------------------- Canis lupus
+|
+|               /----------------------------------------------------------------------------------------------------------------- Phoca largha
+|               |
+|               |               /------------------------------------------------------------------------------------------------- Ailuropoda melanoleuca
+\--------------18               |
+                |               |               /--------------------------------------------------------------------------------- Tremarctos ornatus
+                \--------------17               |
+                                |               |                                                /-------------------------------- Helarctos malayanus
+                                |               |                                                |
+                                |               |                                /--------------12               /---------------- Ursus americanus
+                                \--------------16                                |               \--------------11
+                                                |                /--------------14                               \---------------- Ursus thibetanus
+                                                |                |               |
+                                                |                |               |                               /---------------- Ursus arctos
+                                                \---------------15               \------------------------------13
+                                                                 |                                               \---------------- Ursus maritimus
+                                                                 |
+                                                                 \---------------------------------------------------------------- Melursus ursinus
+
+paup> describetrees 2
+
+Tree description:
+
+  Unrooted tree(s) rooted using outgroup method
+
+  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 300 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        31 characters are constant (proportion = 0.103333)
+        138 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 131
+    Gaps are treated as "missing"
+    Character-state optimization: Accelerated transformation (ACCTRAN)
+
+Tree 2 (rooted using default outgroup)
+
+Tree length = 491
+Consistency index (CI) = 0.8493
+Homoplasy index (HI) = 0.1507
+CI excluding uninformative characters = 0.7439
+HI excluding uninformative characters = 0.2561
+Retention index (RI) = 0.6318
+Rescaled consistency index (RC) = 0.5366
+
+/--------------------------------------------------------------------------------------------------------------------------------- Canis lupus
+|
+|                 /--------------------------------------------------------------------------------------------------------------- Phoca largha
+|                 |
+\----------------18                  /-------------------------------------------------------------------------------------------- Ailuropoda melanoleuca
+                  |                  |
+                  |                  |                 /-------------------------------------------------------------------------- Tremarctos ornatus
+                  \-----------------17                 |
+                                     |                 |                                    /------------------------------------- Helarctos malayanus
+                                     |                 |                                    |
+                                     \----------------16                  /----------------12                  /------------------ Ursus americanus
+                                                       |                  |                 \-----------------11
+                                                       |                  |                                    \------------------ Ursus thibetanus
+                                                       \-----------------15
+                                                                          |                                    /------------------ Ursus arctos
+                                                                          |                 /-----------------13
+                                                                          |                 |                  \------------------ Ursus maritimus
+                                                                          \----------------14
+                                                                                            \------------------------------------- Melursus ursinus
+
+paup> contree
+
+Strict consensus of 2 trees:
+
+/--------------------------------------------------------------------------------------------------------------------------------- Canis lupus
+|
+|                 /--------------------------------------------------------------------------------------------------------------- Phoca largha
+|                 |
+\-----------------+                  /-------------------------------------------------------------------------------------------- Ailuropoda melanoleuca
+                  |                  |
+                  |                  |                 /-------------------------------------------------------------------------- Tremarctos ornatus
+                  \------------------+                 |
+                                     |                 |                                    /------------------------------------- Helarctos malayanus
+                                     |                 |                                    |
+                                     \-----------------+                  /-----------------+                  /------------------ Ursus americanus
+                                                       |                  |                 \------------------+
+                                                       |                  |                                    \------------------ Ursus thibetanus
+                                                       |                  |
+                                                       \------------------+                                    /------------------ Ursus arctos
+                                                                          +------------------------------------+
+                                                                          |                                    \------------------ Ursus maritimus
+                                                                          |
+                                                                          \------------------------------------------------------- Melursus ursinus
+
+paup> pscores
+
+Lengths of trees in memory:
+  Character-status summary:
+    Of 300 total characters:
+      All characters are of type 'unord'
+      All characters have equal weight
+      31 characters are constant (proportion = 0.103333)
+      138 variable characters are parsimony-uninformative
+      Number of parsimony-informative characters = 131
+  Gaps are treated as "missing"
+
+Tree #     1    2
+Length   491  491
+
+paup> describetrees /plot=phylogram
+
+Tree description:
+
+  Unrooted tree(s) rooted using outgroup method
+
+  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 300 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        31 characters are constant (proportion = 0.103333)
+        138 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 131
+    Gaps are treated as "missing"
+    Character-state optimization: Accelerated transformation (ACCTRAN)
+
+Tree 2 (rooted using default outgroup)
+
+Tree length = 491
+Consistency index (CI) = 0.8493
+Homoplasy index (HI) = 0.1507
+CI excluding uninformative characters = 0.7439
+HI excluding uninformative characters = 0.2561
+Retention index (RI) = 0.6318
+Rescaled consistency index (RC) = 0.5366
+
+/--------------------------------------------------------------------------------------------------------------------------------- Canis lupus
+|
+|  /-------------------------------------------------------------- Phoca largha
+|  |
+\-18                                                         /------------------------------------- Ailuropoda melanoleuca
+   |                                                         |
+   |                                                         |                  /------------------------------------------ Tremarctos ornatus
+   \--------------------------------------------------------17                  |
+                                                             |                  |                          /--------------------- Helarctos malayanus
+                                                             |                  |                          |
+                                                             \-----------------16                     /---12     /---------------- Ursus americanus
+                                                                                |                     |    \----11
+                                                                                |                     |          \------------- Ursus thibetanus
+                                                                                \--------------------15
+                                                                                                      |               /---- Ursus arctos
+                                                                                                      | /------------13
+                                                                                                      | |             \----- Ursus maritimus
+                                                                                                      \14
+                                                                                                        \------------- Melursus ursinus
+
+paup> bandb
+
+Branch-and-bound search settings:
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 300 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        31 characters are constant (proportion = 0.103333)
+        138 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 131
+    Gaps are treated as "missing"
+  Initial upper bound: unknown (compute heuristically)
+  Addition sequence: furthest
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+Branch-and-bound search completed:
+  Score of best tree found = 491
+  Number of trees retained = 2
+  Time used = 0.00 sec (CPU time = 0.00 sec)
+
+paup> savetrees ?
+
+Usage: SaveTrees [options...];
+
+Available options:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+file            <output-treefile-name>                             (none)
+format          Nexus|altNexus|Freqpars|Newick|Hennig|Phylip       Nexus
+root            no|yes                                             no
+treeWts         no|yes                                             no
+brLens          no|yes|user                                        no
+taxaBlk         no|yes                                             no
+setStoreCmd     no|yes                                             no
+supportValues   no|brlens|nodeLabels|Both                          brlens
+maxDecimals     <integer-value>                                    6
+trees           all|firstOnly                                      (none)
+from            <integer-value>                                    (none)
+to              <integer-value>                                    (none)
+prefix          <tree-name-prefix>                                 (none)
+replace         no|yes                                            *no
+append          no|yes                                            *no
+                                                                  *Option is nonpersistent
+
+paup> savetrees file=./khanhto/bears_pars_sep12.tre format=newick root=yes brlens=yes supportvalues=nodelabels trees=all
+
+2 trees saved to file "~/repos/macrophy_course/projects/PAUP_lab/khanhto/bears_pars_sep12.tre" in raw Newick format
+
+paup> set?
+
+Error(#152): Command "set?" is unrecognized.
+                 If it is spelled correctly, look for problems in a previous command, such as an unintentional semicolon.
+
+paup> set ?
+
+Usage: Set [options...];
+
+Optimality criterion, general search settings, etc.:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+criterion       parsimony|likelihood|distance                      parsimony
+maxtrees        <integer-value>                                    100
+increase        no|prompt|auto                                     prompt
+autoInc         <integer-value>                                    100
+constraints     <constraint-name>                                  (none)
+statusWin       no|yes                                             yes
+dStatus         <integer-value>|none                               60
+autoClose       no|yes                                             yes
+notifyBeep      no|yes                                             no
+
+Options for Nexus file input/output:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+allDigLab       prohibit|warn|noWarn                               warn
+allowPunct      no|yes                                             no
+nexusBlocks     data|taxaChar                                      data
+taxlabMatch     relaxed|strict                                     strict
+underscores     convert|keep                                       convert
+hashComments    no|yes                                             no
+
+Options for tree rooting and input/output:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+rootMethod      outgroup|lundberg|midpoint                         outgroup
+outRoot         polytomy|paraphyletic|monophyletic                 polytomy
+forcePolytomy   no|yes                                             no
+storeBrLens     no|yes                                             yes
+storeTreeWts    no|yes                                             yes
+
+Warning/error settings:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+warnReset       no|yes                                             yes
+warnTree        no|yes                                             yes
+warnTSave       no|yes                                             yes
+warnBlkName     no|yes                                             yes
+warnRoot        no|yes                                             yes
+warnRedef       no|yes                                             yes
+warnTFileNoData no|yes                                             no
+errorStop       no|yes                                             yes
+errorBeep       no|yes                                             yes
+queryBeep       no|yes                                             yes
+
+Options for matrix output:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+showExcluded    no|yes                                             no
+cmLabels        no|yes                                             no
+cmShowEq        no|yes                                             yes
+cmColWidth      <integer-value>                                    1
+cmCstatus       no|yes                                             no
+
+Options for tree drawing:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+semiGraph       no|yes                                             no
+tOrder          standard|right|left|alphabet                       standard
+tCompress       no|yes                                             no
+showTaxNum      no|yes                                             no
+taxLabels       truncate|full                                      truncate
+
+Miscellaneous settings:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+monitor         no|yes                                             yes
+flushLog        no|yes                                             no
+dataStorage     full|compact                                       compact
+defaultMode     no|yes                                             no
+showAbbrev      no|yes                                             no
+outwidth        <integer-value>|auto                              *auto
+pause           no|silent|beep|msg                                 no
+fLock           no|yes                                             yes
+                                                                  *Option is nonpersistent
+
+paup> set criterion=likelihood
+
+Optimality criterion set to likelihood.
+
+paup> lset ?
+
+Usage: LSet [model=<model-name>] [fixAllParams | estAllParams] [options...];
+
+Available options:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+NST             1|2|6                                              2
+tratio          <real-value>|estimate|previous                     2
+rmatrix         (<rAC><rAG><rAT><rCG><rCT>)|estimate|previous      (1 1 1 1 1)
+rclass          (<cAC><cAG><cAT><cCG><cCT><cGT>)                   '(abcdef)'
+variant         HKY|F84                                            HKY
+baseFreq        empirical|equal|estimate|previous|
+                (<frqA><frqC><frqG>)                               empirical
+rates           equal|gamma|siteSpec                               equal
+shape           <real-value>|estimate|previous                     0.5
+ncat            <integer-value>                                    4
+repRate         mean|median                                        mean
+pinvar          <real-value>|estimate|previous                     0
+siteRates       partition[:<charpartition-name>]|
+                rateset[:<rateset-name>]|previous                  (none)
+mpartition      <modelpartition-name>                              (none)
+modelRates      estimate|previous|equal                            (none)
+initBrLen       rogers|acctranRog|LS|<real-value>                  Rogers
+scoreDigits     <integer-value>|auto                               auto
+lCollapse       no|yes                                             yes
+maxPass         <integer-value>                                    20
+spToler         <real-value>                                       1e-07
+dpToler         <real-value>                                       1e-10
+approxLim       <real-value>|none                                  5
+adjustAppLim    no|yes                                             yes
+logIter         no|yes                                             no
+zeroLenTest     no|full|crude                                      no
+recon           marginal|joint                                     marginal
+allProbs        no|yes                                             no
+clock           no|yes                                             no
+userBrLens      no|yes                                             no
+startVals       parsApprox|arbitrary                               parsApprox
+paramClock      Thorne|relAge|Rambaut                              Thorne
+mlDistforLS     no|yes                                             no
+showQMatrix     no|yes                                             no
+fastStep        no|yes                                             yes
+optimizer       Praxis|LBFGS                                       Praxis
+blopt           newton1D|brent1D|multiDim                          newton1D
+clRescale       <real-value>                                       1e-20
+gRateScale      <real-value>|estimate|previous                     1
+condVar         no|yes|auto                                        auto
+precision       double|single                                      single
+vectorize       no|yes                                             yes
+nthreads        <integer-value>|auto                               1
+
+Options for amino-acid models:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+aaFreq          empirical|equal|estimate|previous|(<list>)|
+                Intrinsic                                          empirical
+aaRMatrix       (<rAC>...<rYV>)|estimate|previous|oneST|JTT|
+                JTTPAML|PAM|MTrev24|WAG|WAGstar|LG                 JTT
+
+Options for generic k-state models ("standard" data):
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+mkStateSpace    variable|fixed                                     variable
+genFreq         empirical|equal|estimate|previous|(<list>)         empirical
+genRmatrix      (<r01><r02>...)|estimate|previous|oneST            OneST
+genRclass       (<c01><c02>...)                                    '(aaaaaa)'
+
+The following options pertain only to Beagle-enabled versions::
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+useBeagle       no|GPU|CPU|<resource-number>                       no
+invarSiteMem    compact|fullStore                                  compact
+
+paup> lset nst=1 basefreq=equal rmatrix=estimate rates=equal
+
+paup> lset?
+
+Error(#152): Command "lset?" is unrecognized.
+                 If it is spelled correctly, look for problems in a previous command, such as an unintentional semicolon.
+
+paup> lset ?
+
+Usage: LSet [model=<model-name>] [fixAllParams | estAllParams] [options...];
+
+Available options:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+NST             1|2|6                                              1
+tratio          <real-value>|estimate|previous                     2
+rmatrix         (<rAC><rAG><rAT><rCG><rCT>)|estimate|previous      estimate
+rclass          (<cAC><cAG><cAT><cCG><cCT><cGT>)                   '(abcdef)'
+variant         HKY|F84                                            HKY
+baseFreq        empirical|equal|estimate|previous|
+                (<frqA><frqC><frqG>)                               equal
+rates           equal|gamma|siteSpec                               equal
+shape           <real-value>|estimate|previous                     0.5
+ncat            <integer-value>                                    4
+repRate         mean|median                                        mean
+pinvar          <real-value>|estimate|previous                     0
+siteRates       partition[:<charpartition-name>]|
+                rateset[:<rateset-name>]|previous                  (none)
+mpartition      <modelpartition-name>                              (none)
+modelRates      estimate|previous|equal                            (none)
+initBrLen       rogers|acctranRog|LS|<real-value>                  Rogers
+scoreDigits     <integer-value>|auto                               auto
+lCollapse       no|yes                                             yes
+maxPass         <integer-value>                                    20
+spToler         <real-value>                                       1e-07
+dpToler         <real-value>                                       1e-10
+approxLim       <real-value>|none                                  5
+adjustAppLim    no|yes                                             yes
+logIter         no|yes                                             no
+zeroLenTest     no|full|crude                                      no
+recon           marginal|joint                                     marginal
+allProbs        no|yes                                             no
+clock           no|yes                                             no
+userBrLens      no|yes                                             no
+startVals       parsApprox|arbitrary                               parsApprox
+paramClock      Thorne|relAge|Rambaut                              Thorne
+mlDistforLS     no|yes                                             no
+showQMatrix     no|yes                                             no
+fastStep        no|yes                                             yes
+optimizer       Praxis|LBFGS                                       Praxis
+blopt           newton1D|brent1D|multiDim                          newton1D
+clRescale       <real-value>                                       1e-20
+gRateScale      <real-value>|estimate|previous                     1
+condVar         no|yes|auto                                        auto
+precision       double|single                                      single
+vectorize       no|yes                                             yes
+nthreads        <integer-value>|auto                               1
+
+Options for amino-acid models:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+aaFreq          empirical|equal|estimate|previous|(<list>)|
+                Intrinsic                                          empirical
+aaRMatrix       (<rAC>...<rYV>)|estimate|previous|oneST|JTT|
+                JTTPAML|PAM|MTrev24|WAG|WAGstar|LG                 JTT
+
+Options for generic k-state models ("standard" data):
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+mkStateSpace    variable|fixed                                     variable
+genFreq         empirical|equal|estimate|previous|(<list>)         empirical
+genRmatrix      (<r01><r02>...)|estimate|previous|oneST            OneST
+genRclass       (<c01><c02>...)                                    '(aaaaaa)'
+
+The following options pertain only to Beagle-enabled versions::
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+useBeagle       no|GPU|CPU|<resource-number>                       no
+invarSiteMem    compact|fullStore                                  compact
+
+paup> Hsearch ?
+
+Usage: HSearch [options...];
+
+Available options:
+
+Keyword ------- Option type -------------------------------------- Current setting -----------------
+swap            none|NNI|SPR|TBR                                   TBR
+keep            <real-value>|No                                    No
+mulTrees        no|yes                                             yes
+writeCurTree    no|yes                                             no
+enforce         no|yes                                             no
+constraints     <constraint-name>                                  (none)
+converse        no|yes                                             no
+reconLimit      <integer-value>|infinity                           8
+nchuck          <integer-value>                                    0
+chuckScore      <real-value>|No                                    No
+start           stepwise|NJ|current|<tree-number>[-<tree-number>] *Stepwise
+addSeq          simple|closest|asIs|random|furthest                simple
+nreps           <integer-value>                                    10
+rseed           <int> or <int:int:int:int>                         0
+rstatus         no|yes                                             no
+saveReps        no|yes                                             no
+refTax          <integer-value>                                    0
+hold            <integer-value>|No                                 1
+nbest           <integer-value>|all                                all
+allSwap         no|yes                                             no
+useNonMin       no|yes                                             no
+steepest        no|yes                                             no
+abortRep        no|yes                                             no
+retain          no|yes                                            *no
+statusWin       no|yes                                             yes
+dStatus         <integer-value>|none                               60
+randomize       addSeq|trees                                       addSeq
+timeLimit       <integer-value>|none                               none
+rearrLimit      <integer-value>|none                               none
+limitPerRep     no|yes                                             no
+                                                                  *Option is nonpersistent
+
+paup> hsearch
+
+Heuristic search settings:
+  Optimality criterion = likelihood
+    300 characters are included
+    All characters have equal weight
+    Likelihood settings:
+      Current model:
+                               Data type = nucleotide
+                      Substitution types = 1
+                       State frequencies = equal
+          Proportion of invariable sites = none
+                 Rates at variable sites = equal
+                    Model correspondence = JC69
+
+      Number of distinct data patterns under this model = 220
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Trees with approximate log likelihoods 5% or further from the target score are rejected without additional iteration
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+      Likelihood calculations performed in single precision
+      Vector processing enabled
+      Conditional-likelihood rescaling threshold = 1e-20
+      Using 1 thread on 22 physical (88 logical) processors
+
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: as-is
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: tree-bisection-reconnection (TBR) with reconnection limit = 8
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+Heuristic search completed
+  Total number of rearrangements tried = 300
+  Score of best tree(s) found = 2185.041
+  Number of trees retained = 1
+  Time used = 0.15 sec (CPU time = 0.16 sec)
+
+paup> lscores
+
+Likelihood scores of tree(s) in memory:
+---------------------------------------
+  300 characters are included
+  All characters have equal weight
+  Likelihood settings:
+    Current model:
+                             Data type = nucleotide
+                    Substitution types = 1
+                     State frequencies = equal
+        Proportion of invariable sites = none
+               Rates at variable sites = equal
+                  Model correspondence = JC69
+
+    Number of distinct data patterns under this model = 220
+    Molecular clock not enforced
+    Starting branch lengths obtained using Rogers-Swofford approximation method
+    Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+    Likelihood calculations performed in single precision
+    Vector processing enabled
+    Conditional-likelihood rescaling threshold = 1e-20
+    Using 1 thread on 22 physical (88 logical) processors
+
+Tree             1
+------------------
+-ln L     2185.041
+
+Time used to compute likelihoods = 0.01 sec (CPU time = 0.00 sec)
+
+paup> lset basefreq=empirical
+
+paup> lscores
+
+Likelihood scores of tree(s) in memory:
+---------------------------------------
+  300 characters are included
+  All characters have equal weight
+  Likelihood settings:
+    Current model:
+                             Data type = nucleotide
+                    Substitution types = 1
+                     State frequencies = empirical: A=0.226333 C=0.243333 G=0.252333 T=0.278
+        Proportion of invariable sites = none
+               Rates at variable sites = equal
+                  Model correspondence = F81
+
+    Number of distinct data patterns under this model = 220
+    Molecular clock not enforced
+    Starting branch lengths obtained using Rogers-Swofford approximation method
+    Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+    Likelihood calculations performed in single precision
+    Vector processing enabled
+    Conditional-likelihood rescaling threshold = 1e-20
+    Using 1 thread on 22 physical (88 logical) processors
+
+Tree             1
+------------------
+-ln L     2183.675
+
+Time used to compute likelihoods = 0.00 sec (CPU time = 0.00 sec)
+
+paup> describetrees /plot=phylogram
+
+Tree description:
+
+  Unrooted tree(s) rooted using outgroup method
+
+  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
+  Optimality criterion = likelihood
+    300 characters are included
+    All characters have equal weight
+    Likelihood settings:
+      Current model:
+                               Data type = nucleotide
+                      Substitution types = 1
+                       State frequencies = empirical: A=0.226333 C=0.243333 G=0.252333 T=0.278
+          Proportion of invariable sites = none
+                 Rates at variable sites = equal
+                    Model correspondence = F81
+
+      Number of distinct data patterns under this model = 220
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+      Likelihood calculations performed in single precision
+      Vector processing enabled
+      Conditional-likelihood rescaling threshold = 1e-20
+      Using 1 thread on 22 physical (88 logical) processors
+
+Tree 1 (rooted using default outgroup)
+
+-Ln likelihood = 2183.675
+
+/--------------------------------------------------------------------------------------------------------------------------------- Canis lupus
+|
+|                     /------------------------------------------------------ Phoca largha
+|                     |
+|                     |                                                                  /---------------------------------------- Ailuropoda melanoleuca
+|                     |                                                                  |
+|                     |                                                                  |               /-------------- Helarctos malayanus
+|                     |                                                                  |               |
+\--------------------18                                                                  |            /-12   /---------- Ursus americanus
+                      |                                                         /-------16            |  \--11
+                      |                                                         |        |           14      \-------- Ursus thibetanus
+                      |                                                         |        |           ||
+                      |                                                         |        |           ||         /-- Ursus arctos
+                      \--------------------------------------------------------17        \----------15\--------13
+                                                                                |                    |          \--- Ursus maritimus
+                                                                                |                    |
+                                                                                |                    \-------- Melursus ursinus
+                                                                                |
+                                                                                \------------------------ Tremarctos ornatus
+
+paup> hsearch basefreq=equal
+
+Error(#143): Keyword "basefreq" is not recognized.
+                 If the keyword is valid for the current command and it is spelled correctly, look for problems in a previous command, such as a missing
+                 semicolon.
+
+paup> bootstrap search=heuristic/swap=NNI nreps=1
+
+Bootstrap method with heuristic search:
+  Number of bootstrap replicates = 100
+  Starting seed = generated automatically
+  Number of characters resampled in each replicate = 300
+  Optimality criterion = likelihood
+    300 characters are included
+    All characters have equal weight
+    Likelihood settings:
+      Current model:
+                               Data type = nucleotide
+                      Substitution types = 1
+                       State frequencies = empirical: A=0.226333 C=0.243333 G=0.252333 T=0.278
+          Proportion of invariable sites = none
+                 Rates at variable sites = equal
+                    Model correspondence = F81
+
+      Number of distinct data patterns under this model = 220
+      Molecular clock not enforced
+      Starting branch lengths obtained using Rogers-Swofford approximation method
+      Trees with approximate log likelihoods 5% or further from the target score are rejected without additional iteration
+      Branch-length optimization = one-dimensional Newton-Raphson with pass limit=20, tolerance=1e-07
+      Likelihood calculations performed in single precision
+      Vector processing enabled
+      Conditional-likelihood rescaling threshold = 1e-20
+      Using 1 thread on 22 physical (88 logical) processors
+
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: as-is
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: nearest-neighbor interchange (NNI)
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if branch length is less than or equal to 1e-08
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+  100 bootstrap replicates completed
+  Time used = 1.55 sec (CPU time = 1.55 sec)
+
+Bootstrap 50% majority-rule consensus tree
+
+/----------------------------------------------------------------------------------------------------------------------------- Canis lupus(1)
+|
+|                 /----------------------------------------------------------------------------------------------------------- Phoca largha(2)
+|                 |
+|                 |                                   /----------------------------------------------------------------------- Ailuropoda melanoleuca(3)
+|                 |                                   |
+|                 |                                   |                                  /------------------------------------ Helarctos malayanus(5)
+\-----------------+                                   |                                  |
+                  |                 /-------73--------+                /-------96--------+                 /------------------ Ursus americanus(6)
+                  |                 |                 |                |                 \-------99--------+
+                  |                 |                 |                |                                   \------------------ Ursus thibetanus(7)
+                  |                 |                 |                |
+                  |                 |                 \-------99-------+                                   /------------------ Ursus arctos(8)
+                  \-------93--------+                                  +----------------100----------------+
+                                    |                                  |                                   \------------------ Ursus maritimus(9)
+                                    |                                  |
+                                    |                                  \------------------------------------------------------ Melursus ursinus(10)
+                                    |
+                                    \----------------------------------------------------------------------------------------- Tremarctos ornatus(4)
+
+Bipartitions found in one or more trees and frequency of occurrence (bootstrap support values):
+
+         1
+1234567890          Freq
+------------------------
+.......**.        100.00
+....******         99.00
+.....**...         99.00
+....***...         96.50
+..********         93.00
+..*.******         73.33
+.......***         49.00
+....*****.         48.50
+...*******         23.33
+.**.******          5.00
+
+10 groups at (relative) frequency less than 5% not shown
+
+paup> execute bears_LBA.nex
+
+Error(#102): Cannot find file "bears_LBA.nex"
+                 Make sure the filename has been specified correctly (including upper- vs. lower-case on operating systems where case is important in
+                 filenames).
+
+paup> execute bears_LBAtree.nex
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/bears_LBAtree.nex" begins...
+
+Are you sure you want to reset the active datafile? (Y/n)y
+
+1 tree read from TREES block; time used = 0.00 sec (CPU time = 0.00 sec)
+
+Processing of input file "bears_LBAtree.nex" completed.
+
+paup> describetrees /plot=phylogram
+
+Tree description:
+
+Tree 1 ("UNTITLED"):
+
+/--------------------------------------------- Canis lupus
+|
+19           /-------------------------------- Phoca largha
+|            |
+|            |                /------------------------------------------------------------------------------------------------ Ailuropoda melanoleuca
+\-----------18                |
+             |                |    /------------ Tremarctos ornatus
+             \---------------17    |
+                              |    |         /------------------------------------------------------------------------------------ Helarctos malayanus
+                              |    |         |
+                              |    |        12/---- Ursus americanus
+                              \---16        |11
+                                   |       14 \---- Ursus thibetanus
+                                   |       ||
+                                   |       ||   /- Ursus arctos
+                                   \------15\--13
+                                           |    \- Ursus maritimus
+                                           |
+                                           \----- Melursus ursinus
+
+paup> execute bears_LBA500.nex
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/bears_LBA500.nex" begins...
+
+Are you sure you want to reset the active datafile? (Y/n)y
+
+Data read in DNA format
+
+Data matrix has 10 taxa, 500 characters
+Valid character-state symbols: ACGT
+Missing data identified by '?'
+Gaps identified by '-'
+"Equate" macros in effect:
+   R,r ==> {AG}
+   Y,y ==> {CT}
+   M,m ==> {AC}
+   K,k ==> {GT}
+   S,s ==> {CG}
+   W,w ==> {AT}
+   H,h ==> {ACT}
+   B,b ==> {CGT}
+   V,v ==> {ACG}
+   D,d ==> {AGT}
+   N,n ==> {ACGT}
+
+Processing of input file "bears_LBA500.nex" completed.
+
+paup> criterion=parsimony
+
+Error(#152): Command "criterion=parsimony" is unrecognized.
+                 If it is spelled correctly, look for problems in a previous command, such as an unintentional semicolon.
+
+paup> set criterion=parsimony
+
+Optimality criterion set to parsimony.
+
+paup> bandb
+
+Branch-and-bound search settings:
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 500 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        12 characters are constant (proportion = 0.024)
+        180 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 308
+    Gaps are treated as "missing"
+  Initial upper bound: unknown (compute heuristically)
+  Addition sequence: furthest
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+Branch-and-bound search completed:
+  Score of best tree found = 1164
+  Number of trees retained = 1
+  Time used = 0.01 sec (CPU time = 0.01 sec)
+
+paup> describetrees /plot=phylogram
+
+Tree description:
+
+  Unrooted tree(s) rooted using outgroup method
+
+  Note: No outgroup has been defined; tree is (arbitrarily) rooted at first taxon.
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 500 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        12 characters are constant (proportion = 0.024)
+        180 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 308
+    Gaps are treated as "missing"
+    Character-state optimization: Accelerated transformation (ACCTRAN)
+
+Tree 1 (rooted using default outgroup)
+
+Tree length = 1164
+Consistency index (CI) = 0.7895
+Homoplasy index (HI) = 0.2105
+CI excluding uninformative characters = 0.7076
+HI excluding uninformative characters = 0.2924
+Retention index (RI) = 0.5149
+Rescaled consistency index (RC) = 0.4065
+
+/---------------------------------------------------- Canis lupus
+|
+|            /----------------------------------- Phoca largha
+|            |
+|            |                                                           /-------------------------------------------------------- Ailuropoda melanoleuca
+\-----------18                         /--------------------------------11
+             |                         |                                 \---------------------------------------------------- Helarctos malayanus
+             |                         |
+             \------------------------17               /------------------ Tremarctos ornatus
+                                       |               |
+                                       |               |                  /-------- Ursus americanus
+                                       |               |             /---12
+                                       \--------------16             |    \--------- Ursus thibetanus
+                                                       |          /-14
+                                                       |          |  |     /---- Ursus arctos
+                                                       |          |  \----13
+                                                       \---------15        \-- Ursus maritimus
+                                                                  |
+                                                                  \----- Melursus ursinus
+
+paup> bootstrap
+
+Bootstrap method with heuristic search:
+  Number of bootstrap replicates = 100
+  Starting seed = generated automatically
+  Number of characters resampled in each replicate = 500
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 500 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        12 characters are constant (proportion = 0.024)
+        180 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 308
+    Gaps are treated as "missing"
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: simple (reference taxon = Canis lupus)
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: nearest-neighbor interchange (NNI)
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+  100 bootstrap replicates completed
+  Time used = 0.02 sec (CPU time = 0.03 sec)
+
+Bootstrap 50% majority-rule consensus tree
+
+/----------------------------------------------------------------------------------------------------------------------------- Canis lupus(1)
+|
+|                 /----------------------------------------------------------------------------------------------------------- Phoca largha(2)
+|                 |
+|                 |                                                                                        /------------------ Ailuropoda melanoleuca(3)
+\-----------------+                 /----------------------------------96----------------------------------+
+                  |                 |                                                                      \------------------ Helarctos malayanus(5)
+                  |                 |
+                  \-------64--------+                 /----------------------------------------------------------------------- Tremarctos ornatus(4)
+                                    |                 |
+                                    |                 |                                                    /------------------ Ursus americanus(6)
+                                    |                 |                                  /-------99--------+
+                                    \-------100-------+                                  |                 \------------------ Ursus thibetanus(7)
+                                                      |                /-------74--------+
+                                                      |                |                 |                 /------------------ Ursus arctos(8)
+                                                      |                |                 \-------100-------+
+                                                      \-------99-------+                                   \------------------ Ursus maritimus(9)
+                                                                       |
+                                                                       \------------------------------------------------------ Melursus ursinus(10)
+
+Bipartitions found in one or more trees and frequency of occurrence (bootstrap support values):
+
+         1
+1234567890          Freq
+------------------------
+.......**.        100.00
+...*.*****        100.00
+.....**...         99.00
+.....*****         99.00
+..*.*.....         95.50
+.....****.         73.67
+..********         64.17
+.*.*.*****         31.83
+.......***         25.33
+
+7 groups at (relative) frequency less than 5% not shown
+
+paup> execute bears_LBA5000.nex
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/bears_LBA5000.nex" begins...
+
+Are you sure you want to reset the active datafile? (Y/n)y
+
+Data read in DNA format
+
+Data matrix has 10 taxa, 5000 characters
+Valid character-state symbols: ACGT
+Missing data identified by '?'
+Gaps identified by '-'
+"Equate" macros in effect:
+   R,r ==> {AG}
+   Y,y ==> {CT}
+   M,m ==> {AC}
+   K,k ==> {GT}
+   S,s ==> {CG}
+   W,w ==> {AT}
+   H,h ==> {ACT}
+   B,b ==> {CGT}
+   V,v ==> {ACG}
+   D,d ==> {AGT}
+   N,n ==> {ACGT}
+
+Processing of input file "bears_LBA5000.nex" completed.
+
+paup> bandb
+
+Branch-and-bound search settings:
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 5000 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        118 characters are constant (proportion = 0.0236)
+        1774 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 3108
+    Gaps are treated as "missing"
+  Initial upper bound: unknown (compute heuristically)
+  Addition sequence: furthest
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+Branch-and-bound search completed:
+  Score of best tree found = 11910
+  Number of trees retained = 1
+  Time used = 0.07 sec (CPU time = 0.07 sec)
+
+paup> bootstrap
+
+Bootstrap method with heuristic search:
+  Number of bootstrap replicates = 100
+  Starting seed = generated automatically
+  Number of characters resampled in each replicate = 5000
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 5000 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        118 characters are constant (proportion = 0.0236)
+        1774 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 3108
+    Gaps are treated as "missing"
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: simple (reference taxon = Canis lupus)
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: nearest-neighbor interchange (NNI)
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+  100 bootstrap replicates completed
+  Time used = 0.13 sec (CPU time = 0.13 sec)
+
+Bootstrap 50% majority-rule consensus tree
+
+/----------------------------------------------------------------------------------------------------------------------------- Canis lupus(1)
+|
+|                                   /----------------------------------------------------------------------------------------- Phoca largha(2)
+|                                   |
+|                                   |                 /----------------------------------------------------------------------- Tremarctos ornatus(4)
+|                 /-------64--------+                 |
+|                 |                 |                 |                                                    /------------------ Ursus americanus(6)
+|                 |                 |                 |                                  /-------100-------+
+|                 |                 \-------100-------+                                  |                 \------------------ Ursus thibetanus(7)
+|                 |                                   |                /-------100-------+
+|                 |                                   |                |                 |                 /------------------ Ursus arctos(8)
+\-----------------+                                   |                |                 \-------100-------+
+                  |                                   \------100-------+                                   \------------------ Ursus maritimus(9)
+                  |                                                    |
+                  |                                                    \------------------------------------------------------ Melursus ursinus(10)
+                  |
+                  |                                                                                        /------------------ Ailuropoda melanoleuca(3)
+                  \-------------------------------------------99-------------------------------------------+
+                                                                                                           \------------------ Helarctos malayanus(5)
+
+Bipartitions found in one or more trees and frequency of occurrence (bootstrap support values):
+
+         1
+1234567890          Freq
+------------------------
+.......**.           100
+.....**...           100
+.....****.           100
+.....*****           100
+...*.*****           100
+..*.*.....            99
+.*.*.*****            64
+..********            35
+
+2 groups at (relative) frequency less than 5% not shown
+
+paup> execute bears_LBA1000.nex
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/bears_LBA1000.nex" begins...
+
+Are you sure you want to reset the active datafile? (Y/n)y
+
+Data read in DNA format
+
+Data matrix has 10 taxa, 1000 characters
+Valid character-state symbols: ACGT
+Missing data identified by '?'
+Gaps identified by '-'
+"Equate" macros in effect:
+   R,r ==> {AG}
+   Y,y ==> {CT}
+   M,m ==> {AC}
+   K,k ==> {GT}
+   S,s ==> {CG}
+   W,w ==> {AT}
+   H,h ==> {ACT}
+   B,b ==> {CGT}
+   V,v ==> {ACG}
+   D,d ==> {AGT}
+   N,n ==> {ACGT}
+
+Processing of input file "bears_LBA1000.nex" completed.
+
+paup> bootstrap nreps=100 search=heuristic/swap=NNI nreps=1
+
+Bootstrap method with heuristic search:
+  Number of bootstrap replicates = 100
+  Starting seed = generated automatically
+  Number of characters resampled in each replicate = 1000
+  Optimality criterion = parsimony
+    Character-status summary:
+      Of 1000 total characters:
+        All characters are of type 'unord'
+        All characters have equal weight
+        21 characters are constant (proportion = 0.021)
+        344 variable characters are parsimony-uninformative
+        Number of parsimony-informative characters = 635
+    Gaps are treated as "missing"
+  Starting tree(s) obtained via stepwise addition
+    Addition sequence: simple (reference taxon = Canis lupus)
+    Number of trees held at each step = 1
+  Branch-swapping algorithm: nearest-neighbor interchange (NNI)
+    Steepest descent option not in effect
+  Initial 'Maxtrees' setting = 100
+  Branches collapsed (creating polytomies) if maximum branch length is zero
+  'MulTrees' option in effect
+  No topological constraints in effect
+  Trees are unrooted
+
+  100 bootstrap replicates completed
+  Time used = 0.04 sec (CPU time = 0.04 sec)
+
+Bootstrap 50% majority-rule consensus tree
+
+/----------------------------------------------------------------------------------------------------------------------------- Canis lupus(1)
+|
+|                    /-------------------------------------------------------------------------------------------------------- Phoca largha(2)
+|                    |
+|                    |                                                                                  /--------------------- Ailuropoda melanoleuca(3)
+|                    +----------------------------------------81----------------------------------------+
+|                    |                                                                                  \--------------------- Helarctos malayanus(5)
+\--------------------+
+                     |                    /----------------------------------------------------------------------------------- Tremarctos ornatus(4)
+                     |                    |
+                     |                    |                                                             /--------------------- Ursus americanus(6)
+                     |                    |                                        /--------100---------+
+                     \--------100---------+                                        |                    \--------------------- Ursus thibetanus(7)
+                                          |                    /--------100--------+
+                                          |                    |                   |                    /--------------------- Ursus arctos(8)
+                                          |                    |                   \--------100---------+
+                                          \--------100---------+                                        \--------------------- Ursus maritimus(9)
+                                                               |
+                                                               \-------------------------------------------------------------- Melursus ursinus(10)
+
+Bipartitions found in one or more trees and frequency of occurrence (bootstrap support values):
+
+         1
+1234567890          Freq
+------------------------
+.......**.        100.00
+.....**...        100.00
+.....*****        100.00
+...*.*****        100.00
+.....****.         99.50
+..*.*.....         81.00
+.*.*.*****         42.00
+..********         39.00
+...*******         10.00
+.*.*******         10.00
+.***.*****          9.00
+.**.......          7.00
+
+2 groups at (relative) frequency less than 5% not shown
+
+paup> modeltest-ng -i bears_irbp.phy
+
+Error(#152): Command "modeltest-ng" is unrecognized.
+                 If it is spelled correctly, look for problems in a previous command, such as an unintentional semicolon.
+
+paup> execute modelblockPAUPb10.nex
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/modelblockPAUPb10.nex" begins...
+
+ ***** MODELFIT BLOCK -- MODELTEST 3.4 *****
