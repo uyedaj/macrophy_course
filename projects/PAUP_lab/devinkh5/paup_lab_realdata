@@ -1,0 +1,36 @@
+
+P A U P *
+Version 4.0a (build 163) for Unix/Linux (built on Jul 23 2018 at 19:49:27)
+Mon Sep 17 10:39:33 2018
+
+
+paup> execute bears_irbp.nex
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/bears_irbp.nex" begins...
+
+Data read in DNA format
+
+Data matrix has 10 taxa, 1281 characters
+Valid character-state symbols: ACGT
+Missing data identified by '?'
+Gaps identified by '-'
+"Equate" macros in effect:
+   R,r ==> {AG}
+   Y,y ==> {CT}
+   M,m ==> {AC}
+   K,k ==> {GT}
+   S,s ==> {CG}
+   W,w ==> {AT}
+   H,h ==> {ACT}
+   B,b ==> {CGT}
+   V,v ==> {ACG}
+   D,d ==> {AGT}
+   N,n ==> {ACGT}
+
+Processing of input file "bears_irbp.nex" completed.
+
+paup> execute modelblockPAUPb10.nex
+
+Processing of file "~/repos/macrophy_course/projects/PAUP_lab/modelblockPAUPb10.nex" begins...
+
+ ***** MODELFIT BLOCK -- MODELTEST 3.4 *****
