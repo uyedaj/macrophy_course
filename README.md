@@ -110,7 +110,7 @@ results of these independent research projects.
 |M 9/17 |   8\. Model selection, model adequacy & Hypothesis testing||Assignment II: Paup Lab|      
 |W 9/19 |   9\. Practical considerations: alignments, concatenation, partitioning etc.|||   
 |M 9/24 |   10\. **EXAM I**   |||                                                         
-|W 9/26 |    11\. Biogeography |Ree and Smith 2008, Landis et al. 2013||                                                        
+|W 9/26 |    11\. Biogeography |Ree and Smith 2008, Landis et al. 2018||                                                        
 |M 10/1 |   12\. Lab: RevBayes ||Turn in lab at end of period|
 |W 10/3 |   13\. Dating phylogenetic trees |||                                            
 |M 10/8 |   14\. The multispecies coalescent ||Assignment III:Project proposal|                                         
