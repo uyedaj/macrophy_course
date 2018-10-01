@@ -1,0 +1,99 @@
+---
+title: "RevBayes lab scripts"
+output: html_notebook
+---
+
+Most of this lab will be run in interactively in Revbayes. However, Revbayes is currently does not have sufficient simulation and plotting functions for our purposes. Thus, we will be using R in combination with Revbayes.  
+
+Let's load up some libraries we will need later. If you have an error, install the packages and then load them.
+```{r}
+library(coda)
+```
+
+
+```{r}
+setwd("~/repos/macrophy_course/projects/Revbayes_lab/")
+```
+
+Let's simulate some linear regression data that we will then ask Revbayes to estimate.
+
+```{r}
+set.seed(5)
+n <- 100
+m <- rnorm(1,0,1)
+b <- rnorm(1,0,1)
+sigma <- rexp(1,1)
+x_obs <- runif(n, -2, 2)
+y_obs <- m*x_obs + b + rnorm(n, 0, sigma)
+
+write.csv(t(x_obs), "./data/x.csv", row.names = FALSE, col.names = FALSE, )
+write.csv(t(y_obs), "./data/y.csv", row.names = FALSE, col.names = FALSE)
+plot(x_obs, y_obs)
+print(data.frame(m,b,sig2))
+
+```
+
+```{r}
+run1 <- read.table("./output/linear_regression1.log", header=TRUE)
+head(run1)
+
+```
+
+
+```{r}
+run1 <- mcmc(run1)
+coln <- c("Posterior", "Likelihood", "Prior", "m", "b", "sigma")
+plot(run1[,coln])
+```
+
+
+
+```{r}
+run2 <- read.table("./output/linear_regression2.log", header=TRUE)
+run2 <- mcmc(run2)
+plot(run2[,coln])
+summary(run2[,coln])
+run2 <- window(run2, 500, 10000)
+plot(run2[,coln])
+summary(run2[,coln])
+```
+
+```{r}
+par(mfrow=c(3,1))
+
+plot(density(run2[,"m"]), main="Slope")
+abline(v=m, lty=2, col="red", lwd=3)
+
+plot(density(run2[,"b"]), main="Intercept")
+abline(v=b, lty=2, col="red", lwd=3)
+
+plot(density(run2[,"sigma"]), main="Sigma")
+abline(v=sqrt(sig2), lty=2, col="red", lwd=3)
+
+```
+
+```{r}
+par(mfrow=c(2,2))
+lm1 <- lm(y_obs ~ x_obs)
+
+plot(as.numeric(run2[,"m"]), run2[,"b"], main="Slope vs. Intercept", xlab="Slope", ylab="Intercept", pch=21, col="gray50", bg="gray50", xlim=c(-2,2), ylim=c(-2,2))
+points(m, b, pch=21, bg="red", cex=2)
+points(lm1$coef[2], lm1$coef[1], pch="+", col="blue", cex=2)
+
+plot(as.numeric(run2[,"m"]), run2[,"sigma"], main="Slope vs. Error", xlab="Slope", ylab="Error", pch=21, col="gray50", bg="gray50", xlim=c(-2,2), ylim=c(0,4))
+points(m, sigma, pch=21, bg="red", cex=2)
+points(lm1$coef[2], summary(lm1)$sigma, pch="+", col="blue", cex=2)
+
+plot(as.numeric(run2[,"b"]), run2[,"sigma"], main="Intercept vs. Error", xlab="Intercept", ylab="Error", pch=21, col="gray50", bg="gray50", xlim=c(-2,2), ylim=c(0,4))
+points(b, sigma, pch=21, bg="red", cex=2)
+points(lm1$coef[1], summary(lm1)$sigma, pch="+", col="blue", cex=2)
+
+```
+
+
+```{r}
+library(ape)
+trees <- read.tree("./output/primates_cytb_GTR.trees")
+tree_MAP <- read.nexus("./output/primates_cytb_GTR_MAP.tre")
+plot(tree_MAP)
+```
