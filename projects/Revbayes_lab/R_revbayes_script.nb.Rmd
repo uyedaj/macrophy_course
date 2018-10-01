@@ -8,6 +8,7 @@ Most of this lab will be run in interactively in Revbayes. However, Revbayes is 
 Let's load up some libraries we will need later. If you have an error, install the packages and then load them.
 ```{r}
 library(coda)
+library(ape)
 ```
 
 
@@ -92,8 +93,17 @@ points(lm1$coef[1], summary(lm1)$sigma, pch="+", col="blue", cex=2)
 
 
 ```{r}
-library(ape)
 trees <- read.tree("./output/primates_cytb_GTR.trees")
-tree_MAP <- read.nexus("./output/primates_cytb_GTR_MAP.tre")
-plot(tree_MAP)
+tree_MAP <- rncl::read_nexus_phylo("./output/primates_cytb_GTR_MAP.tre")
+plot(tree_MAP, show.node.label = TRUE)
+
 ```
+
+
+```{r}
+par(mfrow=c(3,3), mar=c(0,0,0,0))
+for(i in round(seq(1,length(trees), length.out=9), 0)){
+  plot(ladderize(root(trees[[i]], outgroup = "Galeopterus_variegatus")), cex=0.5)
+}
+```
+
