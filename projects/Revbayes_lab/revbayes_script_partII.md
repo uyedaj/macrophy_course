@@ -62,7 +62,7 @@ Create a deterministic variable for the rate matrix under the GTR model.
 Q := fnGTR(er,pi) 
 ```
 
-Note that if you wanted to make a matrix for a Jukes-Cantor model, you could use $Q := fnJC(4)$. 
+Note that if you wanted to make a matrix for a Jukes-Cantor model, you could use `Q := fnJC(4)`. 
 Notice that we do not need a prior on exhcangeabilities or stationary frequencies, only the 
 number of states. 
 
@@ -74,7 +74,8 @@ out_group = clade("Galeopterus_variegatus")
 # Prior distribution on the tree topology
 topology ~ dnUniformTopology(taxa, outgroup=out_group)
 moves[mvi++] = mvNNI(topology, weight=num_taxa/2.0)
-moves[mvi++] = mvSPR(topology, weight=num_taxa/10.0)
+# Here is a nice SPR move but we're going to omit it to speed up analysis!
+#moves[mvi++] = mvSPR(topology, weight=num_taxa/10.0)
 ```
 
 
@@ -126,7 +127,7 @@ map_tree = mapTree(treetrace,"output/primates_cytb_GTR_MAP.tre")
 
 # Transferring files
 We could push our results to your github fork, and then you could download it to your local computer. 
-However, if we want a quick look at a file, we can also just grab the file using $scp$ or $sftp$. To do so, 
+However, if we want a quick look at a file, we can also just grab the file using `scp` or `sftp`. To do so, 
 open a terminal (Mac and Linux) or PuTTY (Windows). 
 
 Navigate to the folder you want to put results, and type in:
@@ -145,7 +146,8 @@ running in the background.
 source("./mcmc_CEFBDP_Specimens.Rev")
 ```
 
-Use $scp$ to transfer "./output/bears_MAP.tre" to your local directory. Then navigate to icytree.org and create
-a figure that shows the estimated dates and error bars (with scale bars) for the tree. 
+Use `scp` to transfer "./output/bears_MAP.tre" to your local directory. Then navigate to icytree.org and create
+a figure that shows the estimated dates and error bars (with scale bars) for the tree. Save your "publication ready" tree with a filename
+including your username. Add it to your github repository and make a pull request. 
 
 
