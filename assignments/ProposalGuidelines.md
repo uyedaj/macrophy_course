@@ -4,8 +4,10 @@ For the final project in this class, you will carry out and present an analysis 
 
 YOUR RESEARCH QUESTION. This is the most important part. You should have a clear idea of what you want to learn and how you will test your research question. You should make a compelling case for why this is interesting/important to your research. 
 
-What data you will be using (what data is available, including numbers and scope. If you are doing a comparative analysis, the tree should exist already and you should be able to match it to existing comparative data. If you are building a tree, you should have morphological and sequence data already available or collected.)
+What data you will be using (what data is available, including numbers and scope. If you are doing a comparative analysis, the tree should exist already and you should be able to match it to existing comparative data. If you are building a tree, you should have morphological and sequence data already available or collected.) 
 
 What methods you will be using (this may be somewhat vague for now since we haven't gone through the entire course material, but you should have some idea of how you will test you research question). 
 
 What you expect to find. 
+
+It is critical to explain why your project is feasible. You should not be collecting extensive datasets (using existing or simulated datasets is much, much better) and your problem should not be overly challenging (proposing to do something that has never been done without a clear idea of methods). 
