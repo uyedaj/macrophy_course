@@ -112,7 +112,7 @@ monitors[mni++] = mnModel(filename="output/primates_cytb_GTR.log", printgen=10)
 Run the analysis
 ```
 mymcmc = mcmc(mymodel, monitors, moves, nruns=2)
-mymcmc.run(generations=20000,tuningInterval=200)
+mymcmc.run(generations=10000)
 ```
 
 Summarize output
