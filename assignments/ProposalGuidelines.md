@@ -1,4 +1,5 @@
 # Project Proposal
+#### Due October 8th, 2018
 For the final project in this class, you will carry out and present an analysis of macroevolutionary data. This is open ended, and the goal is for you to work on something that will help you in your dissertation. As a first step, please prepare a 2 page project proposal (not including references) that specifies:
 
 YOUR RESEARCH QUESTION. This is the most important part. You should have a clear idea of what you want to learn and how you will test your research question. You should make a compelling case for why this is interesting/important to your research. 
