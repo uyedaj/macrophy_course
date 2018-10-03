@@ -88,7 +88,7 @@ include: building a phylogeny of a group of taxa of interest using
 available sequence data on Genbank, analyzing existing phenotypic
 datasets and phylogenies with phylogenetic comparative methods, or
 conducting a simulation study of phylogenetic model behavior. One of the
-5 assignments is to submit a project proposal (due 10/1) that outlines
+5 assignments is to submit a project proposal (due 10/8) that outlines
 the research question under study, the proposed datasets to be used, the
 analyses to be conducted, and the expected results (No more than 2
 pages, not including citations). The last two class periods will be
