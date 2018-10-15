@@ -1,0 +1,231 @@
+---
+title: "Brownian Motion"
+output: html_notebook
+---
+
+Let's simulate Brownian Motion and learn some basic programming along the way.
+
+```{r}
+## Define starting value for the Brownian Motion process
+root <- 0
+
+## Define step variance of the BM process
+sig2 <- 1
+
+## Define trend in BM process
+mu <- 0
+
+```
+
+Now let's do a simulation! First we have to set it up.
+
+```{r}
+## Define number of generations for simulation
+gens <- 100
+
+## Define number of traits
+nsims <- 200
+
+## Make a data frame to store results
+X <- matrix(NA, nrow=gens, ncol=nsims)
+
+## Initialize the starting value
+X[1,] <- root
+
+```
+
+Then, we perform a for loop: 
+
+```{r}
+for(i in 2:gens){
+  X[i,] <- X[i-1,] + rnorm(nsims, mu, sig2)
+}
+
+## Now let's plot it
+## Make a blank plot (type="n")
+plot(0,0, type="n", xlim=c(0,gens+1), ylim=c(-50, 50))
+
+## For loop for plotting individual lines
+for(i in 1:nsims){
+  lines(1:gens, X[,i], col=i)
+}
+
+```
+
+```{r}
+## Let's check out some properties of the collection of BM values
+## Average value across replicate lineages (takes the mean over rows (MARGIN=1))
+meanValues <- apply(X, MARGIN=1, mean)
+plot(meanValues, ylim=c(-20,20))
+
+## What about variance?
+varValues <- apply(X, MARGIN=1, var)
+plot(varValues, ylim=c(0, 100))
+
+## Add the predicted line based on your knowledge of the expected variance among replicate lineages
+
+
+```
+
+What happens if you change the root, sig2 or mu? What effect does this have?
+
+
+## Simulating Brownian Motion on a phylogeny
+
+```{r}
+simBMonTree <- function (root, sig2, tree, ptsperunit = 100, pal = rainbow, aph = 255, lwd = 1, pars=NULL) {
+    tree <- reorder(tree, "postorder")
+    if(is.null(pars)){
+      pars <- list(alpha=0, sig2=sig2, k=0, ntheta=1, theta=root, sb=numeric(0), t2=numeric(0), loc=numeric(0))
+    }
+    simmapTree <- bayou::pars2simmap(pars, tree)
+    maps <- simmapTree$tree$maps
+    alpha <- pars$alpha
+    theta <- pars$theta
+    x0 <- pars$theta[1]
+    cols <- setNames(pal(pars$ntheta), 1:pars$ntheta)
+    brcols <- cols[sapply(1:length(maps), function(x) names(utils::tail(maps[[x]], 
+        1)))]
+    nH <- nodeHeights(tree)
+    history <- list()
+    Xi <- x0
+    for (i in length(maps):1) {
+        if (i < length(maps) - 1) {
+          Xi <- history[[which(tree$edge[, 2] == tree$edge[i, 
+                1])]][length(history[[which(tree$edge[, 2] == 
+                tree$edge[i, 1])]])]
+        }
+        history[[i]] <- bayou:::.simOU.onmap(maps[[i]], alpha, sig2, 
+            theta, ptsperunit, Xi)
+    }
+    plot(c(min(nH), max(nH)), c(min(unlist(history)), max(unlist(history))), 
+        type = "n", xlab = "", ylab = "", xaxt = "n", yaxt = "n", 
+        bty = "n")
+    invisible(lapply(1:length(history), function(x) lines(seq(nH[x, 
+        1], nH[x, 2], length.out = length(history[[x]])), history[[x]], 
+        col = bayou:::makeTransparent(brcols[[x]], alpha = aph), lwd = lwd)))
+}
+```
+
+
+```{r}
+library(ape)
+library(geiger)
+library(bayou)
+library(phytools)
+tree <- sim.bdtree(b=1, d=0, stop="taxa", n=5)
+## Standardize the height of the tree to 100 units
+tree$edge.length <- tree$edge.length/(max(branching.times(tree)))*100
+plot(tree)
+```
+
+```{r}
+simBMonTree(0, 1, tree)
+```
+
+Once we include multiple observations of correlated species, we are no longer describe our Gaussian process with a univariate normal distribution, we must use a multivariate Normal distribution (but it is still a univariate Brownian Motion process, since we are simulating only 1 trait)
+
+
+```{r}
+tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)
+## Standardize the height of the tree to 100 units
+tree$edge.length <- tree$edge.length/(max(branching.times(tree)))*100
+plot(tree)
+```
+
+
+```{r}
+dat <- sim.char(tree, par=sig2, nsim=1, root=root)[,,1]
+phenogram(tree, dat, ftype="off")
+```
+
+Now we can fit the data using Maximum Likelihood:
+```{r}
+bmfit <- fitContinuous(tree, dat, model="BM")
+bmfit
+```
+
+The key to fitting on the phylogeny is that the expected covariance between two observed tips is directly proportional to their SHARED branch length. We can summarize this in a matrix form by using the function `vcv.phylo`.
+
+```{r}
+V <- vcv.phylo(tree)
+V
+```
+
+The diagonal of this "variance-covariance matrix" is simply the distance from the tip to the root. The off diagonals are the shared branch length between two tips. In fact, we don't need anything but this matrix to fit Brownian Motion. We can simply use a multivariate normal distribution and calculate the likelihood. See if you can get the same likelihood as geiger by using the output of bmfit and fitting the parameters using dmvnorm (the density function of a multivariate normal distribution)
+
+```{r}
+library(mvtnorm)
+dmvnorm(dat, mean=?, sigma=?, log=TRUE)
+
+```
+
+We can simulate data using the same method.
+```{r}
+## How many draws from a mvnorm distribution do we need?
+dat2 <- rmvnorm(?, mean=rep(root, ncol(V)), V*sig2)[1,]
+dat2 <- setNames(dat2, tree$tip.label)
+bmfit2 <- fitContinuous(tree, dat2, model="BM")
+bmfit2
+
+```
+
+Felsenstein's Indepedent Contrasts is simply a computationally efficient way to scale divergence by its expected covariance under Brownian Motion. Once this is done, each divergence value can be viewed as an independent data point (assuming Brownian Motion is correct) and used as independent data would be in traditional statistics. 
+```{r}
+picX <- pic(dat, tree)
+picX
+```
+
+Compare the variance among contrasts to the variance estimated by fitContinuous:
+```{r}
+bmfit$opt$sigsq
+var(picX)
+
+```
+
+```{r}
+source("./GmatrixEvolutionFunctions.R")
+```
+
+
+```{r}
+mvBMsim(1, 1, r=0, gens=100, root=c(0,0), npoints=100)
+```
+
+Try for different values of the correlation, or different values of the variances.
+
+```{r}
+mvBMsim(?, ?, r=?, gens=100, root=c(0,0), npoints=100)
+mvBMsim(?, ?, r=?, gens=100, root=c(0,0), npoints=100, add=TRUE, G.color="blue")
+mvBMsim(?, ?, r=?, gens=100, root=c(0,0), npoints=100, add=TRUE, G.color="green")
+
+```
+
+Again, there is nothing fancy about a multivariate Brownian Motion model. It's still just a multivariate normal distribution. In fact, it's remarkably easy to simulate it given an R matrix.
+```{r}
+R <- matrix(c(1, 0.9,
+              0.9, 1), ncol=2, nrow=2, byrow=TRUE)
+mv.V <- kronecker(V, R)
+mvdat <- rmvnorm(1, mean=rep(0, ncol(R)*ncol(V)), sigma=mv.V)
+mvdat <- t(matrix(mvdat, nrow=2))
+rownames(mvdat) <- tree$tip.label
+
+phytools::phylomorphospace(tree, mvdat, xlab="Trait 1", ylab="Trait 2")
+
+```
+
+And whether we use PICs or a ready-made software package, we get essentially the same estimates for the R-matrix (but note slight difference due to REML vs. ML).
+
+```{r}
+library(mvMORPH)
+picX <- pic(mvdat[,1], tree)
+picY <- pic(mvdat[,2], tree)
+var(cbind(picX, picY))
+
+mvbmFit <- mvMORPH::mvBM(tree, mvdat, )
+mvbmFit$sigma
+```
+
+
+
+
