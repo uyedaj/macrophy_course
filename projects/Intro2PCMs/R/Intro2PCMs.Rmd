@@ -89,12 +89,6 @@ tree
 drop.tip(tree, c("Eliomys_quercinus", "Sicista_tianshanica"))
 ```
 
-We can get a distance matrix from the tree as follows:
-```{r}
-dist <- cophenetic(tree)
-dist[1:5,1:5]
-```
-
 ### III. Matching a tree with a dataset
 
 ```{r}
@@ -181,7 +175,7 @@ How do the coefficients compare? What about the intercept? Why?
 
 Now fit the model to a lambda tree transformation and summarize the results:
 ```{r}
-
+?phylolm
 ```
 
 How do you interpret this value of lambda? How would you interpret it if lambda > 1? 
@@ -196,6 +190,13 @@ plot(times, picX xlim=c(0, max(times)))
 ```
 
 Perform a linear regression between picX ~ times and interpret its meaning.
+
+Now if you have time, redo the whole analysis with longevity ~ precipitation. Discuss the assumptions and whether this is an appropriate test for this hypothesis.
+```{r}
+
+
+```
+
 
 ## V. Simple continuous trait models
 For continuous traits, we generally use "Gaussian models" that result in multivariate normal distributions.
