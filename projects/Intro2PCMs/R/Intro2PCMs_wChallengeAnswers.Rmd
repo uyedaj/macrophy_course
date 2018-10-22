@@ -1,0 +1,339 @@
+---
+title: "Introduction to Phylogenetics in R"
+output:
+  html_document:
+    df_print: paged
+---
+
+# An introduction to phylogenetic comparative methods in R
+This tutorial is intended to get you familiar with the R environment for conducting
+phylogenetic comparative analyses.
+
+## I. Preparing the R environment
+
+Load the package using 'library'. These days, many packages may not be on CRAN, but instead hosted on github, bitbucket etc.
+To install these packages, it's useful to use the `devtools` package.
+```{r}
+library(geiger)
+library(devtools)
+library(treeplyr)
+library(phylolm)
+```
+
+You may wish to set your working directory here:
+```{r}
+setwd("~/repos/macrophy_course/projects/Intro2PCMs/R")
+```
+
+
+### II. Reading in a tree & tree data structures
+There are a number of functions to read in phylogenetic tree data into R. We are going
+to use as our example tree phylogeny of Muroid rodents (Schenk, Rowe & Steppan, 2013; Systematic Biology).
+The tree can be downloaded from my github site, or it be accessed directly from treebase (submission 12303).
+```{r}
+tree <- read.tree("../data/schenk.tre")
+tree
+```
+
+We can plot the tree:
+```{r}
+plot(tree)
+plot(tree, type="fan", cex=0.25)
+```
+
+You may notice that the help file for `plot` is not very helpful for options for phylogenies: 
+```{r}
+?plot
+```
+
+This is because `plot` is a "method" that behaves differently on objects of different classes. 
+```{r}
+plot
+methods(plot)
+class(tree)
+?plot.phylo
+```
+
+How is a tree stored? How can it be manipulated and modified? 
+A tree object in R is a data structure called a "list", and given a special class, called a "phylo" object.
+It will be worth your time getting familiar with [data structures in R](http://adv-r.had.co.nz/Data-structures.html).
+
+`str` is a useful commands for determining what is in an R object:
+```{r}
+str(tree)
+```
+
+Each element of the list can be accessed by multiple means:
+```{r}
+tree['tip.label']
+tree[['tip.label']]
+tree[[3]]
+tree$tip.label
+```
+
+The structure of the tree is stored in the edge matrix:
+```{r}
+tree$edge
+```
+
+And branch lengths are stored in the list element `edge.length`
+```{r}
+tree$edge.length
+```
+
+Tips can be dropped with the function `drop.tip`:
+```{r}
+#tree before:
+tree
+#tree after dropping two species:
+drop.tip(tree, c("Eliomys_quercinus", "Sicista_tianshanica"))
+```
+
+### III. Matching a tree with a dataset
+
+```{r}
+pantheria <- read.table("http://www.esapubs.org/archive/ecol/E090/184/PanTHERIA_1-0_WR05_Aug2008.txt",header=TRUE,sep="\t")
+rownames(pantheria) <- gsub(" ", "_", pantheria$MSW05_Binomial)
+head(pantheria)
+```
+
+```{r}
+td <- make.treedata(tree, pantheria)
+td
+```
+
+```{r}
+attributes(td)$dropped
+```
+
+```{r}
+colnames(td$dat)
+```
+
+```{r}
+td2 <- mutate(td, lnMass = log(X5.1_AdultBodyMass_g),lnBMR = log(X18.1_BasalMetRate_mLO2hr), desert=ifelse(X28.1_Precip_Mean_mm < 21, 1, 0)) %>% filter(., !is.na(lnMass), !is.na(lnBMR)) %>% select(., lnMass, lnBMR, desert)
+td2
+```
+
+```{r}
+plot(td2[['lnMass']], td2[['lnBMR']], pch=21, bg=td2[['desert']]+2)
+```
+
+## IV. Visualization
+Ape plotting:
+```{r}
+tree <- td2$phy
+dat <- td2$dat
+
+plot(tree)
+plot(tree, type="fan", cex=0.5)
+plot(tree, type="fan", show.tip.label=FALSE)
+tiplabels(pch=21, bg=dat$desert+1)
+nodelabels(cex=0.75,bg="white" )
+```
+
+Plot a traitgram to visualize a continuous trait:
+```{r}
+require(phytools)
+phenogram(td2$phy, td2[['lnMass']], spread.labels=FALSE)
+```
+
+Phytools' scattergram can be useful for exploring correlations between traits across the phylogeny:
+```{r}
+
+fancyDat <- as.matrix(dat[,1:3])
+rownames(fancyDat) <- tree$tip.label
+fancyTree(tree, type="scattergram", X=fancyDat, fsize=0.3)
+
+```
+
+## IV. PICs and PGLS
+
+Let's work with our td2 dataset. We are going to fit first PICs, then PGLS. To calculate PICs, we just have to use the function pic:
+
+```{r}
+picX <- pic(td2[['lnMass']], td2$phy)
+picY <- pic(td2[['lnBMR']], td2$phy)
+plot(picX, picY)
+length(picX)
+length(picY)
+```
+
+```{r}
+picLm <- lm(picY ~ picX - 1)
+summary(picLm)
+```
+
+Now let's use phylolm:
+
+```{r}
+pglsFit <- phylolm(lnBMR ~ lnMass, dat=td2$dat, phy=td2$phy, model="BM")
+summary(pglsFit)
+```
+
+How do the coefficients compare? What about the intercept? Why? 
+
+Now fit the model to a lambda tree transformation and summarize the results:
+```{r}
+?phylolm
+```
+
+How do you interpret this value of lambda? How would you interpret it if lambda > 1? 
+
+Another useful tool is to plot the contrasts vs. the node height of the tree:
+```{r}
+plot(tree, cex=0.5)
+nodelabels(pch=21, bg=topo.colors(100)[round((picX-min(picX))/diff(range(picX))*100,0)])
+
+times <- branching.times(tree)
+plot(times, picX xlim=c(0, max(times)))
+```
+
+Perform a linear regression between picX ~ times and interpret its meaning.
+
+Now if you have time, redo the whole analysis with longevity ~ precipitation. Discuss the assumptions and whether this is an appropriate test for this hypothesis.
+```{r}
+td3 <- mutate(td, lifespan = log(X17.1_MaxLongevity_m), lnMass = log(X5.1_AdultBodyMass_g), precip=log(X28.1_Precip_Mean_mm)) %>% filter(., !is.na(lnMass), !is.na(lifespan), !is.na(precip)) %>% select(., lifespan, lnMass, precip)
+
+lm_P <- phylolm(lifespan ~ precip, model="lambda", data=td3$dat, phy=td3$phy)
+lm_PM <- phylolm(lifespan ~ precip + lnMass, model="lambda", data=td3$dat, phy=td3$phy)
+lm_PxM <- phylolm(lifespan ~ precip*lnMass, model="lambda", data=td3$dat, phy=td3$phy)
+lm_OLS <- lm(lifespan ~ precip*lnMass, data=td3$dat)
+
+summary(lm_P)
+summary(lm_PM)
+summary(lm_PxM)
+summary(lm_OLS)
+
+plot(td3[['precip']], td3[['lifespan']], cex=(td3[['lnMass']]-min(td3[['lnMass']]))/diff(range(td3[['lnMass']])), xlab="Precipitation", ylab="Max Longevity")
+curve(lm_PxM$coefficients[1]+lm_PxM$coefficients[2]*x + lm_PxM$coefficients[3]*max(td3[['lnMass']]) + lm_PxM$coefficients[4]*x*max(td3[['lnMass']]), add=TRUE, lty=2)
+curve(lm_PxM$coefficients[1]+lm_PxM$coefficients[2]*x + lm_PxM$coefficients[3]*min(td3[['lnMass']]) + lm_PxM$coefficients[4]*x*min(td3[['lnMass']]), add=TRUE, lty=3)
+
+```
+
+
+## V. Simple continuous trait models
+For continuous traits, we generally use "Gaussian models" that result in multivariate normal distributions.
+The most basic and familiar of these is Brownian motion. We can fit a Brownian motion model using the function 
+`fitContinuous` from the `geiger` package. 
+```{r}
+trait <- setNames(dat$lnMass, tree$tip.label)
+mBM <- fitContinuous(tree, trait, model="BM")
+mBM
+```
+
+An more general model than the Brownian motion model is the Ornstein-Uhlenbeck model, which has one additional 
+parameter describing the central tendency of traits to evolve toward an intermediate optimum (think of a rubber 
+band pulling back towards an optimum trait value).
+```{r}
+mOU <- fitContinuous(tree, trait, model="OU")
+mBM
+```
+
+Another model is one in which the rate of evolution is initially rapid, but slows over time. This is called
+the early-burst model (EB). Let's fit all models simultaneously using first 1) a loop and then 2) the lapply function.
+This time, we'll use the BMR data instead of the mass data:
+```{r}
+trait <- setNames(dat$lnBMR, tree$tip.label)
+models <- c("BM", "OU", "EB")
+mFits <- list()
+for(i in 1:length(models)){
+  mFits[[i]] <- fitContinuous(tree, trait, model=models[i])
+}
+
+#Above can also be accomplished by using lapply:
+mFits <- lapply(1:length(models), function(i) fitContinuous(tree, trait, model=models[i]))
+
+```
+
+Model selection can be conducted by comparing AIC values:
+```{r}
+aiccs <- lapply(mFits, function(x) x$opt$aicc)
+names(aiccs) <- models
+aiccs
+```
+
+## VI. Getting a phylogeny from a list of taxa
+
+Most comparative analyses require a time-calibrated phylogeny. The gold standard is to estimate this phylogeny from molecular sequence data, and time-calibrate the resulting phylogeny with fossil calibrations. However, some resources exist for drawing on existing phylogenetic and taxonomic information. One project spearheading the effort to synthesize existing phylogenetic knowledge is the OpenTree of Life (OTL) that has excellent API resources that can be used to obtain synthetic phylogenies, as well as other services such as taxonomic name resolution (this is huge, you will spend a huge amount of time dealing with names). 
+
+```{r}
+library(rotl)
+taxalist <- c("Picoides_borealis", "Carpodacus_mexicana", "Hyla_regilla", "Lithobates_catesbeiana", "Cambarincola", "Cambarus_chasmodactylus", "Pipra_filicauda", "Chrysopelia_paradisi", "Cyanobacteria", "Norops_sagrei", "Carollia_perspicillata", "Piper peltatum", "Taeniopygia_guttata", "Plethodon_hubrichti", "Felus_domestica", "Aedes_aegypti", "Plasmodium_vivax")
+
+```
+
+Let's use OpenTree of Life's powerful taxonomic name resolution services, which draws on NCBI, GBIF, Fishbase, and others to build a comprehensive taxonomy for all life.
+```{r}
+ottTable <- tnrs_match_names(taxalist)
+ottTable
+
+```
+
+Now we can use the Open Tree Taxonomy (OTT) IDs to obtain a synthetic tree of only those taxa.
+```{r}
+synth_tree <- tol_induced_subtree(ottTable$ott_id)
+plot(synth_tree, cex=0.75)
+```
+
+Unfortunately, trees from OpenTree do not have branch lengths. The package datelife is in active development to remedy this. 
+```{r}
+devtools::install_github("phylotastic/datelife")
+library(datelife)
+```
+
+```{r}
+taxa <- gsub(" ", "_", ottTable$unique_name)
+datelife_result <- datelife::datelife_search(taxa)
+datelife_result
+```
+
+## VII. Exercises
+## Questions & exercises:
+
+1. If you have phylogenetic signal in the trait of interest, that means you MUST USE a phylogenetic
+regression method (e.g. PGLS, PICs) to analyze the trait. Explain (Hint: Look up the assumptions of 
+Ordinary Least Squares regression).
+
+2. You conduct model selection using fitContinuous and find that the OU model is a better fit to trait
+evolution over BM. You should prefer an OU correlation structure for any PGLS model you fit. Why or why not?
+
+3. Each of the following lines of code produces an error. Fix the error to accomplish the task requested.
+a. Fit a BM model using fitContinuous
+```{r}
+ex3a <- readRDS("../data/ex3a.rds") 
+phy <- ex3a$tree
+trait <- ex3a$dat
+try(fitContinuous(phy, trait, model="BM"))
+```
+
+b. Plot a phenogram of the data
+```{r}
+ex3b <- readRDS("../data/ex3b.rds")
+phy <- ex3b$tree
+trait <- ex3b$dat
+try(phenogram(phy, trait[,1], spread.labels=FALSE))
+```
+
+4. Below we have a dataset of 23 species of Icterus (New World Orioles) and a posterior distribution of phylogenies from 
+www.birdtree.org based on genetic sequence data (Hackett backbone). Fit a Brownian motion model to each tree for Tarsus length, 
+save all the results as a list, and extract the estimate of the sigma^2 parameter. Plot a histogram of that parameter.
+``` {r }
+icterus <-  read.table("../data/icterus.dat", header=TRUE, sep="\t")
+icterus.trees <- read.nexus("../data/icterus.tre")
+
+icterus.trees
+
+BMfitter <- function(i){
+  ## Fill this in with code to A) match tree and data B) select Tarsus as the dataset C) perform a fitContinuous fit
+  ## and D) return the fitted object
+}
+```
+
+Use a loop or an lapply call to call the `BMfitter` function for all values of i from 1 to 100
+
+Use sapply to extract all the estimates of the parameter `sigsq`
+
+Plot the resulting vector of sigma^2 estimates.
+
+
