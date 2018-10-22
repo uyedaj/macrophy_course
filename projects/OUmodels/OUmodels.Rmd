@@ -1,0 +1,192 @@
+---
+title: "Ornstein-Uhlenbeck Models of Adaptation"
+output: html_notebook
+---
+
+Let's load the required libraries:
+
+```{r}
+
+library(devtools)
+library(geiger)
+library(phytools)
+library(treeplyr)
+library(bayou)
+
+```
+
+# Simulating a multi-optima OU process on a phylogeny
+
+Let's begin by simulating a multi-optimum Ornstein-Uhlenbeck process on a phylogeny so that we can get a feel for how these models work to model adaptation on phylognies. First let's simulate a tree and rescale it to 100 million years. The second step is optional, but it will help us make sure all our trees and parameters are on a common scale that will probably be typical of the trees you'll analyze. We will also reorder the tree into "postorder" format. **bayou** will automatically reorder the tree to postorder format, but it helps to begin by reordering your tree so that the branch numbers used by **bayou** can be easily matched to the tree. 
+
+```{r}
+
+  tree <- sim.bdtree(b = 1, d = 0, stop = "taxa", n = 50, seed = 1)
+  tree$edge.length <- tree$edge.length/max(branching.times(tree))*100
+  tree <- reorder(tree, "postorder")
+  tree <- phytools::force.ultrametric(tree)
+
+  plot(tree, cex = 0.5)
+  axisPhylo()
+  
+```
+
+We are now going to simulate an multi-peak OU process on this tree. bayou stores parameter in a parameter list that at a minimum, expects the parameters:
+
+* alpha
+* sig2
+* k
+* ntheta
+* theta
+* sb
+* t2 
+* loc
+
+Let's begin building this list, and then we'll talk about what each of these parameters means. 
+ 
+```{r}
+
+simpars <- list(alpha=1, sig2=1, k=2, ntheta=3, theta=c(0,-1,1))
+
+```
+
+*alpha* and *sig2* are familiar parameters from our OU model, as well as our theta parameters with specify the value of the different regime optima. *k* specifies the numbers of shifts on the phylogeny, and *ntheta* specifies the number of optima. If there are no biologically convergent regimes, then ntheta = k + 1 = length(theta). Note that the root optimum is always the first *theta*, but we must provide locations for the other shifts so **bayou** knows where on the tree these occur. Here we can simply specify which branches (*sb*) and where on those branches (*loc*) we would like our shifts to occur. 
+
+```{r}
+
+shiftlocations <- list(sb = c(94, 71), loc = c(6.23, 6.52))
+
+```
+
+However, knowing where the shifts are is easier visually. So alternatively, we can use the **bayou** function *identifyBranches*, which opens an interactive window for clicking where we want the *k* shifts to occur. (Note: identifyBranches does not work with markdown notebooks, so you will have to copy and paste this function into the R console to run)
+
+```{r eval = FALSE }
+
+shiftlocations <- identifyBranches(tree, simpars$k) ## Copy and paste into the console, run interactively.
+
+```
+
+We now combine the lists to obtain our full parameter list. 
+
+```{r}
+
+simpars <- c(simpars, shiftlocations)
+simpars$t2 <- 2:3
+simpars
+
+```
+
+```{r}
+
+plotBayoupars(simpars, tree)
+
+```
+
+
+The *$sb* element to the list specifies which branches the shifts occur on (assuming the tree is postordered). The length of *$sb*, *$t2* and *$loc* must equal *$k*. The element *$t2* specifies which optimum is shifted to, while *$loc* specifies where on the branch that shift occurs (distance from the node). Now, let's visualize a complete simulation on the tree:
+
+```{r}
+
+plotOUtreesim(simpars, tree)
+#abline(h = simpars$theta, col=rainbow(3))
+
+```
+
+#### Questions:
+1. What is phylogenetic signal?
+
+2. Looking at this process, would you say this process has high or low phylogenetic signal? 
+(Hint: Consider only within a single regime. If you take 3 species from the red regime, how much more similar will closely related species be than distantly related species?)
+
+*** 
+
+Modify the parameters to produce more phylogenetic signal.
+
+```{r}
+
+simpars$alpha <- ? #Type one (positive) number
+plotOUtreesim(simpars, tree)
+abline(h = simpars$theta, col=rainbow(3))
+
+```
+
+Hopefully it now looks like that unique evolutionary history sticks around for longer. But what did it do to the separation between regimes? Why? 
+
+Try modifying *sig2* and/or *theta* to restore separation between regimes.
+
+```{r}
+
+simpars$sig2  <-  ?          #Type one (positive) number
+simpars$theta <- c(?,?,?)  #Type simpars$ntheta numbers
+
+plotOUtreesim(simpars, tree)
+abline(h=seq(-10, 10, 1), lty=3, lwd=0.5)
+abline(h = simpars$theta, col=rainbow(3))
+
+```
+
+OU models have often come under criticism recently for having flat likelihood ridges and poorly estimated parameters (especially *alpha*). While some of this criticism is valid, it's important to understand **how the parameters affect the model** and especially, that **the parameters in the model have units**. 
+
+Brownian Motion, Ornstein-Uhlenbeck models and Early Burst models are Gaussian models. Thus, simply predict the mean and (co)variance of a multivariate normal distribution. We can use some internal functions of **bayou** to visualize how *alpha* affects the expected covariance of an OU/BM model. Let's plot the expected variance-covariance of a Brownian motion model, which is simply the parameter *sigma^2* times the VCV matrix of the tree (the shared branch lengths between tips). Let's assume *sigma^2* is 1 or simplicity. 
+
+```{r}
+
+VCV <- vcv.phylo(tree)
+heatmap(VCV)
+
+```
+
+In an OU model, it's not quite so simple. Instead, the covariance between tips degrades over time proportional to the parameter *alpha*. Eventually, given enough time of independent evolution, the covariance will be 0 and the replicate lineages will equilibrate to a stationary variance (*Vy*) equal to *sigma^2/(2 X alpha)*. 
+
+Using the internal function of bayou called *.ouMatrix*, we can visualize how these parameters affect the expected covariance. 
+
+```{r}
+
+ouV_0.000000001 <- bayou:::.ouMatrix(VCV, alpha = 0.000000001)
+ouV_0.0001 <- bayou:::.ouMatrix(VCV, alpha = 0.0001)
+ouV_0.001 <- bayou:::.ouMatrix(VCV, alpha = 0.001)
+ouV_0.01 <- bayou:::.ouMatrix(VCV,  alpha = 0.01)
+ouV_0.1 <- bayou:::.ouMatrix(VCV,  alpha = 0.1)
+ouV_1.0 <- bayou:::.ouMatrix(VCV,  alpha = 1)
+ouV_10.0 <- bayou:::.ouMatrix(VCV,  alpha = 10)
+ouV_100000000.0 <- bayou:::.ouMatrix(VCV,  alpha = 100000000)
+
+heatmap(ouV_0.000000001)
+heatmap(ouV_0.0001)
+heatmap(ouV_0.001)
+heatmap(ouV_0.01)
+heatmap(ouV_0.1)
+heatmap(ouV_1.0)
+heatmap(ouV_10.0)
+heatmap(ouV_100000000.0)
+
+
+```
+
+Scroll through the different heat maps and see how different alpha values affect the expected covariance among tips. Do you see much difference between *alpha = 0.000000001* and a value 1,000,000 times larger at *alpha = 0.001*? What about between *alpha = 10* and *alpha = 100,000,000*? Look at how *.ouMatrix* transforms the tree. Why are these different values indistinguishable? 
+
+```{r}
+
+bayou:::.ouMatrix
+
+```
+
+So what values if your optimizer is optimizing *alpha*, and all it knows is that it's very large or very small, it will have a really tough time finding the correct value! But ultimately, it doesn't matter much for the predictions of the model. They basically predict the same thing regardless of whether the parameter is large vs. huge (or...tiny vs. miniscule). 
+
+We did see a lot of change between what values? Convert these to phylogenetic half-life and compare to the height of the tree. What do you conclude about the range of *alpha* values that are distinguishable?
+
+###### Challenge questions
+
+1. Consider the following scenarios, how would you generate them by changing the parameters of an OU model (if at all)?
+  
+  + Brownian Motion with a trend (i.e. phylogenetic covariance that never goes away, but regimes that slowly and continuously get pulled apart in different directions.)
+  
+  + White noise with extremely narrow adaptive zones (i.e. very little phylogenetic covariance within regimes, very small stationary variance)
+  
+  + Brownian Motion with sudden jumps (i.e. phylogenetic covariance that never goes away, but sudden shifts)
+  
+  + Lineages very close to their adaptive optima with very large amounts of phylogenetic signal and very narrow adaptive zones.
+
+
+
+
