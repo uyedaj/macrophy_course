@@ -300,3 +300,5 @@ regimePlot.OUwie(fits[['OUM']], simmaps[[1]], ouwieDat, pal=viridis::viridis, ce
 regimePlot.OUwie(fits[['OUMV']], simmaps[[1]], ouwieDat, pal=viridis::viridis, cex=0.5)
 ```
 
+
+Notice that we've only covered 1 simmap tree, we would want to perform the analysis across a range of simmaps. We may also want to try different traits, and different predictors (for example, this dataset would allow you to test island effects). Try it out! Try fitting `island` instead of ecomorph and compare to the best-fitting model you found above. 
