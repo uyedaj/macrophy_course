@@ -2,6 +2,7 @@
 title: "Ornstein-Uhlenbeck Models of Adaptation"
 output: html_notebook
 ---
+Remember to update your repository. Use the bash command: `git pull upstream master` or `git pull https://github.com/uyedaj/macrophy_course.git`.
 
 Let's load the required libraries:
 
@@ -187,6 +188,115 @@ We did see a lot of change between what values? Convert these to phylogenetic ha
   
   + Lineages very close to their adaptive optima with very large amounts of phylogenetic signal and very narrow adaptive zones.
 
+## OUwie Analysis
+
+We're going to fit a few hypotheses for the potential drivers of evolution in a continuous trait using the software OUwie. This requires we model both discrete and continuous traits jointly. To model discrete predictors, we are going to first create a set of _stochastic character maps_, which is how we can generate possible histories of a discrete trait given a particular CTMC model for trait evolution. 
+
+```{r}
+library(OUwie)
+library(phytools)
+library(treeplyr)
+setwd("~/repos/macrophy_course/projects/OUmodels/")
+```
+
+We're going to use a dataset of Anolis lizards and analyze using OUwie. Let's load the dataset 
+
+```{r}
+data(anolis)
+td <- make.treedata(anolis$phy, anolis$dat)
+# Remove taxa that are unassigned to ecomorph
+td <- filter(td, ecomorph != "U")
+focalTrait <- "SVL"
+```
+
+Now we will use `phytools` function `make.simmap` to simultaneously fit a discrete character model (a CTMC) and reconstruct plausible ancestral states using Bayesian stochastic character mapping. Note that we've set the option `Q` to "mcmc", which means we will sample uncertainty in our Q matrix. What would be the effect on our reconstructions if we set Q to the Maximum Likelihood estimate?  
+
+```{r}
+
+simmaps <- make.simmap(td$phy, td[['ecomorph']], model="SYM", nsim=10, Q="mcmc")
+```
+
+Now let's visualize our stochastic character maps (the first 9).
+```{r}
+par(mfrow=c(3,3))
+for(i in 1:9){
+  plotSimmap(simmaps[[i]], ftype="off")
+}
+
+for(i in 1:9){
+  phenogram(simmaps[[i]], td[[focalTrait]], ftype="off")
+}
+```
 
 
+Now choose one of the traits to analyze. Choose a different trait than your neighbor. Note that several of the traits in this dataset are example traits and are simply random data (e.g. hostility, awesomeness and attitude). 
+
+```{r}
+# Prepare the data into OUwie format
+ouwieDat <- data.frame("Genus_species"=td$phy$tip.label, Reg=td[['ecomorph']], X=td[[focalTrait]])
+# Run OUwie on the first simmap tree. 
+OUwie(simmaps[[1]], ouwieDat, model="OUM", simmap.tree=TRUE)
+```
+
+
+```{r}
+models <- c("BM1","BMS", "OU1", "OUM", "OUMV")
+fits <- lapply(models, function(x) OUwie(simmaps[[1]], ouwieDat, model=x, simmap.tree=TRUE))
+```
+
+```{r}
+names(fits) <- models
+sapply(fits, function(x) x$AIC)
+```
+
+```{r}
+fits[['OUMV']]
+```
+
+One thing you may want to do is actually visualize your data and model fit. I've written the following function that will allow you to do this. First, load in the function by running the following block. 
+```{r}
+library(denstrip)
+regplot <- function(i, theta, Vy, pal, y.lim, transparency=100){
+  x <- seq(-0.5+i, i+0.5, length.out=10)
+  y <- seq(y.lim[1], y.lim[2], length.out=500)
+  lines(x, rep(theta[i], 10), lty=2, col=pal[i], lwd=2)
+  Z <- matrix(nrow=length(x), ncol=length(y))
+  for(j in 1:length(x)){
+    Z[j,] <- dnorm(y, mean=theta[i], sd=sqrt(Vy[i]))
+  }
+  densregion(x, y, Z, colmax = bayou:::makeTransparent(pal[i], 
+                                               transparency), colmin = "transparent")
+}
+
+regimePlot.OUwie <- function(ouwiefit, simmaptree, ouwiedat, pal=viridis::viridis, y.lim=NULL, plot.pts=TRUE, ...){
+  par(mfrow=c(1,2), mar=c(5,0,0,0))
+  if(ouwiefit$model %in% c("BM1", "BMS")) stop("Cannot plot Brownian Motion models, only OU models")
+  class(simmaptree) <- "phylo"
+  nreg <- ncol(ouwiefit$solution)
+  cols <- setNames(pal(nreg),1:nreg)
+  bayou::plotRegimes(simmaptree, pal=pal, ...)
+  par(mar=c(5,4,1,0.1))
+  Vy <- ouwiefit$solution[2,]/(2*ouwiefit$solution[1,])
+  theta <- ouwiefit$theta[,1]
+  if(is.null(y.lim)){
+    y.lim <- c(min(theta-4*sqrt(Vy)), max(theta+4*sqrt(Vy)))   
+  }
+  if(ouwiefit$model=="OU1"){
+    theta <- rep(theta[1], nreg)
+  }
+  plot(1:nreg, theta, xlim=c(0.5,nreg+0.5), ylim=y.lim, pch=21, cex=1.5, bg=cols, col=cols, ylab="Phenotype", xaxt="n", xlab="Regime")
+  dum <- lapply(1:nreg, function(x) regplot(x, theta, Vy, cols, y.lim, 50))
+  if(plot.pts) points(ouwiedat[,2], ouwiedat[,3], pch=21, bg=bayou:::makeTransparent(cols[ouwiedat[,2]], 20), col=bayou:::makeTransparent(cols[ouwiedat[,2]], 20))
+  axis(1, 1:nreg, labels=colnames(ouwiefit$solution), cex=0.75)
+
+}
+
+```
+
+Then invoke the function by providing an OUwie fit object, a simmap tree, the data, and a color palette. 
+```{r}
+regimePlot.OUwie(fits[['OU1']], simmaps[[1]], ouwieDat, pal=viridis::viridis, cex=0.5)
+regimePlot.OUwie(fits[['OUM']], simmaps[[1]], ouwieDat, pal=viridis::viridis, cex=0.5)
+regimePlot.OUwie(fits[['OUMV']], simmaps[[1]], ouwieDat, pal=viridis::viridis, cex=0.5)
+```
 
