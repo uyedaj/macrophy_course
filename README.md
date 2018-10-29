@@ -119,22 +119,15 @@ results of these independent research projects.
 |W 10/17 |  17\. The comparative method & PICs |Felsenstein 1985||                        
 |M 10/22 |  18\. Modeling adaptation |Hansen 1997 ||                                      
 |W 10/24 | 19\. Ornstein-Uhlenbeck models II  |Butler and King 2004 ||  
-
 |M 10/29 |  20\. Finding evolutionary shifts |||                                          
 |W 10/31 |  21\. Hypothesis testing vs. data-driven modeling |Uyeda et al. 2018||   
-
 |M 11/5 |    22\. **EXAM II** |||                                                         
 |W 11/7 |    23\. Diversification models & SSE models |Maddison et al. 2007|| 
-
 |M 11/12 |  24\. Species selection (Lab: Diversitree)|||            
-
 |W 11/14 |  25\. Punctuations, stasis & gradualism |Eldredge and Gould, 1972; Charlesworth et al. 1982||      
 |M 11/19 |  No Class - Thanksgiving Holiday |||                                           
 |W 11/21 |  No Class - Thanksgiving Holiday |||                                           
 |M 11/26 | 26\. Connecting Micro & Macroevolution | Uyeda et al. 2011; Futuyma 2010|| 
-
 |W 11/28 | 27\. Grand challenges in phylogenetics and macroevolution |||          
-
 |M 12/3 |  Presentations |||
-
 |W 12/5 | Presentations |||                                                                 
