@@ -1,0 +1,59 @@
+---
+title: "Diversification Models"
+output: html_notebook
+---
+
+A very brief tutorial to show variation in diversification under various types of birth-death model. 
+
+```{r}
+library(TreeSim)
+```
+
+```{r}
+## Pure birth/Yule
+yuletrees <- sim.bd.age(age=100, numbsim=9, lambda=0.05, mu=0)
+par(mfrow=c(3,3), mar=c(0,0,0,0))
+for(i in yuletrees){
+  plot(i)
+}
+```
+
+```{r}
+## Birth-Death trees
+bdtrees <- sim.bd.age(age=100, numbsim=9, lambda=0.1, mu=0.05, complete = FALSE)
+par(mfrow=c(3,3), mar=c(0,0,0,0))
+for(i in bdtrees){
+  plot(i)
+}
+```
+
+```{r}
+## Birth-Death trees conditioning on number of taxa, high extinction
+bdtrees <- sim.bd.taxa(n=100, numbsim=9, lambda=0.1, mu=0.09, complete =FALSE)
+par(mfrow=c(3,3), mar=c(0,0,0,0))
+for(i in bdtrees){
+  plot(i)
+}
+
+```
+
+```{r}
+## Birth-Death trees with density dependence
+bdtrees <- sim.bd.age(age = 100, numbsim=9, lambda=0.05, mu=0, complete=FALSE, K = 100)
+par(mfrow=c(3,3), mar=c(0,0,0,0))
+for(i in bdtrees){
+  plot(i)
+}
+```
+
+```{r}
+## Mass extinction
+metrees <- sim.rateshift.taxa(n=100, numbsim=9, lambda=0.1, mu=0, frac=c(0.1), times=c(30), complete=FALSE)
+par(mfrow=c(3,3), mar=c(0,0,0,0))
+for(i in metrees){
+  plot(i)
+  abline(v=20, lty=2)
+}
+```
+
+
