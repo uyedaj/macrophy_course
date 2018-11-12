@@ -140,7 +140,7 @@ Tasks:
 
 ```{r}
 
-#asr <- asr.marginal(cbisseModel, cbisseFit$par)
+#asr <- asr.marginal(model_lik_fn, model_fit$par)
 #plot(td$phy, type="fan", show.tip.label=FALSE)
 #tiplabels(pch=21, bg=td[['state']])
 #nodelabels(pie=t(asr), piecol=0:1, cex=0.3)
