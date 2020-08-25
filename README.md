@@ -88,9 +88,9 @@ Final Project: Final project presentation(100 pts)
 
 |**Date**   |**Topic**|**Reading**|**Assignments**|
 |-----------|---------|-----------|---------------|
-|T 8/25 |   1\. An Introduction to Phylogenetics & Macroevolution|  Baum&Smith Ch 1-3 | |
-|Th 8/27|   2\. Parsimony & cladistics|Baum&Smith Ch 4 & 7|Assignment I: Self-evaluation|
-|T 9/1| 3\. Probability, likelihood & Rev. Bayes||
+|T 8/25 |   1\. An Introduction to Phylogenetics & Macroevolution|  | |
+|Th 8/27|   2\. Parsimony & cladistics|Baum&Smith Ch 1-3||
+|T 9/1| 3\. Probability, likelihood & Rev. Bayes|Baum&Smith Ch 4 & 7|Assignment I: Self-evaluation|
 |Th 9/3| 4\. Felsenstein & the birth of statistical phylogenetics| Felsenstein 1981||
 |T 9/8 |5\. Discrete character evolution I|O’Meara 2012||
 |Th 9/10|6\. Discrete character evolution II|Inferring phylogenies||
