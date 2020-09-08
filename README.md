@@ -92,7 +92,7 @@ Final Project: Final project presentation(100 pts)
 |Th 8/27|   2\. [Parsimony & cladistics](lectures/slides/LectureII_Parsimony.pptx);[pdf](lectures/slides/LectureII_Parsimony.pdf) |Baum&Smith Ch 1-3||
 |T 9/1| 3\. [Felsenstein & the birth of statistical phylogenetics](lectures/slides/LectureIII_ModelingPhylogeneticChange.pptx); [pdf](lectures/slides/LectureIII_ModelingPhylogeneticChange.pdf)|Baum&Smith Ch 4 & 7|Assignment I: Self-evaluation|
 |Th 9/3| 4\. [Probability, likelihood & Rev. Bayes](projects/LearningML&Bayes_Exercise.Rmd); [Answers](projects/LearningML&Bayes_Answers.pdf)| [Felsenstein 1981](papers/Felsenstein1981_Article_EvolutionaryTreesFromDNASequen.pdf)||
-|T 9/8 |5\. [Discrete character evolution I](lectures/slides/LectureIV_DiscreteCharacterModel.pptx);[pdf](lectures/slides/LectureIV_DiscreteCharacterModel.pdf)|[O’Meara 2012](papers/OmearaReview.pdf)||
+|T 9/8 |5\. [Discrete character evolution I](lectures/slides/LectureIV_DiscreteCharacterModels.pptx);[pdf](lectures/slides/LectureIV_DiscreteCharacterModels.pdf)|[O’Meara 2012](papers/OMearaReview.pdf)||
 |Th 9/10|6\. Discrete character evolution II|Inferring phylogenies||
 |T 9/15| 7\. Inferring phylogenies from molecular data|Inferring phylogenies||
 |Th 9/17| 8\. Practical considerations: alignments, partitioning and mixture models |||
