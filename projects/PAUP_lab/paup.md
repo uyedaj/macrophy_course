@@ -5,41 +5,18 @@ output:
 ---
 # Computational Exercise in PAUP*
 
-We will be using the software program called PAUP\* (Phylogenetic Analysis Under Parsimony \*and other methods) written by David Swofford. PAUP\* is an old program that has been around for decades now (v3 in 1989). As its name suggests the original version only performed parsimony. For many years, PAUP* v4.0b10 was commercial software distributed by Sinauer Associates. However, recently the license has expired and PAUP* will now be released as an open-source software as v.5.0, with “test” versions available now. While a variety of alternative likelihood and parsimony software programs exist, few have as reliable a likelihood estimation as PAUP*. There are GUIs available for some versions, but we will be using 
+We will be using the software program called PAUP\* (Phylogenetic Analysis Under Parsimony \*and other methods) written by David Swofford. PAUP\* is an old program that has been around for decades now (v3 in 1989). As its name suggests the original version only performed parsimony. For many years, PAUP* v4.0b10 was commercial software distributed by Sinauer Associates. However, recently the license has expired and PAUP* will now be released as an open-source software with “test” versions available now. While a variety of alternative likelihood and parsimony software programs exist, few have as reliable a likelihood estimation as PAUP\*. There are GUIs available for some versions, but we will be using a command line version.
 
 ## Logging into the server
-I have given you accounts on my server. You can access a terminal to this machine by going to the following address in your browser, with *<pid>* replaced with your VT PID. You will see a screen warning you not to continue, do it anyway. I will supply your initial password in class. 
-
-```
-https://128.173.187.20:8080/wetty/ssh/<pid>
-```
-
-As your first action, please update your password using the command below, replacing *username* with your PID. Please use something secure. 
-
-```
-passwd username
-```
-####*Alternative method*
-We are using a browser that access my lab's computer to get you up and running as soon as possible. Note that more features will be available if you 1) install PAUP\* on your own machine (https://paup.phylosolutions.com/) 2) you SSH into my machine through a command line using an SSH client (native in Mac & Linux, https://www.putty.org/ or equivalent in Windows). If you would prefer this option or already know something about SSH, you can do the following from  terminal (this will only work if you are the VT network or VPN): 
-```
-ssh username@128.173.187.20
-```
-Either way, please change your pwd to something secure once you are in!
+We are using a browser that access my lab's computer again. You can either use the Terminal in Rstudio server, or you can directly SSH into the machie via command line. Note that more features will be available if you 1) install PAUP\* on your own machine (https://paup.phylosolutions.com/) 2) you SSH into my machine through a command line using an SSH client (native in Mac & Linux, https://www.putty.org/ or equivalent in Windows). If you would prefer this option or already know something about SSH, you can do so from the terminal using the same IP address we use for Rstudio server (this will only work if you are the VT network or VPN).
 
 ## Get the data for the lab
 
-We are going to use git to clone the course repository. First, let's make a new directory in our home directory. 
+We can update our existing git repository to the most recent version by navigating into the macrophy_course directory:
 
 ```
-mkdir repos
-cd repos
-```
-
-Now clone the repository.
-```
-git clone https://github.com/uyedaj/macrophy_course.git
 cd macrophy_course
-ls
+git pull
 ```
 
 Now navigate to the lab folder (NB: you can hit tab to autocomplete):
@@ -50,11 +27,11 @@ ls
 
 We're going to make a directory for your results. Make the folder your username
 ```
-mkdir juyeda
+mkdir username
 ```
 
 ## Getting started with PAUP\*
-Today, we are working with data that has been simulated on a bear phylogeny. Let's look at the phylogeny itself and how it is stored. 
+Today, we are working with data that has been simulated on a bear phylogeny in R using the [following script](./simulatingData.R) and the program `seq-gen`. Let's look at the phylogeny itself and how it is stored. 
 ```
 more bears.tre
 
@@ -70,34 +47,34 @@ To launch paup, simply type the name of the program. Because I installed the sof
 it can be launched from anywhere. Otherwise, you'd have to be in the directory with the program. 
 
 ```
-paup
+paup4.0
 ```
 You should be greated by the following screen: 
 
 ```
 P A U P *
-Version 4.0a (build 163) for Unix/Linux (built on Jul 23 2018 at 19:49:27)
-Tue Sep 11 21:03:57 2018
+Version 4.0a (build 168) for Unix/Linux (built on Aug  2 2020 at 07:23:11)
+Mon Sep 14 17:43:24 2020
 
         -----------------------------NOTICE-----------------------------
-          This is an alpha-test version that is still changing rapidly.
-          It will expire on 1 Nov 2018.
-
+          This is a test version that is still changing rapidly.
           Please report bugs to dave@phylosolutions.com
         ----------------------------------------------------------------
 
-Running on Intel(R) 64 architecture
-SSE vectorization enabled
-SSSE3 instructions supported
-Multithreading enabled for likelihood using Pthreads
-Compiled using GNU C compiler (gcc) 4.8.4
-
-paup> 
+Running on Intel(R) Xeon(R) CPU E5-2699 v4 @ 2.20GHz
+    44 CPU cores on 2 sockets (hyperthreaded to 88 logical cores)
+    Executable built for Intel(R) 64 architecture
+    Compiled using GNU C compiler (gcc) 4.8.4
+    SSE vectorization enabled
+    SSSE3 instructions supported
+    Multithreading enabled using Pthreads
+paup>
 ```
 Type "?" to get a list of possible commands. Type a command followed by a question mark (e.g. "lset ?") to get 
-help about a specific function. 
+help about a specific function. To exit, type `quit`.
 
-Let's begin by creating a log file of our session. 
+Let's begin by creating a log file of our session. Replace username with the name of the folder you created to
+store your results.
 ```
 log file=./username/paup_lab.log
 ```
@@ -140,7 +117,7 @@ Let's start with a Jukes-Cantor model (what this data were simulated under).
 lset nst=1 basefreq=equal
 hsearch
 ```
-How many trees were found? How do they compare to those found under parsimony? Instead of using *pscores*, use *lscores* to see the likelihood of the data given the ML tree. Also use *describetrees /plot=phylogram* to plot the tree with branch lengths. Try modifying the model lset (increasing *nst=2* or *nst=6* w/*rmatrix=estimate*; or setting *basefreq=empirical*) and rerun hsearch. Does this increase the likelihood (decrease the -lnL) substantially? 
+How many trees were found? How do they compare to those found under parsimony? Instead of using *pscores*, use *lscores* to see the likelihood of the data given the ML tree. Also use *describetrees /plot=phylogram* to plot the tree with branch lengths. Try modifying the model lset (increasing *nst=2* or *nst=6* w/*tratio=estimate* or *rmatrix=estimate* (respectively); or setting *basefreq=empirical*) and rerun hsearch. Does this increase the likelihood (decrease the -lnL) substantially? 
 
 Now let's consider another dataset. Let's first load the modified "true tree" that I used to simulate the data. How is it different? What is the biological meaning of the changes?
 ```
@@ -153,7 +130,7 @@ We are going to now load data simulated on this phylogeny, again under a JC69 mo
 execute bears_LBA500.nex
 ```
 
-Now perform a parsimony anaylsis. How has the resulting tree changed? How does it compare to the true tree? 
+Now perform a parsimony anaylsis. Switch your criterion back to parsimony and conduct branch and bound searches. How has the resulting tree changed? How does it compare to the true tree? 
 
 Let's now determine how confident we are in the tree. We're going to use a method called the boostrap, which will be explained in class. 
 
@@ -171,7 +148,7 @@ bootstrap nreps=100 search=heuristic/swap=NNI nreps=1
 
 What is the consequence of adding more data in the likelihood example? 
 
-## Finally...a real dataset!
+## Assignment: Finally...a real dataset!
 
 We are now going to actually analyze a real dataset. We have a real sequence dataset from these species. But first, we need to establish what the correct model of sequence evolution is. We could do this all within PAUP\*. In fact, if you run the following command: 
 
@@ -179,7 +156,7 @@ We are now going to actually analyze a real dataset. We have a real sequence dat
 execute bears_irbp.nex
 execute modelblockPAUPb10.nex
 ```
-It will fit a large set of models which can then be ranked. However, the output is a bit dense to parse, and the software used to summarize them is a bit hard to get these days. Folks usually select models using stand alone software like *jModeltest2*. We're going to use *modeltest-ng*, which can be run from command line. Open up another browser tab and navigate again to the portal for accessing the server. Navigate to the PAUP_lab director again, and run the following command:
+It will fit a large set of models which can then be ranked. However, the output is a bit dense to parse, and the software used to summarize them is a bit hard to get these days. Folks usually select models using stand alone software like *jModeltest2*. We're going to use *modeltest-ng*, which can be run from command line. Open up another terminal tab by clicking ont he down arrow by `Terminal` and selecting `New Terminal`. Navigate to the PAUP_lab directory again, and run the following command:
 ```
 modeltest-ng -i bears_irbp.phy
 ```
@@ -187,6 +164,6 @@ Note that we have two files with our sequence data, *bears_irbp.phy*, which is i
 
 What is the best model? Does the answer differ depending on the criterion you pick? What is the correct criterion anyway!?!
 
-Challenge: Implement the model in PAUP\* and analyze using a heuristic search. Perform a bootstrap analysis with 100 replicates that takes a reasonable amount of time. Save the tree in your output folder. 
+Assignment: Create a new log file with your *username_assignment2_paupanalysis.log* and implement the model in PAUP\* and analyze using a heuristic search. Perform a bootstrap analysis with 100 replicates that takes a reasonable amount of time. Save the tree in your output folder. 
 
-When you are finished, email me your log file. In the future we will use Github, so please get Github account. 
+When you are finished, upload your log file to canvas assignments. 
