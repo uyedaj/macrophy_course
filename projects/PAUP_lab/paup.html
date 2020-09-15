@@ -90,6 +90,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -123,65 +126,53 @@ $(document).ready(function () {
 
 <div id="computational-exercise-in-paup" class="section level1">
 <h1>Computational Exercise in PAUP*</h1>
-<p>We will be using the software program called PAUP* (Phylogenetic Analysis Under Parsimony *and other methods) written by David Swofford. PAUP* is an old program that has been around for decades now (v3 in 1989). As its name suggests the original version only performed parsimony. For many years, PAUP* v4.0b10 was commercial software distributed by Sinauer Associates. However, recently the license has expired and PAUP* will now be released as an open-source software as v.5.0, with “test” versions available now. While a variety of alternative likelihood and parsimony software programs exist, few have as reliable a likelihood estimation as PAUP*. There are GUIs available for some versions, but we will be using</p>
+<p>We will be using the software program called PAUP* (Phylogenetic Analysis Under Parsimony *and other methods) written by David Swofford. PAUP* is an old program that has been around for decades now (v3 in 1989). As its name suggests the original version only performed parsimony. For many years, PAUP* v4.0b10 was commercial software distributed by Sinauer Associates. However, recently the license has expired and PAUP* will now be released as an open-source software with “test” versions available now. While a variety of alternative likelihood and parsimony software programs exist, few have as reliable a likelihood estimation as PAUP*. There are GUIs available for some versions, but we will be using a command line version.</p>
 <div id="logging-into-the-server" class="section level2">
 <h2>Logging into the server</h2>
-<p>I have given you accounts on my server. You can access a terminal to this machine by going to the following address in your browser, with <em><pid></em> replaced with your VT PID. You will see a screen warning you not to continue, do it anyway. I will supply your initial password in class.</p>
-<pre><code>https://128.173.187.20:8080/wetty/ssh/&lt;pid&gt;</code></pre>
-<p>As your first action, please update your password using the command below, replacing <em>username</em> with your PID. Please use something secure.</p>
-<pre><code>passwd username</code></pre>
-<div id="alternative-method" class="section level4">
-<h4><em>Alternative method</em></h4>
-<p>We are using a browser that access my lab’s computer to get you up and running as soon as possible. Note that more features will be available if you 1) install PAUP* on your own machine (<a href="https://paup.phylosolutions.com/" class="uri">https://paup.phylosolutions.com/</a>) 2) you SSH into my machine through a command line using an SSH client (native in Mac &amp; Linux, <a href="https://www.putty.org/" class="uri">https://www.putty.org/</a> or equivalent in Windows). If you would prefer this option or already know something about SSH, you can do the following from terminal (this will only work if you are the VT network or VPN):</p>
-<pre><code>ssh username@128.173.187.20</code></pre>
-<p>Either way, please change your pwd to something secure once you are in!</p>
-</div>
+<p>We are using a browser that access my lab’s computer again. You can either use the Terminal in Rstudio server, or you can directly SSH into the machie via command line. Note that more features will be available if you 1) install PAUP* on your own machine (<a href="https://paup.phylosolutions.com/" class="uri">https://paup.phylosolutions.com/</a>) 2) you SSH into my machine through a command line using an SSH client (native in Mac &amp; Linux, <a href="https://www.putty.org/" class="uri">https://www.putty.org/</a> or equivalent in Windows). If you would prefer this option or already know something about SSH, you can do so from the terminal using the same IP address we use for Rstudio server (this will only work if you are the VT network or VPN).</p>
 </div>
 <div id="get-the-data-for-the-lab" class="section level2">
 <h2>Get the data for the lab</h2>
-<p>We are going to use git to clone the course repository. First, let’s make a new directory in our home directory.</p>
-<pre><code>mkdir repos
-cd repos</code></pre>
-<p>Now clone the repository.</p>
-<pre><code>git clone https://github.com/uyedaj/macrophy_course.git
-cd macrophy_course
-ls</code></pre>
+<p>We can update our existing git repository to the most recent version by navigating into the macrophy_course directory:</p>
+<pre><code>cd macrophy_course
+git pull</code></pre>
 <p>Now navigate to the lab folder (NB: you can hit tab to autocomplete):</p>
 <pre><code>cd projects/PAUP_lab/
 ls</code></pre>
 <p>We’re going to make a directory for your results. Make the folder your username</p>
-<pre><code>mkdir juyeda</code></pre>
+<pre><code>mkdir username</code></pre>
 </div>
 <div id="getting-started-with-paup" class="section level2">
 <h2>Getting started with PAUP*</h2>
-<p>Today, we are working with data that has been simulated on a bear phylogeny. Let’s look at the phylogeny itself and how it is stored.</p>
+<p>Today, we are working with data that has been simulated on a bear phylogeny in R using the <a href="./simulatingData.R">following script</a> and the program <code>seq-gen</code>. Let’s look at the phylogeny itself and how it is stored.</p>
 <pre><code>more bears.tre
 </code></pre>
 <p>What are the numbers? How is the topology represented?</p>
 <p>Now let’s look at the data, which is saved in <em>NEXUS</em> format.</p>
 <pre><code>more bears_JC69.nex</code></pre>
 <p>To launch paup, simply type the name of the program. Because I installed the software in the system path, it can be launched from anywhere. Otherwise, you’d have to be in the directory with the program.</p>
-<pre><code>paup</code></pre>
+<pre><code>paup4.0</code></pre>
 <p>You should be greated by the following screen:</p>
 <pre><code>P A U P *
-Version 4.0a (build 163) for Unix/Linux (built on Jul 23 2018 at 19:49:27)
-Tue Sep 11 21:03:57 2018
+Version 4.0a (build 168) for Unix/Linux (built on Aug  2 2020 at 07:23:11)
+Mon Sep 14 17:43:24 2020
 
         -----------------------------NOTICE-----------------------------
-          This is an alpha-test version that is still changing rapidly.
-          It will expire on 1 Nov 2018.
-
+          This is a test version that is still changing rapidly.
           Please report bugs to dave@phylosolutions.com
         ----------------------------------------------------------------
 
-Running on Intel(R) 64 architecture
-SSE vectorization enabled
-SSSE3 instructions supported
-Multithreading enabled for likelihood using Pthreads
-Compiled using GNU C compiler (gcc) 4.8.4
-
-paup&gt; </code></pre>
-<p>Type “?” to get a list of possible commands. Type a command followed by a question mark (e.g. “lset ?”) to get help about a specific function.</p>
+Running on Intel(R) Xeon(R) CPU E5-2699 v4 @ 2.20GHz
+    44 CPU cores on 2 sockets (hyperthreaded to 88 logical cores)
+    Executable built for Intel(R) 64 architecture
+    Compiled using GNU C compiler (gcc) 4.8.4
+    SSE vectorization enabled
+    SSSE3 instructions supported
+    Multithreading enabled using Pthreads
+paup&gt;</code></pre>
+<p>Type “?” to get a list of possible commands. Type a command followed by a question mark (e.g. “lset ?”) to get help about a specific function. To exit, type <code>quit</code>.</p>
+<p>Let’s begin by creating a log file of our session. Replace username with the name of the folder you created to store your results.</p>
+<pre><code>log file=./username/paup_lab.log</code></pre>
 <p>Next we execute our data block and do an exhaustive parsimony analysis.</p>
 <pre><code>execute bears_JC69.nex
 outgroup Canis_lupus</code></pre>
@@ -201,11 +192,13 @@ lset ?</code></pre>
 <p>Let’s start with a Jukes-Cantor model (what this data were simulated under).</p>
 <pre><code>lset nst=1 basefreq=equal
 hsearch</code></pre>
-<p>How many trees were found? How do they compare to those found under parsimony? Instead of using <em>pscores</em>, use <em>lscores</em> to see the likelihood of the data given the ML tree. Also use <em>describetrees /plot=phylogram</em> to plot the tree with branch lengths. Try modifying the model lset (increasing <em>nst=2</em> or <em>nst=6</em> w/<em>rmatrix=estimate</em>; or setting <em>basefreq=empirical</em>) and rerun hsearch. Does this increase the likelihood (decrease the -lnL) substantially?</p>
+<p>How many trees were found? How do they compare to those found under parsimony? Instead of using <em>pscores</em>, use <em>lscores</em> to see the likelihood of the data given the ML tree. Also use <em>describetrees /plot=phylogram</em> to plot the tree with branch lengths. Try modifying the model lset (increasing <em>nst=2</em> or <em>nst=6</em> w/<em>tratio=estimate</em> or <em>rmatrix=estimate</em> (respectively); or setting <em>basefreq=empirical</em>) and rerun hsearch. Does this increase the likelihood (decrease the -lnL) substantially?</p>
 <p>Now let’s consider another dataset. Let’s first load the modified “true tree” that I used to simulate the data. How is it different? What is the biological meaning of the changes?</p>
 <pre><code>execute bears_LBAtree.nex
 describetrees /plot=phylogram</code></pre>
-<p>Now perform a parsimony anaylsis. How has the resulting tree changed? How does it compare to the true tree?</p>
+<p>We are going to now load data simulated on this phylogeny, again under a JC69 model.</p>
+<pre><code>execute bears_LBA500.nex</code></pre>
+<p>Now perform a parsimony anaylsis. Switch your criterion back to parsimony and conduct branch and bound searches. How has the resulting tree changed? How does it compare to the true tree?</p>
 <p>Let’s now determine how confident we are in the tree. We’re going to use a method called the boostrap, which will be explained in class.</p>
 <pre><code>bootstrap nreps=100</code></pre>
 <p>Sequentially load all the files <em>bears_LBAXXX.nex</em> which have sequences of different length and perform a bootstrap analysis. What happens as you increase the length of the sequences?</p>
@@ -213,24 +206,17 @@ describetrees /plot=phylogram</code></pre>
 <pre><code>bootstrap nreps=100 search=heuristic/swap=NNI nreps=1</code></pre>
 <p>What is the consequence of adding more data in the likelihood example?</p>
 </div>
-<div id="finallya-real-dataset" class="section level2">
-<h2>Finally…a real dataset!</h2>
+<div id="assignment-finallya-real-dataset" class="section level2">
+<h2>Assignment: Finally…a real dataset!</h2>
 <p>We are now going to actually analyze a real dataset. We have a real sequence dataset from these species. But first, we need to establish what the correct model of sequence evolution is. We could do this all within PAUP*. In fact, if you run the following command:</p>
-<pre><code>execute modelblockPAUPb10.nex</code></pre>
-<p>It will fit a large set of models which can then be ranked. However, the output is a bit dense to parse, and the software used to summarize them is a bit hard to get these days. Folks usually select models using stand alone software like <em>jModeltest2</em>. We’re going to use <em>modeltest-ng</em>, which can be run from command line. Open up another browser tab and navigate again to the portal for accessing the server. Navigate to the PAUP_lab director again, and run the following command:</p>
+<pre><code>execute bears_irbp.nex
+execute modelblockPAUPb10.nex</code></pre>
+<p>It will fit a large set of models which can then be ranked. However, the output is a bit dense to parse, and the software used to summarize them is a bit hard to get these days. Folks usually select models using stand alone software like <em>jModeltest2</em>. We’re going to use <em>modeltest-ng</em>, which can be run from command line. Open up another terminal tab by clicking ont he down arrow by <code>Terminal</code> and selecting <code>New Terminal</code>. Navigate to the PAUP_lab directory again, and run the following command:</p>
 <pre><code>modeltest-ng -i bears_irbp.phy</code></pre>
 <p>Note that we have two files with our sequence data, <em>bears_irbp.phy</em>, which is in Phylip format, while PAUP* will want Nexus format (<em>bears_irbp.nex</em>). There are lots of conversion tools available, I’ve done it already to save time.</p>
 <p>What is the best model? Does the answer differ depending on the criterion you pick? What is the correct criterion anyway!?!</p>
-<p>Challenge: Implement the model in PAUP* and analyze using a heuristic search. Perform a bootstrap analysis with 100 replicates that takes a reasonable amount of time. Save the tree in your output folder.</p>
-</div>
-<div id="submit-your-final-analysis-to-github" class="section level2">
-<h2>Submit your final analysis to github</h2>
-<p>Get a github account if you don’t already have one. Now you’re going to take your results and submit them to the github repository so I can take a look and give you credit.</p>
-<p>Navigate to the macrophy-course directory:</p>
-<pre><code>cd ~/repos/macrophy-course
-git status
-git add ./projects/PAUP_lab/username/
-git commit -m &quot;Adding &lt;username&gt;'s lab exercise results&quot;</code></pre>
+<p>Assignment: Create a new log file with your <em>username_assignment2_paupanalysis.log</em> and implement the model in PAUP* and analyze using a heuristic search. Perform a bootstrap analysis with 100 replicates that takes a reasonable amount of time. Save the tree in your output folder.</p>
+<p>When you are finished, upload your log file to canvas assignments.</p>
 </div>
 </div>
 
