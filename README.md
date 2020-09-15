@@ -94,7 +94,7 @@ Final Project: Final project presentation(100 pts)
 |Th 9/3| 4\. [Probability, likelihood & Rev. Bayes](projects/LearningML&Bayes_Exercise.Rmd); [Answers](projects/LearningML&Bayes_Answers.pdf)| [Felsenstein 1981](papers/Felsenstein1981_Article_EvolutionaryTreesFromDNASequen.pdf)||
 |T 9/8 |5\. [Discrete character evolution I](lectures/slides/LectureIV_DiscreteCharacterModels.pptx);[pdf](lectures/slides/LectureIV_DiscreteCharacterModels.pdf)|[O’Meara 2012](papers/OMearaReview.pdf)||
 |Th 9/10|6\. [Discrete character evolution II](lectures/slides/LectureV_DiscreteCharacterModels.pptx);[pdf](lectures/slides/LectureV_DiscreteCharacterModels.pdf)|||
-|T 9/15| 7\. Lab: Inferring phylogenies from molecular data|Inferring phylogenies||
+|T 9/15| 7\. [Slides](lectures/slides/LectureVI_DiscreteCharacterModels.pptx);[pdf](lectures/slides/LectureVI_DiscreteCharacterModels.pdf) [Lab: Inferring phylogenies from molecular data](projects/PAUP_lab/paup.md)|Inferring phylogenies Chs. 13, 16||
 |Th 9/17| 8\. Practical considerations: alignments, partitioning and mixture models |||
 |T 9/22| 9\. EXAM I| ||
 |Th 9/24| 10\. Lab: RevBayes|||
