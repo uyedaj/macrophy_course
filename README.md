@@ -95,10 +95,10 @@ Final Project: Final project presentation(100 pts)
 |T 9/8 |5\. [Discrete character evolution I](lectures/slides/LectureIV_DiscreteCharacterModels.pptx);[pdf](lectures/slides/LectureIV_DiscreteCharacterModels.pdf)|[O’Meara 2012](papers/OMearaReview.pdf)||
 |Th 9/10|6\. [Discrete character evolution II](lectures/slides/LectureV_DiscreteCharacterModels.pptx);[pdf](lectures/slides/LectureV_DiscreteCharacterModels.pdf)|||
 |T 9/15| 7\. [Slides](lectures/slides/LectureVI_DiscreteCharacterModels.pptx);[pdf](lectures/slides/LectureVI_DiscreteCharacterModels.pdf) [Lab: Inferring phylogenies from molecular data](projects/PAUP_lab/paup.md)|Inferring phylogenies Chs. 13, 16||
-|Th 9/17| 8\. Practical considerations: alignments, partitioning and mixture models |||
+|Th 9/17| 8\. PAUP* Lab |||
 |T 9/22| 9\. EXAM I| ||
-|Th 9/24| 10\. Lab: RevBayes|||
-|T 9/29| 11\. Phylogenomics|||
+|Th 9/24| 10\. [Practical considerations: alignments, support, model selection & adequacy](lectures/slides/Alignment&ModelSelection&ModelAdequacy.pptx); [pdf](lectures/slides/Alignment&ModelSelection&ModelAdequacy.pdf)|[Holder & Lewis, 2003](papers/HolderandLewis2003.pdf); [Brown, 2014](papers/Brown2014.pdf)|PAUP lab due (log file)|
+|T 9/29| 11\. Lab: RevBayes|||
 |Th 10/1| 12\. Biogeography||Assignment: Project proposal |
 |T 10/6| 13\. Advanced topics in morphological evolution (Guest lecturer: Diego Porto)|TBA||
 |Th 10/8| 14\. Dating phylogenetic trees|||
