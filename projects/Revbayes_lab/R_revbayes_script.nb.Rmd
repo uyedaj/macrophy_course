@@ -154,3 +154,11 @@ plot(beartree_MAP, show.node.label=TRUE, cex=0.75)
 What data and model tells us where the fossil bears go?
 What data and model likely primarily informs the backbone topology of extant species?
 What data informs the branch lengths? 
+
+```{r}
+par(mfrow=c(2,1), mar=c(0,0,0,0))
+for(i in c(100,101)){
+  plot(ladderize(beartrees[[i]]), cex=0.75)
+}
+```
+
