@@ -89,38 +89,40 @@ mymcmc = mcmc(mymodel, moves, monitors)
 mymcmc.run(10000)
 ```
 
+What happens if delta is too large? Feel free to try it if there is time. 
+
 # Phylogenetic Models 
 _Adapted from exercise by:_
 _Sebastian Hoehna, Michael Landis, and Tracy A. Heath_
 
 Read in sequence data for the gene
 ```
-data = readDiscreteCharacterData("data/primates_and_galeopterus_cytb.nex")
+data = readDiscreteCharacterData("data/primates_and_galeopterus_cox2.nex")
 ```
 
 Get some useful variables from the data. We need these later on.
 ```
-num_taxa <- data.ntaxa()
-num_branches <- 2 * num_taxa - 3
-taxa <- data.taxa()
+num_taxa <- data.ntaxa();
+num_branches <- 2 * num_taxa - 3;
+taxa <- data.taxa();
 
-mvi = 1
-mni = 1
+mvi = 1;
+mni = 1;
 ```
 Specify the stationary frequency parameters
 ```
-pi_prior <- v(1,1,1,1) 
-pi ~ dnDirichlet(pi_prior)
-moves[mvi++] = mvBetaSimplex(pi, weight=2.0)
-moves[mvi++] = mvDirichletSimplex(pi, weight=1.0)
+pi_prior <- v(1,1,1,1); 
+pi ~ dnDirichlet(pi_prior);
+moves[mvi++] = mvBetaSimplex(pi, weight=2.0);
+moves[mvi++] = mvDirichletSimplex(pi, weight=1.0);
 ```
 
 Specify the exchangeability rate parameters
 ```
-er_prior <- v(1,1,1,1,1,1)
-er ~ dnDirichlet(er_prior)
-moves[mvi++] = mvBetaSimplex(er, weight=3.0)
-moves[mvi++] = mvDirichletSimplex(er, weight=1.5)
+er_prior <- v(1,1,1,1,1,1);
+er ~ dnDirichlet(er_prior);
+moves[mvi++] = mvBetaSimplex(er, weight=3.0);
+moves[mvi++] = mvDirichletSimplex(er, weight=1.5);
 ```
 
 Create a deterministic variable for the rate matrix, GTR
@@ -130,25 +132,24 @@ Q := fnGTR(er,pi)
 ```
 
 #### Tree model
-
+Set the prior on tree topology:
 ```
-out_group = clade("Galeopterus_variegatus")
-# Prior distribution on the tree topology
-topology ~ dnUniformTopology(taxa, outgroup=out_group)
-moves[mvi++] = mvNNI(topology, weight=num_taxa/2.0)
-moves[mvi++] = mvSPR(topology, weight=num_taxa/10.0)
+out_group = clade("Galeopterus_variegatus");
+topology ~ dnUniformTopology(taxa, outgroup=out_group);
+moves[mvi++] = mvNNI(topology, weight=num_taxa/2.0);
+#moves[mvi++] = mvSPR(topology, weight=num_taxa/10.0); #A nice SPR move, but omitting for speed!
 ```
 
 #### Branch length prior
 ```
 for (i in 1:num_branches) {
-    bl[i] ~ dnExponential(10.0)
+    bl[i] ~ dnExponential(10.0);
     moves[mvi++] = mvScale(bl[i])
-}
+};
 
-TL := sum(bl)
+TL := sum(bl);
 
-psi := treeAssembly(topology, bl)
+psi := treeAssembly(topology, bl);
 ```
 
 
@@ -156,7 +157,7 @@ psi := treeAssembly(topology, bl)
 
 The sequence evolution model
 ```
-seq ~ dnPhyloCTMC(tree=psi, Q=Q, type="DNA")
+seq ~ dnPhyloCTMC(tree=psi, Q=Q, type="DNA");
 seq.clamp(data)
 ```
 
@@ -166,21 +167,31 @@ mymodel = model(psi)
 ```
 Add monitors
 ```
-monitors[mni++] = mnScreen(TL, printgen=1000)
-monitors[mni++] = mnFile(psi, filename="output/primates_cytb_GTR.trees", printgen=10)
-monitors[mni++] = mnModel(filename="output/primates_cytb_GTR.log", printgen=10)
+monitors[mni++] = mnScreen(TL, printgen=100);
+monitors[mni++] = mnFile(psi, filename="output/primates_cox2_GTR.trees", printgen=10);
+monitors[mni++] = mnModel(filename="output/primates_cox2_GTR.log", printgen=10)
 ```
 Run the analysis
 ```
-mymcmc = mcmc(mymodel, monitors, moves, nruns=2)
-mymcmc.run(generations=20000,tuningInterval=200)
+mymcmc = mcmc(mymodel, monitors, moves, nruns=2);
+mymcmc.run(generations=5000,tuningInterval=200)
 ```
 
 Summarize output
 ```
-treetrace = readTreeTrace("output/primates_cytb_GTR.trees", treetype="non-clock", outgroup=out_group)
+treetrace = readTreeTrace("output/primates_cox2_GTR.trees", treetype="non-clock", outgroup=out_group)
 ```
 And then get the MAP tree
 ```
-map_tree = mapTree(treetrace,"output/primates_cytb_GTR_MAP.tre")
+map_tree = mapTree(treetrace,"output/primates_cox2_GTR_MAP.tre")
+```
+
+
+# Total evidence dating of a tree using the fossilized birth-death process. 
+
+We will discuss how phylogenetic trees are dated. While we do so, have the following script
+running in the background. 
+
+```
+source("./mcmc_CEFBDP_Specimens.Rev")
 ```

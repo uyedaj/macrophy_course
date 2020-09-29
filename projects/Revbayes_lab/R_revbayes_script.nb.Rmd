@@ -13,7 +13,8 @@ library(ape)
 
 
 ```{r}
-setwd("~/repos/macrophy_course/projects/Revbayes_lab/")
+# You may wish to set the working directory using this line, and putting your working directory in quotes.
+#setwd("path/to/your/working/directory")
 ```
 
 Let's simulate some linear regression data that we will then ask Revbayes to estimate.
@@ -30,9 +31,18 @@ y_obs <- m*x_obs + b + rnorm(n, 0, sigma)
 write.csv(t(x_obs), "./data/x.csv", row.names = FALSE, col.names = FALSE, )
 write.csv(t(y_obs), "./data/y.csv", row.names = FALSE, col.names = FALSE)
 plot(x_obs, y_obs)
-print(data.frame(m,b,sig2))
+print(data.frame(m,b,sigma))
 
 ```
+
+Now go to RevBayes and analyze this data, or use the cheat below:
+
+```{r}
+system("rb revbayes_linearregression_script.rev")
+
+```
+
+Once you have analyzed the data in RevBayes, read it back in. 
 
 ```{r}
 run1 <- read.table("./output/linear_regression1.log", header=TRUE)
@@ -45,6 +55,12 @@ head(run1)
 run1 <- mcmc(run1)
 coln <- c("Posterior", "Likelihood", "Prior", "m", "b", "sigma")
 plot(run1[,coln])
+```
+
+```{r}
+plot(0,0, type="n", xlim=c(-3, 3), ylim=c(-3,3), xlab="m", ylab="b")
+lines(run1[,6], run1[,5])
+points(m, b, cex=2, pch=21, bg="red")
 ```
 
 
@@ -69,9 +85,16 @@ plot(density(run2[,"b"]), main="Intercept")
 abline(v=b, lty=2, col="red", lwd=3)
 
 plot(density(run2[,"sigma"]), main="Sigma")
-abline(v=sqrt(sig2), lty=2, col="red", lwd=3)
+abline(v=sigma, lty=2, col="red", lwd=3)
 
 ```
+
+```{r}
+plot(0,0, type="n", xlim=c(-3, 3), ylim=c(-3,3), xlab="m", ylab="b")
+lines(run2[,6], run2[,5])
+points(m, b, cex=2, pch=21, bg="red")
+```
+
 
 ```{r}
 par(mfrow=c(2,2))
@@ -91,12 +114,15 @@ points(lm1$coef[1], summary(lm1)$sigma, pch="+", col="blue", cex=2)
 
 ```
 
+# Part II. Run a phylogenetic analysis in RevBayes. Return here to visualize the results. 
 
 ```{r}
-trees <- read.tree("./output/primates_cytb_GTR.trees")
-tree_MAP <- rncl::read_nexus_phylo("./output/primates_cytb_GTR_MAP.tre")
-plot(tree_MAP, show.node.label = TRUE)
-
+trees <- read.tree("./output/primates_cox2_GTR.trees")
+tree_MAP <- read.nexus("./output/primates_cox2_GTR_MAP.tre")
+tree_MAP <- root(tree_MAP, "Galeopterus_variegatus")
+tree_MAP <- addConfidences(tree_MAP, trees)
+tree_MAP$node.label <- round(tree_MAP$node.label,2)
+plot(tree_MAP, show.node.label=TRUE, cex=0.75)
 ```
 
 
@@ -107,3 +133,24 @@ for(i in round(seq(1,length(trees), length.out=9), 0)){
 }
 ```
 
+```{r}
+trees <- root(trees, outgroup = "Galeopterus_variegatus")
+for(i in 1:length(trees)){
+  trees[[i]] <- phytools::force.ultrametric(trees[[i]])
+}
+densiTree(trees, alpha=0.2, scaleX=FALSE, col=viridis::viridis(1002))
+```
+
+# Part III. Demo of Combined Evidence Fossilized Birth-Death Process. 
+
+```{r}
+beartrees <- read.tree("./output/bears.trees")
+beartree_MAP <- read.nexus("./output/bears_MAP.tre")
+beartree_MAP <- addConfidences(beartree_MAP, beartrees)
+beartree_MAP$node.label <- round(beartree_MAP$node.label,2)
+plot(beartree_MAP, show.node.label=TRUE, cex=0.75)
+```
+
+What data and model tells us where the fossil bears go?
+What data and model likely primarily informs the backbone topology of extant species?
+What data informs the branch lengths? 
