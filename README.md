@@ -98,9 +98,9 @@ Final Project: Final project presentation(100 pts)
 |Th 9/17| 8\. PAUP* Lab |||
 |T 9/22| 9\. EXAM I| ||
 |Th 9/24| 10\. [Practical considerations: alignments, support, model selection & adequacy](lectures/slides/Alignment&ModelSelection&ModelAdequacy.pptx); [pdf](lectures/slides/Alignment&ModelSelection&ModelAdequacy.pdf)|[Holder & Lewis, 2003](papers/HolderandLewis2003.pdf); [Brown, 2014](papers/Brown2014.pdf)|PAUP lab due (log file)|
-|T 9/29| 11\. Lab: RevBayes|||
-|Th 10/1| 12\. Biogeography||Assignment: Project proposal |
-|T 10/6| 13\. Advanced topics in morphological evolution (Guest lecturer: Diego Porto)|TBA||
+|T 9/29| 11\. [Model selection & adequacy](lectures/slides/ModelAdequacy.pptx); [pdf](lectures/slides/ModelAdequacy.pdf). [Revbayes Lab](https://github.com/uyedaj/macrophy_course/blob/master/projects/Revbayes_lab/revbayes_script.md)|||
+|Th 10/1| 12\. [Revbayes Lab](https://github.com/uyedaj/macrophy_course/blob/master/projects/Revbayes_lab/revbayes_script.md)||Assignment: Project proposal |
+|T 10/6| 13\. Advanced topics in morphological evolution (Guest lecturer: Diego Porto)|[Porto et al. 2020](papers/Porto&al2020Sysbio_InformationalDissonanceMorphologyBees.pdf); [Wright Morphology Review](papers/Wright2019ISD_BayesianMorphologicalPhylogeneticsGuide.pdf)||
 |Th 10/8| 14\. Dating phylogenetic trees|||
 |T 10/13| 15\. Gene trees vs. Species trees & the multispecies coalescent|||
 |Th 10/15| 16\. Guest speaker paper discussion (Rosana Zenil-Ferguson/Tentative)||
