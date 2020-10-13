@@ -102,7 +102,7 @@ Final Project: Final project presentation(100 pts)
 |Th 10/1| 12\. [Revbayes Lab](https://github.com/uyedaj/macrophy_course/blob/master/projects/Revbayes_lab/revbayes_script.md)||Assignment: Project proposal |
 |T 10/6| 13\. [Advanced topics in morphological evolution](lectures/slides/AdvancedTopicsMorphologicalEvolution.pptx); [pdf](lectures/slides/AdvancedTopicsMorphologicalEvolution.pdf) (Guest lecturer: Diego Porto)|[Porto et al. 2020](papers/Porto&al2020Sysbio_InformationalDissonanceMorphologyBees.pdf); [Wright Morphology Review](papers/Wright2019ISD_BayesianMorphologicalPhylogeneticsGuide.pdf)||
 |Th 10/8| 14\. [Dating phylogenetic trees](lectures/slides/DatingPhylogenies.pptx); [pdf](lectures/slides/DatingPhylogenies.pdf)|[Heath et al. 2014](papers/Heathetal2014FBD.pdf); [Gavryushkina et al. 2017](papers/Gavryushkina2017PenguinFBD.pdf); [Landis et al. 2018](papers/2018Silverswords.pdf)||
-|T 10/13| 15\. Gene trees vs. Species trees & the multispecies coalescent|||
+|T 10/13| 15\. [Species trees & the multispecies coalescent](lectures/slides/CoalescentSpeciesTrees2020.pptx); [pdf](lectures/slides/CoalescentSpeciesTrees2020.pdf)|[Edwards 2009](papers/Edwards2009SpeciesTrees.pdf)||
 |Th 10/15| 16\. Guest speaker paper discussion (Rosana Zenil-Ferguson/Tentative)||
 |T 10/20| 17\. Brownian Motion & continuous trait evolution|||
 |Th 10/22| 18\. The comparative method & PICs |Felsenstein 1985||
