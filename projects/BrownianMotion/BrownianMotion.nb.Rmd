@@ -189,7 +189,7 @@ source("./GmatrixEvolutionFunctions.R")
 
 
 ```{r}
-mvBMsim(1, 1, r=0, gens=100, root=c(0,0), npoints=100)
+mvBMsim(1, 1, r=0, gens=20, root=c(0,0), npoints=100)
 ```
 
 Try for different values of the correlation, or different values of the variances.
@@ -203,9 +203,9 @@ mvBMsim(?, ?, r=?, gens=100, root=c(0,0), npoints=100, add=TRUE, G.color="green"
 
 Again, there is nothing fancy about a multivariate Brownian Motion model. It's still just a multivariate normal distribution. In fact, it's remarkably easy to simulate it given an R matrix.
 ```{r}
-R <- matrix(c(1, 0.9,
-              0.9, 1), ncol=2, nrow=2, byrow=TRUE)
-mv.V <- kronecker(V, R)
+R <- matrix(c(1, -0.9,
+              -0.9, 1), ncol=2, nrow=2, byrow=TRUE)
+mv.V <- kronecker(V, R) #Expand the VCV matrix by the R matrix
 mvdat <- rmvnorm(1, mean=rep(0, ncol(R)*ncol(V)), sigma=mv.V)
 mvdat <- t(matrix(mvdat, nrow=2))
 rownames(mvdat) <- tree$tip.label
@@ -222,7 +222,7 @@ picX <- pic(mvdat[,1], tree)
 picY <- pic(mvdat[,2], tree)
 var(cbind(picX, picY))
 
-mvbmFit <- mvMORPH::mvBM(tree, mvdat, )
+mvbmFit <- mvMORPH::mvBM(tree, mvdat)
 mvbmFit$sigma
 ```
 

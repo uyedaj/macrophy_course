@@ -104,7 +104,7 @@ Final Project: Final project presentation(100 pts)
 |Th 10/8| 14\. [Dating phylogenetic trees](lectures/slides/DatingPhylogenies.pptx); [pdf](lectures/slides/DatingPhylogenies.pdf)|[Heath et al. 2014](papers/Heathetal2014FBD.pdf); [Gavryushkina et al. 2017](papers/Gavryushkina2017PenguinFBD.pdf); [Landis et al. 2018](papers/2018Silverswords.pdf)||
 |T 10/13| 15\. [Species trees & the multispecies coalescent](lectures/slides/CoalescentSpeciesTrees2020.pptx); [pdf](lectures/slides/CoalescentSpeciesTrees2020.pdf)|[Edwards 2009](papers/Edwards2009SpeciesTrees.pdf); [Optional review: 10 years later, Bravo et al. 2019](https://peerj.com/articles/6399/) ||
 |Th 10/15| 16\. Guest speaker paper discussion (Rosana Zenil-Ferguson/Tentative)||
-|T 10/20| 17\. Brownian Motion & continuous trait evolution|||
+|T 10/20| 17\. [Brownian Motion & continuous trait evolution](lectures/slides/BrownianMotion2020.pptx);[pdf](lectures/slides/BrownianMotion2020.pdf)|[Lab](projects/BrownianMotion/BrownianMotion.nb.Rmd)||
 |Th 10/22| 18\. The comparative method & PICs |Felsenstein 1985||
 |T 10/27| 19\. Modeling adaptation |Hansen 1997||
 |Th 10/29| 20\. Ornstein-Uhlenbeck models II|Butler and King 2004||
