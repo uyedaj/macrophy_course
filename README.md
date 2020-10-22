@@ -105,7 +105,7 @@ Final Project: Final project presentation(100 pts)
 |T 10/13| 15\. [Species trees & the multispecies coalescent](lectures/slides/CoalescentSpeciesTrees2020.pptx); [pdf](lectures/slides/CoalescentSpeciesTrees2020.pdf)|[Edwards 2009](papers/Edwards2009SpeciesTrees.pdf); [Optional review: 10 years later, Bravo et al. 2019](https://peerj.com/articles/6399/) ||
 |Th 10/15| 16\. Guest speaker paper discussion (Rosana Zenil-Ferguson/Tentative)||
 |T 10/20| 17\. [Brownian Motion & continuous trait evolution](lectures/slides/BrownianMotion2020.pptx);[pdf](lectures/slides/BrownianMotion2020.pdf)|[Lab](projects/BrownianMotion/BrownianMotion.nb.Rmd)||
-|Th 10/22| 18\. The comparative method & PICs |Felsenstein 1985||
+|Th 10/22| 18\. [The comparative method & PICs](lectures/slides/PGLS&PICs.pptx);[pdf](lectures/slides/PGLS&PICs.pdf)|[Felsenstein 1985](papers/Felsenstein1985Phylogenies&TheComparativeMethod.pdf)||
 |T 10/27| 19\. Modeling adaptation |Hansen 1997||
 |Th 10/29| 20\. Ornstein-Uhlenbeck models II|Butler and King 2004||
 |T 10/29| 21\. Finding evolutionary shifts|||
