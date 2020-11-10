@@ -105,14 +105,12 @@ Final Project: Final project presentation(100 pts)
 |T 10/13| 15\. [Species trees & the multispecies coalescent](lectures/slides/CoalescentSpeciesTrees2020.pptx); [pdf](lectures/slides/CoalescentSpeciesTrees2020.pdf)|[Edwards 2009](papers/Edwards2009SpeciesTrees.pdf); [Optional review: 10 years later, Bravo et al. 2019](https://peerj.com/articles/6399/) ||
 |Th 10/15| 16\. Guest speaker paper discussion (Rosana Zenil-Ferguson/Tentative)||
 |T 10/20| 17\. [Brownian Motion & continuous trait evolution](lectures/slides/BrownianMotion2020.pptx);[pdf](lectures/slides/BrownianMotion2020.pdf)|[Lab](projects/BrownianMotion/BrownianMotion.nb.Rmd)||
-|Th 10/22| 18\. The comparative method & PICs |Felsenstein 1985||
-|T 10/27| 19\. Modeling adaptation |Hansen 1997||
-|Th 10/29| 20\. Ornstein-Uhlenbeck models II|Butler and King 2004||
-|T 10/29| 21\. Finding evolutionary shifts|||
-|Th 10/31| 22\. Hypothesis testing vs. data-driven modeling |Uyeda et al. 2018||
+|Th 10/22| 18\. [The comparative method & PICs](lectures/slides/PGLS&PICs.pptx);[pdf](lectures/slides/PGLS&PICs.pdf)|[Felsenstein 1985](papers/Felsenstein1985Phylogenies&TheComparativeMethod.pdf)||
+|T 10/27| 19\. [Modeling adaptation](lectures/slides/OUmodels.pptx);[pdf](lectures/slides/OUmodels.pdf) |[Hansen 1997](dpapers/Hansen1997.pdf)||
+|Th 10/29| 20\. [Ornstein-Uhlenbeck models II](lectures/slides/ModelingAdaptiveEvolution.pptx);[pdf]((lectures/slides/ModelingAdaptiveEvolution.pdf))|[Butler and King 2004](papers/Butler&King2004.pdf)||
 |T 11/3| 23\. EXAM II|||
-|Th 11/5| 24\. Diversification models - birth and death on trees|Eldredge and Gould, 1972||
-|T 11/10| 25\. Species selection - SSE models | Maddison et al. 2007||
+|Th 11/5| 24\. [Diversification models - birth and death on trees](lectures/slides/Diversification&SSE.pptx); [pdf](lectures/slides/Diversification&SSE.pdf)|Harmon Textbook Ch. 10-12||
+|T 11/10| 25\. [Species selection - SSE models](lectures/slides/SSEModels.pptx); [pdf](lectures/slides/SSEModels.pdf) | [Maddison et al. 2007](papers/Maddison2007.pdf)||
 |Th 11/12| 26\. Punctuations, stasis & gradualism| ||
 |T 11/17| 27\. Connecting micro & macroevolution|||
 |Th 11/19| 28\. Grand challenges in phylogenetics and macroevolution|||
