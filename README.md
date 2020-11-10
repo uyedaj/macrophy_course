@@ -110,7 +110,7 @@ Final Project: Final project presentation(100 pts)
 |Th 10/29| 20\. [Ornstein-Uhlenbeck models II](lectures/slides/ModelingAdaptiveEvolution.pptx);[pdf]((lectures/slides/ModelingAdaptiveEvolution.pdf))|[Butler and King 2004](papers/Butler&King2004.pdf)||
 |T 11/3| 23\. EXAM II|||
 |Th 11/5| 24\. [Diversification models - birth and death on trees](lectures/slides/Diversification&SSE.pptx); [pdf](lectures/slides/Diversification&SSE.pdf)|Harmon Textbook Ch. 10-12||
-|T 11/10| 25\. Species selection - SSE models | Maddison et al. 2007||
+|T 11/10| 25\. [Species selection - SSE models](lectures/slides/SSEModels.pptx); [pdf](lectures/slides/SSEModels.pdf) | [Maddison et al. 2007](papers/Maddison2007.pdf)||
 |Th 11/12| 26\. Punctuations, stasis & gradualism| ||
 |T 11/17| 27\. Connecting micro & macroevolution|||
 |Th 11/19| 28\. Grand challenges in phylogenetics and macroevolution|||
