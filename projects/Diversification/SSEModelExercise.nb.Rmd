@@ -103,7 +103,7 @@ anova(nbModelMLFit, constrained = cnbModelMLFit)
 
 # Challenge: How many times have geckos evolved adhesive toepads? 
 
-Some analyses have suggested that Geckos have multiple origins of adhesive toepads (up to 11!) while other suggest the frequent loss of toepads and a single loss. Of course, a trait such as adhesive toepads may affect diversification rates as well. To adequately test this hypothesis, we need to account for the effects of diversification. Here we have data taken from Harrington and Reeder (2017; https://onlinelibrary.wiley.com/doi/full/10.1111/jeb.13004). 
+Some analyses have suggested that Geckos have multiple origins of adhesive toepads (up to 11!) while other suggest the frequent loss of toepads and a single loss. Of course, a trait such as adhesive toepads may affect diversification rates as well. To adequately test this hypothesis, we need to account for the effects of diversification. Here we have data taken from Harrington and Reeder (2017; https://onlinelibrary.wiley.com/doi/full/10.1111/jeb.13004). Here I demonstrate an ancestral state reconstruction using a standard CTMC. What's the scaled likelihood of the ancestor of all geckos having toepads? 
 
 ```{r}
 dat <- read.csv("./Gecko_toes.csv")
@@ -112,6 +112,9 @@ td <- make.treedata(tree, dat)
 td$phy <- chronopl(td$phy, 0)##Really crappy way of making ultrametric
 plot(td$phy, show.tip.label=FALSE, type="fan")
 tiplabels(pch=21, bg=td[['state']])
+asr <- ace(td[['state']], td$phy, type="discrete", model="ARD")
+asr
+nodelabels(pie=asr$lik.anc, cex=0.3, piecol = c(0,1))
 ```
 
 Tasks:
@@ -136,11 +139,16 @@ Tasks:
 
 4. Test for a single origin of toepads in the geckos by constraining the best model from above (either the BiSSE model or the state-independent model) to have the relevant transition parameter set to 0. Compare this constrained model to the original model and report the best fitting model. 
 
+```{r}
+
+```
+
+
 5. Use the best-fitting model to reconstruct ancestral states using `asr.marginal`. 
 
 ```{r}
 
-#asr <- asr.marginal(model_lik_fn, model_fit$par)
+#asr <- asr.marginal(best_model_lik, best_model_fit$par)
 #plot(td$phy, type="fan", show.tip.label=FALSE)
 #tiplabels(pch=21, bg=td[['state']])
 #nodelabels(pie=t(asr), piecol=0:1, cex=0.3)
