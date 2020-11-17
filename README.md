@@ -112,8 +112,8 @@ Final Project: Final project presentation(100 pts)
 |Th 11/5| 24\. [Diversification models - birth and death on trees](lectures/slides/Diversification&SSE.pptx); [pdf](lectures/slides/Diversification&SSE.pdf)|Harmon Textbook Ch. 10-12||
 |T 11/10| 25\. [Species selection - SSE models](lectures/slides/SSEModels.pptx); [pdf](lectures/slides/SSEModels.pdf) | [Maddison et al. 2007](papers/Maddison2007.pdf)||
 |Th 11/12| 26\. [Rethinking comparative methods](lectures/slides/DataDrivenvsHypothesisTesting.pptx);[pdf](lectures/slides/DataDrivenvsHypothesisTesting.pdf)|[Uyeda et al. 2018](papers/Uyedaetal2018.pdf) ||
-|T 11/17| 27\. Connecting micro & macroevolution|||
-|Th 11/19| 28\. Grand challenges in phylogenetics and macroevolution|||
+|T 11/17| 27\. [Punctuated Equilibrium](lectures/slides/Punctuations2020.pptx); [pdf](lectures/slides/Punctuations2020.pdf) |[Eldredge \& Gould 1972](papers/Eldredge&Gould1972.pdf); [Charlesworth et al. 1982](papers/Charlesworth1982.pdf)||
+|Th 11/19| 28\. Connecting Micro \& Macroevolution|||
 |T 11/24| Thanksgiving Holiday|||
 |Th 11/26| Thanksgiving Holiday|||
 |M 12/1|Presentations|||
