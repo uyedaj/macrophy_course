@@ -113,7 +113,7 @@ Final Project: Final project presentation(100 pts)
 |T 11/10| 25\. [Species selection - SSE models](lectures/slides/SSEModels.pptx); [pdf](lectures/slides/SSEModels.pdf) | [Maddison et al. 2007](papers/Maddison2007.pdf)||
 |Th 11/12| 26\. [Rethinking comparative methods](lectures/slides/DataDrivenvsHypothesisTesting.pptx);[pdf](lectures/slides/DataDrivenvsHypothesisTesting.pdf)|[Uyeda et al. 2018](papers/Uyedaetal2018.pdf) ||
 |T 11/17| 27\. [Punctuated Equilibrium](lectures/slides/Punctuations2020.pptx); [pdf](lectures/slides/Punctuations2020.pdf) |[Eldredge \& Gould 1972](papers/Eldredge&Gould1972.pdf); [Charlesworth et al. 1982](papers/Charlesworth1982.pdf)||
-|Th 11/19| 28\. Connecting Micro \& Macroevolution|||
+|Th 11/19| 28\.[Connecting Micro \& Macroevolution](lectures/slides/StasisMicroMacro.pptx);[pdf](lectures/slides/StasisMicroMacro.pdf)|[Hansen and Houle 2004](papers/HansenHoule2004.pdf)||
 |T 11/24| Thanksgiving Holiday|||
 |Th 11/26| Thanksgiving Holiday|||
 |M 12/1|Presentations|||
