@@ -97,22 +97,23 @@ Final Project: Final project presentation(100 pts)
 |T 9/20| 9\. EXAM I| ||
 |Th 9/22| 10\. [Practical considerations: alignments, support, model selection & adequacy](lectures/slides/Alignment&ModelSelection&ModelAdequacy.pptx); [pdf](lectures/slides/Alignment&ModelSelection&ModelAdequacy.pdf)|[Holder & Lewis, 2003](papers/HolderandLewis2003.pdf); [Brown, 2014](papers/Brown2014.pdf)|PAUP lab due (log file)|
 |T 9/27| 11\. [Revbayes Lab](https://github.com/uyedaj/macrophy_course/blob/master/projects/Revbayes_lab/revbayes_script.md)|||
-|Th 10/4| 12\. [Model selection & adequacy](lectures/slides/ModelAdequacy.pptx); [pdf](lectures/slides/ModelAdequacy.pdf).||Assignment: Project proposal |
-|T 10/6| 13\. [Dating phylogenetic trees](lectures/slides/DatingPhylogenies.pptx); [pdf](lectures/slides/DatingPhylogenies.pdf)|[Heath et al. 2014](papers/Heathetal2014FBD.pdf); [Gavryushkina et al. 2017](papers/Gavryushkina2017PenguinFBD.pdf); [Landis et al. 2018](papers/2018Silverswords.pdf)||
-|Th 10/11| 14\. [Species trees & the multispecies coalescent](lectures/slides/CoalescentSpeciesTrees2020.pptx); [pdf](lectures/slides/CoalescentSpeciesTrees2020.pdf)|[Edwards 2009](papers/Edwards2009SpeciesTrees.pdf); [Optional review: 10 years later, Bravo et al. 2019](https://peerj.com/articles/6399/) ||
-|T 10/13| 15\. [Brownian Motion & continuous trait evolution](lectures/slides/BrownianMotion2020.pptx);[pdf](lectures/slides/BrownianMotion2020.pdf)|[Lab](projects/BrownianMotion/BrownianMotion.nb.Rmd)||
-|Th 10/18| 16\. [The comparative method & PICs](lectures/slides/PGLS&PICs.pptx);[pdf](lectures/slides/PGLS&PICs.pdf)|[Felsenstein 1985](papers/Felsenstein1985Phylogenies&TheComparativeMethod.pdf)||
-|T 10/20| 17\. [Modeling adaptation](lectures/slides/OUmodels.pptx);[pdf](lectures/slides/OUmodels.pdf) |[Hansen 1997](dpapers/Hansen1997.pdf)||
-|Th 10/25| 18\. [Ornstein-Uhlenbeck models II](lectures/slides/ModelingAdaptiveEvolution.pptx);[pdf]((lectures/slides/ModelingAdaptiveEvolution.pdf))|[Butler and King 2004](papers/Butler&King2004.pdf)||
+|T 9/29| 12\. [Model selection & adequacy](lectures/slides/ModelAdequacy.pptx); [pdf](lectures/slides/ModelAdequacy.pdf).||Assignment: Project proposal |
+|Th 10/4| 13\. Phylogenomics.|||
+|T 10/6| 14\. [Dating phylogenetic trees](lectures/slides/DatingPhylogenies.pptx); [pdf](lectures/slides/DatingPhylogenies.pdf)|[Heath et al. 2014](papers/Heathetal2014FBD.pdf); [Gavryushkina et al. 2017](papers/Gavryushkina2017PenguinFBD.pdf); [Landis et al. 2018](papers/2018Silverswords.pdf)||
+|Th 10/11| 15\. [Species trees & the multispecies coalescent](lectures/slides/CoalescentSpeciesTrees2020.pptx); [pdf](lectures/slides/CoalescentSpeciesTrees2020.pdf)|[Edwards 2009](papers/Edwards2009SpeciesTrees.pdf); [Optional review: 10 years later, Bravo et al. 2019](https://peerj.com/articles/6399/) ||
+|T 10/13| 16\. [Brownian Motion & continuous trait evolution](lectures/slides/BrownianMotion2020.pptx);[pdf](lectures/slides/BrownianMotion2020.pdf)|[Lab](projects/BrownianMotion/BrownianMotion.nb.Rmd)||
+|Th 10/18| 17\. [The comparative method & PICs](lectures/slides/PGLS&PICs.pptx);[pdf](lectures/slides/PGLS&PICs.pdf)|[Felsenstein 1985](papers/Felsenstein1985Phylogenies&TheComparativeMethod.pdf)||
+|T 10/20| 18\. [Modeling adaptation](lectures/slides/OUmodels.pptx);[pdf](lectures/slides/OUmodels.pdf) |[Hansen 1997](dpapers/Hansen1997.pdf)||
+|Th 10/25| 19\. [Ornstein-Uhlenbeck models II](lectures/slides/ModelingAdaptiveEvolution.pptx);[pdf]((lectures/slides/ModelingAdaptiveEvolution.pdf))|[Butler and King 2004](papers/Butler&King2004.pdf)||
 |T 10/27| 19\. [Postdoc Guest Lecturer(s) TBD] | ||
-|Th 11/1| 20\. Hidden State Models |Beaulieu et al. 2013||
-|T 11/3| 23\. EXAM II|||
-|Th 11/8| 24\. [Diversification models - birth and death on trees](lectures/slides/Diversification&SSE.pptx); [pdf](lectures/slides/Diversification&SSE.pdf)|Harmon Textbook Ch. 10-12||
-|T 11/10| 25\. [Species selection - SSE models](lectures/slides/SSEModels.pptx); [pdf](lectures/slides/SSEModels.pdf) | [Maddison et al. 2007](papers/Maddison2007.pdf)||
-|Th 11/15| 26\. [Rethinking comparative methods](lectures/slides/DataDrivenvsHypothesisTesting.pptx);[pdf](lectures/slides/DataDrivenvsHypothesisTesting.pdf)|[Uyeda et al. 2018](papers/Uyedaetal2018.pdf) ||
+|Th 11/1| 20\. [Rethinking comparative methods](lectures/slides/DataDrivenvsHypothesisTesting.pptx);[pdf](lectures/slides/DataDrivenvsHypothesisTesting.pdf)|[Uyeda et al. 2018](papers/Uyedaetal2018.pdf) ||
+|T 11/3| 23\. Hidden State Models |Beaulieu et al. 2013||
+|Th 11/8| 24\. EXAM II|||
+|T 11/10| 25\. [Diversification models - birth and death on trees](lectures/slides/Diversification&SSE.pptx); [pdf](lectures/slides/Diversification&SSE.pdf)|Harmon Textbook Ch. 10-12||
+|Th 11/15| 26\. [Species selection - SSE models](lectures/slides/SSEModels.pptx); [pdf](lectures/slides/SSEModels.pdf) | [Maddison et al. 2007](papers/Maddison2007.pdf)||
 |T 11/17| 27\. [Punctuated Equilibrium](lectures/slides/Punctuations2020.pptx); [pdf](lectures/slides/Punctuations2020.pdf) |[Eldredge \& Gould 1972](papers/Eldredge&Gould1972.pdf); [Charlesworth et al. 1982](papers/Charlesworth1982.pdf)||
 |Th 11/22| Thanksgiving Holiday|||
 |T 11/24| Thanksgiving Holiday|||
-|Th 11/29| 28\.[Connecting Micro \& Macroevolution](lectures/slides/StasisMicroMacro.pptx);[pdf](lectures/slides/StasisMicroMacro.pdf)|[Hansen and Houle 2004](papers/HansenHoule2004.pdf)||
+|Th 11/29| 28\.[Grand Challenges/Connecting Micro \& Macroevolution](lectures/slides/StasisMicroMacro.pptx);[pdf](lectures/slides/StasisMicroMacro.pdf)|[Hansen and Houle 2004](papers/HansenHoule2004.pdf)||
 |M 12/1|29. Presentations|||
 |Th 12/6|30. Presentations|||
