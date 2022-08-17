@@ -9,7 +9,7 @@ TR 11:00 - 12:15 PM
 
 **All lectures will conducted on Zoom**
 
-**Course location:** https://virginiatech.zoom.us/j/93056390213
+**Course location:** Goodwin Hall 241
 
 **Class website:** Canvas and https://github.com/uyedaj/macrophy_course
 
