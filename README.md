@@ -7,7 +7,7 @@ TR 11:00 - 12:15 PM
 **Professor:** Prof. Josef Uyeda (Yo-sef Weh-duh)
 **Email:** juyeda@vt.edu
 
-**All lectures will conducted on Zoom**
+**All lectures will conducted in person**
 
 **Course location:** Goodwin Hall 241
 
