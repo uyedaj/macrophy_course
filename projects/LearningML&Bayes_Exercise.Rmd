@@ -229,8 +229,8 @@ Why are you not recommended to get a mammogram until you're under 40?
 Research on breast cancer has determined the following statistics (I don't think these are actually accurate, but they convey the idea):
 
 1% of women have breast cancer
-80% of mammograms detect breast cancer when breast cancer is present
-9.6% of mammograms detect breast cancer when breast cancer IS ABSENT
+99% of mammograms detect breast cancer when breast cancer is present
+2% of mammograms detect breast cancer when breast cancer IS ABSENT
 
 Imagine you received a positive mammogram test stating that breast cancer is detected. How worried should you be?
 
