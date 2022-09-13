@@ -8,11 +8,10 @@ output:
 We will be using the software program called PAUP\* (Phylogenetic Analysis Under Parsimony \*and other methods) written by David Swofford. PAUP\* is an old program that has been around for decades now (v3 in 1989). As its name suggests the original version only performed parsimony. For many years, PAUP* v4.0b10 was commercial software distributed by Sinauer Associates. However, recently the license has expired and PAUP* will now be released as an open-source software with “test” versions available now. While a variety of alternative likelihood and parsimony software programs exist, few have as reliable a likelihood estimation as PAUP\*. There are GUIs available for some versions, but we will be using a command line version.
 
 ## Logging into the server
-We are using a browser that access my lab's computer again. You can either use the Terminal in Rstudio server, or you can directly SSH into the machie via command line. Note that more features will be available if you 1) install PAUP\* on your own machine (https://paup.phylosolutions.com/) 2) you SSH into my machine through a command line using an SSH client (native in Mac & Linux, https://www.putty.org/ or equivalent in Windows). If you would prefer this option or already know something about SSH, you can do so from the terminal using the same IP address we use for Rstudio server (this will only work if you are the VT network or VPN).
+If you are unable to install PAUP\* on your own machine, you will be given access to my lab's computer again. You can either use the Terminal in Rstudio server, or you can directly SSH into the machie via command line. Note that more features will be available if you 1) install PAUP\* on your own machine (https://paup.phylosolutions.com/) 2) you SSH into my machine through a command line using an SSH client (native in Mac & Linux, https://www.putty.org/ or equivalent in Windows). If you would prefer this option or already know something about SSH, you can do so from the terminal using the same IP address we use for Rstudio server (this will only work if you are the VT network or VPN).
 
 ## Get the data for the lab
-
-We can update our existing git repository to the most recent version by navigating into the macrophy_course directory:
+We can update our existing git repository to the most recent version, or extracting a zip version of the macrophy_course github page (https://github.com/uyedaj/macrophy_course/). If you have git installed, you can update to the most recent version of the repository by navigating into the macrophy_course directory:
 
 ```
 cd macrophy_course
@@ -43,13 +42,16 @@ Now let's look at the data, which is saved in *NEXUS* format.
 more bears_JC69.nex
 ```
 
-To launch paup, simply type the name of the program. Because I installed the software in the system path, 
-it can be launched from anywhere. Otherwise, you'd have to be in the directory with the program. 
+To launch paup, make sure the program executable is in your data directory. Because I installed the software in the system 
+path on the server, you can run it from anywhere if you are using my lab computer. Otherwise, copy and paste your executable 
+into the macrophy_course/projects/PAUP_lab directory. I suggest renaming the program as well to something shorter. Whatever
+you name it, type that in in the code below. Some of you may need to preced the name of the program with a "./paup4.0" for example,
+to get it to run. 
 
 ```
 paup4.0
 ```
-You should be greated by the following screen: 
+You should be greeted by the following screen: 
 
 ```
 P A U P *
@@ -130,7 +132,7 @@ We are going to now load data simulated on this phylogeny, again under a JC69 mo
 execute bears_LBA500.nex
 ```
 
-Now perform a parsimony anaylsis. Switch your criterion back to parsimony and conduct branch and bound searches. How has the resulting tree changed? How does it compare to the true tree? 
+Now perform a parsimony analysis. Switch your criterion back to parsimony and conduct branch and bound searches. How has the resulting tree changed? How does it compare to the true tree? 
 
 Let's now determine how confident we are in the tree. We're going to use a method called the boostrap, which will be explained in class. 
 
@@ -138,11 +140,12 @@ Let's now determine how confident we are in the tree. We're going to use a metho
 bootstrap nreps=100
 ```
 
-Sequentially load all the files *bears_LBAXXX.nex* which have sequences of different length and perform a bootstrap analysis. What happens as you increase the length of the sequences? 
+Sequentially load all the files *bears_LBAXXX.nex* which have sequences of different length and perform a bootstrap analysis. What happens as you increase the length of the sequences? When you're done, reload the *bears_LBA1000.nex* and run *bandb* again.
 
 Now analyze these sequences using likelihood. Notice that the bootstrap is going to take WAAAY too long for us if we do the larger sequences. So instead of using the better search algorithms, let's make it simpler. These are quick and dirty ways of analyzing data. If you wanted publication quality, you may want to search more exhaustively. 
 
 ```
+execute bears_LBA1000.nex
 bootstrap nreps=100 search=heuristic/swap=NNI nreps=1
 ```
 
@@ -156,7 +159,7 @@ We are now going to actually analyze a real dataset. We have a real sequence dat
 execute bears_irbp.nex
 execute modelblockPAUPb10.nex
 ```
-It will fit a large set of models which can then be ranked. However, the output is a bit dense to parse, and the software used to summarize them is a bit hard to get these days. Folks usually select models using stand alone software like *jModeltest2*. We're going to use *modeltest-ng*, which can be run from command line. Open up another terminal tab by clicking ont he down arrow by `Terminal` and selecting `New Terminal`. Navigate to the PAUP_lab directory again, and run the following command:
+It will fit a large set of models which can then be ranked. However, the output is a bit dense to parse, and the software used to summarize them is a bit hard to get these days. Folks usually select models using stand alone software like *jModeltest2*. I'm going to demonstrate with *modeltest-ng*, which will only run on Linux and OSX. You can install this program yourself here: https://anaconda.org/bioconda/modeltest-ng and it is run from command line. For the purposes of this lab, I will do this as a demonstration. I will open up another terminal tab by clicking on the down arrow by `Terminal` and selecting `New Terminal`. Navigate to the PAUP_lab directory again, and run the following command:
 ```
 modeltest-ng -i bears_irbp.phy
 ```
