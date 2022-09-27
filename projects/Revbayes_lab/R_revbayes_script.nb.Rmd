@@ -9,6 +9,7 @@ Let's load up some libraries we will need later. If you have an error, install t
 ```{r}
 library(coda)
 library(ape)
+library(phangorn)
 ```
 
 
