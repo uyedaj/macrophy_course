@@ -1,0 +1,198 @@
+### "Teaching Maximum Likelihood & Bayesian Inference"
+# Let's try to understand how we can estimate statistical parameters using Maximum Likelihood and Bayesian Inference. 
+
+# Now let's turn to a linear regression. Let's first generate data that follows a standard linear regression model, which should be familiar to you as $y = m*x + b + \epsilon$. _x_ can take on any set of values, while _m_ and _b_ are regression parameters. $\epsilon$ is a random error term that we will model as a normal distribution with mean $\mu = 0$ and $\sigma^2$, which will be estimated from the data. Let's begin by simulating the data.
+# Simulate regression data and plot it
+
+
+
+#Now, we could estimate this regression using R's built in tools, but we want to learn how to do it ourselves using Maximum Likelihood. What is a likelihood? It is simply the probability of observing the data given certain parameters $P(data | parameters)$. Our goal for maximizing the likelihood is to simply search for the parameters that make $P(data | parameters)$ as big as it can possibly be. How do we calculate that probability? Let's start by assuming that $m = 0$, $b = 0$ and $sig2 = 1$, i.e. that the data are simple draws from a normal distribution. Then we could use the R function _dnorm_, which provides the _probability density_ of a particular data point. 
+
+?dnorm ##Get help
+## Calculate the probability of observing y for sigma^2 = 1
+hist(y)
+L <- ?
+L 
+
+# Notice that many numbers are VERY SMALL. Computationally, it works better if we take the log of the probability density
+
+logLs <- ?
+
+#Now we take the sum of this number to get the log-Likelihood of the data given m=0, b=0 and sigma^2 = 1. 
+
+logL <- ?
+logL
+
+#However, we know these are not the parameters we used to generate these data. What's the log likelihood under those parameters? Well we simply need to define for each data point, it's expectation and variance. In other words, we need to calculate the residuals from the model, then plug them into dnorm. 
+
+expected_values <- ?
+residuals <- ?
+logL <- ?
+logL
+
+#Notice that while the log-likelihood is still small, it is substantially larger than it was previously. But is it the maximum? Let's make a function of the likelihood to streamline calculating the likelihood for a set of parameters. 
+
+logL_fx <- function(parameters, x, y){
+  m <- parameters[1]
+  b <- parameters[2]
+  sig2 <- parameters[3]
+  ?
+  ?
+  ?
+  return(logL)
+}
+
+#Verify that it returns the same value as before:
+
+logL_fx(c(m, b, sig2), x, y)
+
+#Now we can use computational tools to _optimize_ the best likelihood. These are "hill-climbing" algorithms. 
+starting_values <- c(0, 0, 1) #Our initial guesses for the parameters
+optim(par=starting_values, fn=logL_fx, control=list(fnscale=-1), x=x, y=y)
+
+#Compare to R's built-in regression estimation:
+
+lm1 <- lm(y~x)
+summary(lm1)
+sqrt(sig2)
+
+
+#Likely, the biggest difference will be in the residual standard error. This is because Maximum Likelihood estimators are biased estimators, whereas the algorithm used in R is an unbiased estimator of the variance. Nevertheless, this bias will get smaller and smaller as more data are added. 
+
+#Congratulations! That's all there is to ML estimation. In phylogenetics, we do the same thing, except instead of _m_, _b_ and $\sigma^2$, we are estimating $\tau$ (the topology of the tree), $\nu$ (a vector of branch lengths), and $Q$ (a matrix of transition probabilities) and our data are gene sequences or phenotypes. 
+
+##What about Bayesian analyses?##
+
+#Suppose you're an alien visiting earth for the first time. Not knowing any borders or habits of the people who live there, you randomly chose a particular human to suck up and analyze. You find that this particular human is wearing what they call a cowboy hat. You also learn of a people known as "Texans" that often wear cowboy hats. You hypothesize that given the observed data (human X is wearing a cowboy hat) that human X is a Texan. So long as $P(Cowboy hat | Texan)$ > $P(Cowboy hat | any other state)$, then the Maximum Likelihood conclusion that you should make is that the human you obtained is in fact, a Texan (even if Wyomingites and Montanans are only slightly less likely to wear cowboy hats). Suppose that the rate of cowboy hat wearing in Texas is 10%. 
+#But this is odd. What we really want to know is what is the probability that our human is in fact, a Texan. Instead, ML has given us "What are the most likely people to wear cowboy hats?". Mathematically, the rules of conditional probability relate these two quantities for us:
+#$P(Cowboy hat | Texan) P(Texan) = P(Texan | Cowboy hat) P(Cowboy hat)$
+#So we figured out how to maximize $P(Cowboy hat | Texan)$, but we really want $P(Texan | Cowboy hat)$. We can do some algebra to figure out what we need. It turns out it is:
+#$P(Texan | Cowboy hat) = \frac{P(Texan) P(Cowboy hat |Texan)}{P(Cowboy hat)}$
+
+#This is Bayes Formula. 
+
+#Let's go through each of these terms. $P(Texan)$ is the probability that a random human from the world is Texan. We know this value, it is approximately 28.3 million/7.6 billion or ~0.003724. What's the Probability of someone wearing a cowboy hat? That's a harder number to estimate. But we could go around estimating it for each state/country, e.g. $P(cowboy hat|Virginian)$ and $P(cowboy hat | Norwegian)$ wouldn't be too big, while $P(cowboy hat | Montanan)$, $P(cowboy hat|Argentinian)$ and $P(cowboy hat|Wyomingite)$ might be a bit bigger. Of course for each one, we would have to also weight them by their population. 
+
+#In the end, we'd get this: 
+#$P(Texan | Cowboy hat) = \frac{0.003724 x 0.1}{P(cowboy hat | Montanan)*P(Montanan) + P(cowboy hat | Virginian)*P(Virginian) + P(cowboy hat|Argentinian)*P(Argentinian)...P(cowboy hat|Zimbabwean)*P(Zimbabwean)}$
+
+#Notice that the denominator is a daunting quantity to calculate. Let's instead limit our world to a few regions. The alien knows that the human was sucked up from either Texas, Montana, California, or Virginia with populations of 28.3 million, 1.1 million, 39.5 million and 8.5 million respectively. Furthermore, let's assume they have cowboy hat wearing at rates of 10%, 9%, 1% and 0.01%. Under ML, it's clear that Texans are most likely to wear cowboy hats. However, let's plug it into Bayes Formula. 
+
+pop <- c("Texas"=28.3, "Montana"=1.1, "California"=39.5, "Virginia"=8.5)
+
+## Calculate the prior probabilities of being from each state in the variable pState
+
+## Now calculate the Likelihoods for each state. 
+
+liks <- c("Texas"=10, "Montana"=9, "California"=1, "Virginia"=0.01)/100
+
+#Followed by the denominator of Bayes Formula, or the marginal probability of wearing a cowboy hat.
+denom <- ?
+
+#Put it all together in Bayes Formula:
+
+post <- ?
+post
+
+#This is the _posterior probability_ that someone is a Texan if you observe they are wearing a cowboy hat. We can see that our certainty of them being Texan went up from our prior probability:
+#Prior probability 
+pState["Texas"]
+## Increase in posterior over prior
+post/pState["Texas"]
+
+#Furthermore, our human being is still the most probably from Texas. However, suppose that ALL Montanans wear Cowboy hats. What is our posterior probability of our person being a Cowboy then? Under Maximum Likelihood, we would definitely conclude that our human was a Montanan. However, under Bayesian Inference we would STILL conclude that they were most likely a Texan
+
+liks["Montana"] <- 1
+# Calculate the new posterior value 
+post
+
+#Why? Well because we knew beforehand that they were very unlikely to be a Montanan! Compare the prior and posterior of being from each state:
+
+posts <- ?
+results <- data.frame("prior"=round(pState,2), "likelihood"=round(liks,2), "posterior"=round(posts,2))
+results
+
+#The posterior probabilities went up a lot for us having a Montanan! 25x greater. However, even if every Montanan wears a cowboy hat, we know there are so few of them that it is more likely they come from another, more populous state. 
+
+#This is the heart of Bayesian Analyses, with the main difference being that we include a 
+#prior. Sometimes those priors are well-justified. For example, our priors here are based on knowledge of human population sizes. However, if you didn't have that available, the results would end up looking almost identical to Maximum Likelihood analysis:
+
+pState_uninformative <- ?
+denom2 <- ?
+posts2 <- ?
+results_uninformative <- data.frame("prior"=pState_uninformative, "likelihood"=round(liks,2), "posterior"=round(posts2,2))
+results_uninformative
+
+#So Bayesian analysis does a better job of answering what questions we probably want answers to, but can be harder to apply for two reasons: 1) The prior may be hard to justify and 2) the denominator of Bayes' formula is hard to figure out! For (1), we can either try to justify our prior using data, or we can see whether our conclusions are _prior sensitive_ by trying a range of plausible prior values. If our results are unaffected by our choice of prior, then we don't have to worry! For (2), we often make use a computational trick called Markov Chain Monte Carlo. 
+
+#A Simple MCMC
+#We're going to travel randomly between all 4 states. Let's start in Texas. 
+gens <- ? # Pick how many times you want to try moving between states
+states <- names(pState)
+state <- rep(NA, gens)
+state[1] <- "Texas"
+lik <- rep(NA, gens)
+prior <- rep(NA, gens)
+lik[1] <- liks[state[1]]
+prior[1] <- pState[state[1]]
+
+for(i in 2:gens){
+  proposed_state <- sample(states, 1) #Propose a new state at random
+  num_post_state_old <- prior[i-1]*lik[i-1] # get the posterior numerator for the old state
+  num_post_state_new <- pState[proposed_state]*liks[proposed_state] # get the posterior numerator for the new state
+  if(num_post_state_new > num_post_state_old){ #If the new state has a higher posterior probability, accept it automatically
+    state[i] <- proposed_state
+    lik[i] <- liks[proposed_state]
+    prior[i] <- pState[proposed_state]
+  } else{ #If it's not higher, accept it anyway with probability proportional to the ratio of the probabilities, otherwise stay in the old state
+    u <- runif(1)
+    a <- num_post_state_new/num_post_state_old
+    if(u < a){
+      state[i] <- proposed_state
+      lik[i] <- liks[proposed_state]
+      prior[i] <- pState[proposed_state]
+    } else {
+      state[i] <- state[i-1]
+      lik[i] <- lik[i-1]
+      prior[i] <- prior[i-1]
+    }
+  }
+}
+
+
+MCMCestimates <- table(factor(state,states))/gens
+
+
+data.frame(results, "mcmcEst"=round(as.vector(MCMCestimates),2))
+
+#In phylogenetics, we're just doing the same exact thing as we've done above. Instead of P(state | cowboy hat) we have P(tree | sequence/phenotypic data). Tree space is a lot bigger than 4 states, it's enormous, and the likelihoods are a bit trickier to calculate, but doable. What priors do we use in a Bayesian analysis? That's a tricky question and the subject of much debate. Ideally, we'd use informative priors. In practice, people usually use software defaults. This is bad. Don't do this. Learn about what priors mean. And when you review papers, make people 1) specify what priors they used for every parameter and 2) make people justify their use of those priors. 
+
+##Breast Cancer Testing##
+#Why are you not recommended to get a mammogram until you're under 40? 
+
+#Research on breast cancer has determined the following statistics (I don't think these are actually accurate, but they convey the idea):
+
+#1% of women have breast cancer
+#99% of mammograms detect breast cancer when breast cancer is present
+#2% of mammograms detect breast cancer when breast cancer IS ABSENT
+
+#Imagine you received a positive mammogram test stating that breast cancer is detected. How worried should you be?
+
+#Make a statement using conditional probability that represents the probability you want to determine. 
+
+#Then use Bayes' Formula to determine that conditional probability. Compare to the answer from Maximum Likelihood. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
