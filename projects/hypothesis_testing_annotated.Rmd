@@ -1,0 +1,160 @@
+
+---
+title: "Hypothesis Testing"
+author: "Josef Uyeda"
+date: "2024-09-17"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+## Introduction
+In this tutorial, we will explore different methods to test hypotheses using both linear regression and likelihood-based methods. We will begin with a basic linear regression example and proceed to test more specific hypotheses, comparing models using both frequentist and information-theoretic approaches. Additionally, we will introduce phylogenetic comparative methods.
+
+### Linear Regression Hypothesis Testing
+
+Let's start by simulating some data and fitting a simple linear regression model. The hypothesis we'll be testing here is whether the slope of the relationship between `x` and `y` is significantly different from zero.
+
+```{r}
+set.seed(1)
+n <- 50 # Number of data points
+m <- 0.63 # Slope of the regression
+b <- 3 # Intercept
+sig2 <- 3 # Variance of the normal error
+x <- runif(n, -10, 10) # Simulate predictor variable
+y <- m*x + b + rnorm(n, 0, sqrt(sig2)) # Simulate response variable with noise
+plot(x, y, main="Simulated Data") # Plot the simulated data
+```
+
+### Estimating the Slope and Testing the Null Hypothesis
+
+We can use R’s built-in linear regression model (`lm`) to estimate the slope and intercept. The null hypothesis here is that the slope is equal to 0 (no relationship between `x` and `y`).
+
+```{r}
+lm1 <- lm(y ~ x) # Fit linear regression
+summary(lm1) # Summarize the model fit
+```
+
+The output provides a p-value for the slope coefficient. If this p-value is below a certain threshold (commonly 0.05), we reject the null hypothesis that the slope is 0, concluding that there is a significant relationship between `x` and `y`.
+
+### Testing Alternative Hypotheses
+
+In some cases, we may want to test if the slope is significantly different from specific values, rather than just testing if it’s different from zero. For example, in the metabolic theory of ecology, researchers debate whether the relationship between body size and metabolic rate follows a slope of 2/3 (surface area to volume ratio) or 3/4 (fractal distribution networks). We can formulate hypotheses to test these specific slopes.
+
+We will use maximum likelihood estimation (MLE) to test whether our slope differs from these specific values.
+
+### Defining the Log-Likelihood Functions
+
+The following functions define the log-likelihood of the data given the model parameters for the full model and for the reduced models with fixed slopes (0.67 and 0.75).
+
+```{r}
+logL_fx_full <- function(parameters, x, y){
+  m <- parameters[1] # Slope
+  b <- parameters[2] # Intercept
+  sig2 <- parameters[3] # Variance
+  expected_values <- m * x + b
+  residuals <- y - expected_values
+  logL <- sum(dnorm(residuals, 0, sqrt(sig2), log=TRUE)) # Log-likelihood
+  return(logL)
+}
+
+logL_fx_0.67 <- function(parameters, x, y){
+  m <- 0.67 # Fixed slope
+  b <- parameters[1] # Intercept
+  sig2 <- parameters[2] # Variance
+  expected_values <- m * x + b
+  residuals <- y - expected_values
+  logL <- sum(dnorm(residuals, 0, sqrt(sig2), log=TRUE)) # Log-likelihood
+  return(logL)
+}
+
+logL_fx_0.75 <- function(parameters, x, y){
+  m <- 0.75 # Fixed slope
+  b <- parameters[1] # Intercept
+  sig2 <- parameters[2] # Variance
+  expected_values <- m * x + b
+  residuals <- y - expected_values
+  logL <- sum(dnorm(residuals, 0, sqrt(sig2), log=TRUE)) # Log-likelihood
+  return(logL)
+}
+```
+
+### Maximum Likelihood Estimation
+
+We can now use the `optim` function to find the maximum likelihood estimates (MLEs) for each model (full and reduced).
+
+```{r}
+starting_values_full <- c(0, 0, 1) # Initial parameter guesses (slope, intercept, variance)
+starting_values_reduced <- c(0, 1) # Initial guesses for the reduced models (intercept, variance)
+fit_full <- optim(par=starting_values_full, fn=logL_fx_full, control=list(fnscale=-1), x=x, y=y)
+fit_0.67 <- optim(par=starting_values_reduced, fn=logL_fx_0.67, control=list(fnscale=-1), x=x, y=y)
+fit_0.75 <- optim(par=starting_values_reduced, fn=logL_fx_0.75, control=list(fnscale=-1), x=x, y=y)
+```
+
+### Comparing Models
+
+Next, we compare the models using different criteria, including likelihood ratio tests, Akaike Information Criterion (AIC), and Bayesian Information Criterion (BIC).
+
+```{r}
+## Likelihood Ratio Test (LRT)
+LR_0.67 <- -2*(fit_0.67$value - fit_full$value) # LRT for slope = 0.67
+LR_0.75 <- -2*(fit_0.75$value - fit_full$value) # LRT for slope = 0.75
+p_0.67 <- 1 - pchisq(LR_0.67, df=1) # p-value for slope = 0.67
+p_0.75 <- 1 - pchisq(LR_0.75, df=1) # p-value for slope = 0.75
+c("LRT_H0=0.67" = p_0.67, "LRT_H0=0.75" = p_0.75) # Output p-values
+
+## AIC (Akaike Information Criterion)
+AIC_full <- 2*3 - 2*fit_full$value # AIC for full model
+AIC_0.67 <- 2*2 - 2*fit_0.67$value # AIC for reduced model (slope = 0.67)
+AIC_0.75 <- 2*2 - 2*fit_0.75$value # AIC for reduced model (slope = 0.75)
+c("AIC_full" = AIC_full, "AIC_0.67" = AIC_0.67, "AIC_0.75" = AIC_0.75)
+
+## BIC (Bayesian Information Criterion)
+BIC_full <- 3*log(length(y)) - 2*fit_full$value # BIC for full model
+BIC_0.67 <- 2*log(length(y)) - 2*fit_0.67$value # BIC for reduced model (slope = 0.67)
+BIC_0.75 <- 2*log(length(y)) - 2*fit_0.75$value # BIC for reduced model (slope = 0.75)
+c("BIC_full" = BIC_full, "BIC_0.67" = BIC_0.67, "BIC_0.75" = BIC_0.75)
+```
+
+### Adding Phylogenetics
+
+To wrap up, let's include a phylogenetic example using the `phytools` package. This will allow us to apply hypothesis testing to trait evolution in a phylogenetic context.
+
+```{r}
+# Install phytools package (if not already installed)
+install.packages("phytools")
+library(phytools)
+
+# Load example data
+data(bonyfish.data) # Trait data
+data(bonyfish.tree) # Phylogenetic tree
+bonyfish.data
+bonyfish.tree
+```
+
+### Plotting the Phylogenetic Tree
+
+```{r}
+# Plot the phylogenetic tree and trait data
+plot(bonyfish.tree, cex=0.35)
+plotTree.datamatrix(bonyfish.tree, bonyfish.data, fsize=0.35)
+```
+
+### Phylogenetic Comparative Methods: Pagel's Test
+
+We can test for a relationship between two traits using Pagel's test of correlated evolution. Here, we test for a correlation between spawning mode and paternal care.
+
+```{r}
+spawning_mode <- setNames(bonyfish.data$spawning_mode, rownames(bonyfish.data))
+paternal_care <- setNames(bonyfish.data$paternal_care, rownames(bonyfish.data))
+bonyfish.pagel <- fitPagel(bonyfish.tree, paternal_care, spawning_mode)
+```
+
+### Testing the Difference Between Models
+
+Finally, we test whether the model assuming correlated evolution is significantly better than the model assuming no correlation.
+
+```{r}
+anova(bonyfish.pagel) # Test for a difference between models
+plot(bonyfish.pagel, lwd.by.rate=TRUE) # Visualize the model fit
+```
