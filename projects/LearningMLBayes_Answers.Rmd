@@ -151,7 +151,7 @@ pState["Texas"]
 post/pState["Texas"]
 ```
 
-Furthermore, our human being is still the most probably from Texas. However, suppose that ALL Montanans wear Cowboy hats. What is our posterior probability of our person being a Cowboy then? Under Maximum Likelihood, we would definitely conclude that our human was a Montanan. However, under Bayesian Inference we would STILL conclude that they were most likely a Texan
+Furthermore, our human being is still most probably from Texas. However, suppose that ALL Montanans wear Cowboy hats. What is our posterior probability of our person being a Cowboy then? Under Maximum Likelihood, we would definitely conclude that our human was a Montanan. However, under Bayesian Inference we would STILL conclude that they were most likely a Texan
 
 ```{r}
 liks["Montana"] <- 1
@@ -233,7 +233,7 @@ data.frame(results, "mcmcEst"=round(as.vector(MCMCestimates),2))
 ```
 
 
-In phylogenetics, we're just doing the same exact thing as we've done above. Instead of P(state | cowboy hat) we have P(tree | sequence/phenotypic data). Tree space is a lot bigger than 4 states, it's enormous, and the likelihoods are a bit trickier to calculate, but doable. What priors do we use in a Bayesian analysis? That's a tricky question and the subject of much debate. Ideally, we'd use informative priors. In practice, people usually use software defaults. This is bad. Don't do this. Learn about what priors mean. And when you review papers, make people 1) specify what priors they used for every parameter and 2) make people justify their use of those priors. 
+In phylogenetics, we're just doing the same exact thing as we've done above. Instead of P(state | cowboy hat) we have P(tree | sequence/phenotypic data). Tree space is a lot bigger than 4 states, it's enormous, and the likelihoods are a bit trickier to calculate, but doable. What priors do we use in a Bayesian analysis? That's a tricky question and the subject of much debate. Ideally, we'd use informative priors. In practice, people usually use software defaults. This is bad. Don't do this, except everyone does it all the time, including me. Learn about what priors mean. And when you review papers, make people 1) specify what priors they used for every parameter and 2) make people justify their use of those priors. 
 
 ##Breast Cancer Testing##
 Why are you not recommended to get a mammogram until you're under 40? 
