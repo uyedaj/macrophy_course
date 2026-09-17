@@ -1,0 +1,266 @@
+---
+title: "Simulating and Estimating Sequence Data"
+author: "Josef Uyeda"
+date: "2026-09-16"
+output: html_document
+---
+
+## Installing IQ-TREE
+
+In this lab, we will simulate sequence evolution along a known phylogeny and
+then try to re-estimate that phylogeny from the simulated data. We will also
+estimate a small phylogeny from empirical data.
+
+Before we start, install IQ-TREE:
+
+- [Download IQ-TREE](https://iqtree.github.io/)
+
+- [Installation instructions and basic usage](https://iqtree.github.io/doc/Quickstart#installation)
+
+IQ-TREE is a command-line program. After you download and extract it, you cannot
+simply double-click the program; you must run it from a terminal.
+
+It is worth installing IQ-TREE and becoming comfortable with command-line
+programs. However, if you cannot get the local installation to work, or do not
+want to install it for now, use the
+[IQ-TREE web server](https://www.hiv.lanl.gov/content/sequence/IQTREE/iqtree.html).
+
+## Phylogeny simulation and estimation
+
+We will need two R packages. If you successfully installed `phytools`, you
+already have both of them, so we only need to load them.
+
+```{r}
+# install.packages("phangorn")
+library(ape)
+library(phangorn)
+```
+
+Download the phylogeny lab directory from the course GitHub repository or the
+Canvas site. Make sure you are working in the phylogeny lab directory and that
+the file `bears.tre` is in your working directory.
+
+```{r}
+getwd()
+list.files()
+```
+
+Now read the bear phylogeny. We will treat this as our "true tree."
+
+```{r}
+tree <- read.nexus("./bears.tre")
+plot(tree)
+```
+
+The tree is stored as a list-like object with four main components:
+
+- `$edge`: the topology of the tree, represented as a two-column matrix of
+  ancestral and descendant nodes
+- `$edge.length`: the branch lengths corresponding to the rows of the edge matrix
+- `$Nnode`: the number of internal nodes
+- `$tip.label`: the labels of the tips (nodes 1 through 10 in this case)
+
+Inspect `tree$edge.length`. What units do you think the branch lengths use?
+
+```{r}
+tree
+str(tree)
+tree$edge.length
+```
+
+Next, we will build a model of sequence evolution and simulate data along this
+phylogeny. We want branch lengths measured in expected substitutions per site,
+so we divide each branch length by 100. This corresponds to an expected rate of
+one substitution per site every 100 million years, assuming the original branch
+lengths are measured in millions of years. We also add 0.01 to every branch so
+that none are zero or extremely short.
+
+```{r}
+tree_sl <- tree
+tree_sl$edge.length <- tree$edge.length/200 + 0.01
+```
+
+Now build a rate matrix, $Q$. How many free parameters does this model have?
+What does it assume about the evolutionary process?
+
+```{r}
+Q <- matrix(0, nrow=4, ncol=4) # Make an empty matrix.
+rownames(Q) <- colnames(Q) <- c("a", "c", "g", "t") # Label rows and columns.
+Q[lower.tri(Q)] <- Q[upper.tri(Q)] <- c(0.2, 0.6, 0.2, 0.2, 0.6, 0.2) # Substitution rates.
+diag(Q) <- -1*rowSums(Q) # Set each diagonal to the negative row sum.
+Q
+
+pi <- c("a"=0.25, "c"=0.25, "g"=0.25, "t"=0.25)
+pi
+```
+
+The off-diagonal elements of $Q$ describe instantaneous substitution rates.
+The diagonal elements are negative because they describe the total rate of
+leaving each state. The vector `pi` gives the equilibrium base frequencies.
+
+There are many programs for simulating sequences, including stand-alone tools
+with additional features such as AliSim. The `phangorn` package provides a
+convenient function that works from within R.
+
+```{r}
+data <- phangorn::simSeq(tree_sl, l=2000, Q=Q, bf=pi, type="DNA")
+image(data) # A rough visualization of the DNA sequence alignment.
+# More polished options exist in packages such as ggmsa, but are not needed here.
+```
+
+Before continuing, inspect the alignment visualization. Which sites appear
+constant, and which appear variable? What information in the alignment could
+help us recover the tree?
+
+We can create a distance matrix and use it to build a neighbor-joining tree.
+
+```{r}
+D <- dist.dna(as.DNAbin(data))
+njtree <- nj(D)
+njtree <- root(njtree, "Canis_lupus")
+plot(njtree)
+```
+
+Compare the neighbor-joining tree with the true tree.
+
+Next, export the simulated alignment so that we can estimate a maximum-likelihood
+phylogeny with IQ-TREE.
+
+```{r}
+write.phyDat(data, file="./sim1_bears.fasta", format="fasta")
+```
+
+Estimate the phylogeny using either the IQ-TREE web server or the downloaded
+version of IQ-TREE. We want to use model selection and conduct 1,000 ultrafast
+bootstrap replicates.
+
+I will demonstrate the command-line program in class. For long-term use, you
+should move the IQ-TREE executable into your system's `PATH` so that you can run
+it from any directory. Package managers such as Conda, Homebrew, and `apt`
+usually do this automatically.
+
+If you downloaded and extracted IQ-TREE manually, the executable will not
+automatically be added to your `PATH`. For now, the easiest way to minimize the
+amount of typing and searching is to copy the entire contents of IQ-TREE's
+`bin` directory into your `phylogenyLab` folder.
+
+Run the following line, replacing `iqtree3` with the name of your IQ-TREE
+executable. The `-s` option specifies the alignment file, and `-m MFP` requests
+model selection followed by phylogeny estimation.
+
+```{bash}
+./iqtree3 -s ./sim1_bears.fasta -m MFP -bb 1000 -redo
+```
+
+How closely does the maximum-likelihood tree match the true tree? When they differ, is the disagreement associated with low bootstrap support? Did it estimate parameters of the evolutionary model accurately? Did it pick the right model? Under which information criteria?
+
+The following code extracts fitted parameters from the IQ-TREE report. It is not elegant, and it depends on the formatting of that report. You could instead transcribe the values into an R object, but extracting them keeps the analysis reproducible.
+
+```{r}
+extractSubModelLog <- function(file){
+  params <- list()
+  log <- readLines(file)
+  Qstart <- (grep("Rate matrix Q:", log)+2)
+  Qend <- Qstart +3
+  Qest <- do.call(rbind, lapply(strsplit(log[Qstart:Qend], split='[ \t]+'), function(x) x[3:6]))
+  class(Qest) <- "numeric"
+  diag(Qest) <- 0
+  diag(Qest) <- -1*rowSums(Qest)
+  colnames(Qest) <- rownames(Qest) <- c("a", "c", "g" ,"t")
+  params$Q <- Qest
+
+  piStart <- grep("State frequencies", log)+2; piEnd <- piStart+3
+  stateFreq <- as.numeric(sapply(strsplit(log[piStart:piEnd], "= "), function(x) x[2]))
+  stateFreq <- stateFreq/sum(stateFreq)
+  if(is.na(stateFreq[1])==TRUE){
+    params$pi <- setNames(rep(0.25, 4), c("a", "c", "g", "t"))
+  } else {
+    params$pi <- setNames(stateFreq, c("a", "c", "g", "t"))
+  }
+  
+
+  alphalog <- grep("Gamma shape alpha:", log)
+  if(length(alphalog)==0){
+    params$alpha <- NULL
+  } else{
+    alpha <- as.numeric(strsplit(log[alphalog], ": ", fixed=TRUE)[[1]][2])
+    params$alpha <- alpha
+  }
+  return(params)
+}
+```
+
+Now use it:
+```{r}
+extractSubModelLog("./sim1_bears.fasta.iqtree")
+```
+
+## A real dataset
+
+Now repeat the analysis with the `bears_irbp.nex` file.
+
+```{bash}
+./iqtree3 -s ./bears_irbp.nex -m MFP -bb 1000
+```
+
+
+```{r}
+iqtree_est <-read.tree("./bears_irbp.nex.treefile")
+plot(iqtree_est, show.node.label=TRUE, cex=0.5)
+```
+
+Which relationships have strong support? Which remain uncertain? Remember that
+a high support value measures consistency under resampling; it does not prove
+that the model is correct.
+
+
+
+```{r}
+params <- extractSubModelLog("./bears_irbp.nex.iqtree")
+params
+```
+
+Now simulate 100 datasets under the fitted model. We could compare the simulated
+and empirical datasets in many ways. Here, we will use the built-in summary
+statistics from `phangorn::glance()`. These statistics are simple and incomplete,
+but they are useful for demonstrating a simulation-based model check.
+
+```{r}
+summaries <- list()
+for(i in 1:100){
+  rates <- discrete.gamma(params$alpha, 4)
+  data1 <- phangorn::simSeq(iqtree_est, l=320, Q=params$Q, bf=params$pi,  type="DNA", rate=rates[1])
+  data2 <- phangorn::simSeq(iqtree_est, l=321, Q=params$Q, bf=params$pi,  type="DNA", rate=rates[2])
+  data3 <- phangorn::simSeq(iqtree_est, l=320, Q=params$Q, bf=params$pi,  type="DNA", rate=rates[3])
+  data4 <- phangorn::simSeq(iqtree_est, l=320, Q=params$Q, bf=params$pi,  type="DNA", rate=rates[4])
+  data <- c(data1, data2, data3, data4)
+  summaries[[i]] <- glance(data)
+}
+summaries <- do.call(rbind, summaries)
+summaries
+
+irbp <- read.phyDat("./bears_irbp.nex", format="nexus")
+irbp_summary <- glance(irbp)
+irbp_summary
+```
+
+Plot each distribution from the simulated datasets and show the observed value
+from the empirical dataset as a vertical red dotted line. How typical is the
+observed dataset under the fitted model? A value in the tail suggests that the
+model does not reproduce that feature of the data well; it does not, by itself,
+tell us which assumption is responsible.
+
+```{r}
+hist(summaries$unique_site_pattern, main="Unique site patterns", xlim=c(50,100))
+abline(v=irbp_summary$unique_site_pattern, lty=2, lwd=2, col="red")
+```
+
+```{r}
+hist(summaries$parsimony_informative_sites, main="Parsimony Informative Sites")
+abline(v=irbp_summary$parsimony_informative_sites, lty=2, lwd=2, col="red")
+```
+
+```{r}
+hist(summaries$const_sites, xlim=c(1000, 1150), main="Constant Sites")
+abline(v=irbp_summary$const_sites, lty=2, lwd=2, col="red")
+```
