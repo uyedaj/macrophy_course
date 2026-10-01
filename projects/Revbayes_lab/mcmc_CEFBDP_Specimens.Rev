@@ -12,7 +12,7 @@
 # Reading in the Data #
 #######################
 # Create the full list of taxa (including all fossils and extant species #
-taxa <- readTaxonData("data/bears_taxa.tsv")
+taxa <- readTaxonData(filename="data/bears_taxa.tsv")
 
 # Import the molecular sequences #
 # this file contains only the taxa for which sequence data are available #
@@ -59,7 +59,7 @@ monitors[mni++] = mnModel(filename="output/bears.log", printgen=100)
 monitors[mni++] = mnFile(filename="output/bears.trees", printgen=100, pruned_tree)
 
 # 3. and a few select parameters to be printed to the screen #
-monitors[mni++] = mnScreen(printgen=10, age_extant, num_samp_anc, origin_time)
+monitors[mni++] = mnScreen(printgen=1000, age_extant, num_samp_anc, origin_time)
 
 # Initialize the MCMC object #
 mymcmc = mcmc(mymodel, monitors, moves)

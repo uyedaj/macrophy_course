@@ -12,12 +12,6 @@ library(ape)
 library(phangorn)
 ```
 
-
-```{r}
-# You may wish to set the working directory using this line, and putting your working directory in quotes.
-#setwd("path/to/your/working/directory")
-```
-
 Let's simulate some linear regression data that we will then ask Revbayes to estimate.
 
 ```{r}
@@ -115,12 +109,16 @@ points(lm1$coef[1], summary(lm1)$sigma, pch="+", col="blue", cex=2)
 
 ```
 
-# Part II. Run a phylogenetic analysis in RevBayes. Return here to visualize the results. 
+# Part II. Run a morphological phylogenetic analysis in RevBayes. Return here to visualize the results. 
+```{r}
+system("rb mcmc_mk.Rev")
+```
+
 
 ```{r}
-trees <- read.tree("./output/primates_cox2_GTR.trees")
-tree_MAP <- read.nexus("./output/primates_cox2_GTR_MAP.tre")
-tree_MAP <- root(tree_MAP, "Galeopterus_variegatus")
+trees <- read.tree("./output/mk.trees")
+tree_MAP <- read.nexus("./output/mk.map.tre")
+tree_MAP <- root(tree_MAP, "Zaragocyon_daamsi")
 tree_MAP <- addConfidences(tree_MAP, trees)
 tree_MAP$node.label <- round(tree_MAP$node.label,2)
 plot(tree_MAP, show.node.label=TRUE, cex=0.75)
@@ -130,19 +128,19 @@ plot(tree_MAP, show.node.label=TRUE, cex=0.75)
 ```{r}
 par(mfrow=c(3,3), mar=c(0,0,0,0))
 for(i in round(seq(1,length(trees), length.out=9), 0)){
-  plot(ladderize(root(trees[[i]], outgroup = "Galeopterus_variegatus")), cex=0.5)
+  plot(ladderize(root(trees[[i]], outgroup = "Zaragocyon_daamsi")), cex=0.5)
 }
 ```
 
-```{r}
-trees <- root(trees, outgroup = "Galeopterus_variegatus")
-for(i in 1:length(trees)){
-  trees[[i]] <- phytools::force.ultrametric(trees[[i]])
-}
-densiTree(trees, alpha=0.2, scaleX=FALSE, col=viridis::viridis(1002))
-```
 
 # Part III. Demo of Combined Evidence Fossilized Birth-Death Process. 
+
+
+```{r}
+system("rb mcmc_CEFBDP_Specimens.Rev")
+```
+
+
 
 ```{r}
 beartrees <- read.tree("./output/bears.trees")
